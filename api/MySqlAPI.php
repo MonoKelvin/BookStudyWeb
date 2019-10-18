@@ -16,7 +16,7 @@ class MySqlAPI
     private $user = 'root';
     private $pwd = '123';
     private $charset = 'utf8';
-    private $db = 'userdb';
+    private $db = 'bookstudy';
     private $link;
 
     //私有的构造方法
@@ -24,7 +24,7 @@ class MySqlAPI
     {
         //连接数据库
         $this->db_connect();
-        $this->useDataBase();
+        mysqli_query($this->link, "use {$this->db}");
         //设置字符集
         mysqli_query($this->link, "set names {$this->charset}");
     }
@@ -45,14 +45,6 @@ class MySqlAPI
     private function __clone()
     {
         die('clone is not allowed');
-    }
-
-    //选择数据库
-    public function useDataBase($dbName = null)
-    {
-        $this->db = $dbName ? $dbName : 'userdb';
-        mysqli_query($this->link, "use {$this->db}");
-        return self::$dbcon;
     }
 
     //公用的静态方法

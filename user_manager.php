@@ -68,7 +68,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php include_once('html/create_user_table.php'); ?>
+                                        <?php
+                                        include_once('api/UserAPI.php');
+                                        global $id;
+                                        showBaseInfo();
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -10,7 +10,6 @@ require_once('utility.php');
 function getBookFromISBN($isbn)
 {
     $db = MySqlAPI::getInstance();
-    $db->useDataBase('bookdb');
     $sql = "select * from bookinfo where isbn=" . $isbn;
     $res = $db->getRow($sql);
     $db->close();
@@ -32,7 +31,6 @@ function getBookFromISBN($isbn)
 function getBooksFromTitle($title)
 {
     $db = MySqlAPI::getInstance();
-    $db->useDataBase('bookdb');
     $sql = "select * from bookinfo where title like '*" . $title . "*'";
     $res = $db->getAll($sql);
     $db->close();
@@ -56,7 +54,6 @@ function getBooksFromTitle($title)
 function getBookInfoWithNumber($number = 50)
 {
     $db = MySqlAPI::getInstance();
-    $db->useDataBase('bookdb');
     $res = $db->getAll(
         "select bi.id,bd.isbn13,bi.title,bi.remaining,bd.lent
         from bookinfo as bi
@@ -93,7 +90,6 @@ function storeBookFromDouBan($book_json)
 
     // 打开数据库
     $db = MySqlAPI::getInstance();
-    $db->useDataBase('bookdb');
 
     // 基本信息的获取
     $author = implode(",", $json_obj['author']);
@@ -143,7 +139,6 @@ function storeBookFromDouBan($book_json)
 function getBooksNumber($calc_indentical = false)
 {
     $db = MySqlAPI::getInstance();
-    $db->useDataBase('bookdb');
     if ($calc_indentical == false) {
         $res = $db->getRow("select SUM(remaining) from bookinfo");
         $res = $res['SUM(remaining)'];
@@ -163,7 +158,6 @@ function getBooksNumber($calc_indentical = false)
 function getBooksLentNumber()
 {
     $db = MySqlAPI::getInstance();
-    $db->useDataBase('bookdb');
     $res = $db->getRow("select SUM(lent) from bookdetail");
     $db->close();
 
