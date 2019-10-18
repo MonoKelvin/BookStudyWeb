@@ -58,17 +58,16 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>排序</th>
-                                            <th>用户id</th>
-                                            <th>用户名（昵称）</th>
-                                            <th>账号</th>
-                                            <th>密码</th>
-                                            <th>是否在线</th>
-                                            <th>其他操作</th>
+                                            <th class="text-center">序号</th>
+                                            <th class="text-center">用户id</th>
+                                            <th class="text-center">用户名（昵称）</th>
+                                            <th class="text-center">账号</th>
+                                            <th class="text-center">密码</th>
+                                            <th class="text-center">是否在线</th>
+                                            <th class="text-center">其他操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- TODO: 使用php生成用户信息 -->
                                         <?php include_once('html/create_user_table.php'); ?>
                                     </tbody>
                                 </table>

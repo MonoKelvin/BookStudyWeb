@@ -1,16 +1,16 @@
 <tr>
-    <th class="text-center">{number}</th>
+    <th class="text-center">{book_no}</th>
     <td class="text-center">{id}</td>
-    <td class="text-center">{name}</td>
-    <td class="text-center">{account}</td>
-    <td class="text-center">{password}</td>
-    <td class="text-center"><i class="fa fa-close" style="color: {online} !important;"></i></td>
+    <td class="text-center">{isbn13}</td>
+    <td class="text-center">{title}</td>
+    <td class="text-center">{remaining}</td>
+    <td class="text-center">{lent}</td>
     <td class="container-fluid d-flex">
         <div class="flex-fill text-center">
-            <button type="button" data-toggle="modal" data-target="#userDetailModel"
+            <button type="button" data-toggle="modal" data-target="#bookDetailModel"
                 class="btn btn-sm btn-primary">详情</button>
             <!-- TODO:该Model使用一个php页面 include 动态显示-->
-            <div id="userDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            <div id="bookDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
                 class="modal fade text-left">
                 <div role="document" class="modal-dialog">
                     <div class="modal-content">

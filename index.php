@@ -1,3 +1,16 @@
+<?php
+require_once('api/MySqlAPI.php');
+
+$db = MySqlAPI::getInstance();
+$user_online = $db->getRow("select SUM(u_online) from userprivate")['SUM(u_online)'];
+$users_num = $db->getRow("select COUNT(*) from userinfo")['COUNT(*)'];
+$db->useDataBase('bookdb');
+$rm_num = $db->getRow("select SUM(remaining) from bookinfo")['SUM(remaining)'];
+$lent_num = $db->getRow("select SUM(lent) from bookdetail")['SUM(lent)'];
+$db->close();
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -27,36 +40,39 @@
                             <!-- Item -->
                             <div class="col-xl-4 col-sm-6">
                                 <div class="item d-flex align-items-center">
-                                    <div class="icon bg-violet"><i class="icon-user"></i></div>
+                                    <div class="icon bg-violet"><i class="fa fa-user"></i></div>
                                     <div class="title"><span>用户<br>在线人数</span>
                                         <div class="progress">
-                                            <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                                            <div role="progressbar" style=<?php $res = $user_online / $users_num * 100;
+                                                                            echo "\"width: $res%; height: 4px;\""; ?> class="progress-bar bg-violet"></div>
                                         </div>
                                     </div>
-                                    <div class="number"><strong>25</strong></div>
+                                    <div class="number"><strong><?php echo $user_online; ?></strong></div>
                                 </div>
                             </div>
                             <!-- Item -->
                             <div class="col-xl-4 col-sm-6">
                                 <div class="item d-flex align-items-center">
-                                    <div class="icon bg-red"><i class="icon-padnote"></i></div>
+                                    <div class="icon bg-green"><i class="fa fa-book"></i></div>
                                     <div class="title"><span>图书<br>馆藏数量</span>
                                         <div class="progress">
-                                            <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                                            <div role="progressbar" style=<?php $res = $rm_num / ($rm_num + $lent_num) * 100;
+                                                                            echo "\"width: $res%; height: 4px;\""; ?> class="progress-bar bg-green"></div>
                                         </div>
                                     </div>
-                                    <div class="number"><strong>70</strong></div>
+                                    <div class="number"><strong><?php echo $rm_num; ?></strong></div>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-sm-6">
                                 <div class="item d-flex align-items-center">
-                                    <div class="icon bg-red"><i class="icon-padnote"></i></div>
+                                    <div class="icon bg-red"><i class="fa fa-address-book"></i></div>
                                     <div class="title"><span>图书<br>已被借出</span>
                                         <div class="progress">
-                                            <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                                            <div role="progressbar" style=<?php $res = $lent_num / ($rm_num + $lent_num) * 100;
+                                                                            echo "\"width: $res%; height: 4px;\""; ?> class="progress-bar bg-red"></div>
                                         </div>
                                     </div>
-                                    <div class="number"><strong>70</strong></div>
+                                    <div class="number"><strong><?php echo $lent_num; ?></strong></div>
                                 </div>
                             </div>
                         </div>

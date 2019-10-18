@@ -1,5 +1,4 @@
 <?php
-header('content-type:text/html;charset=utf-8');
 
 /*
 掌握满足单例模式的必要条件

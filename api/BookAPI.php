@@ -48,6 +48,26 @@ function getBooksFromTitle($title)
     return $res;
 }
 
+/**
+ * 根据数量来获取书的基本信息(后台展示用)
+ * @param int $number 要一次拿出几个数据
+ * @return int 从数据库中去除的书，取出来的数据 <= $number
+ */
+function getBookInfoWithNumber($number = 50)
+{
+    $db = MySqlAPI::getInstance();
+    $db->useDataBase('bookdb');
+    $res = $db->getAll(
+        "select bi.id,bd.isbn13,bi.title,bi.remaining,bd.lent
+        from bookinfo as bi
+        join bookdetail as bd
+        on bi.id = bd.id order by bi.id limit $number"
+    );
+    $db->close();
+
+    return $res;
+}
+
 /* 根据书ID号获得数据库中书的详细数据
  * @param $id 书的 ID 号
  * @return 封装图书的json格式数据
@@ -113,4 +133,43 @@ function storeBookFromDouBan($book_json)
     // 关闭数据库并返回插入后影响的ID号
     $db->close();
     return $res;
+}
+
+/**
+ * 获得书库里所有书的数量
+ * @param bool $merge_identical 是否重复计算相同的书数目
+ * @return int 返回书库里书的数量
+ */
+function getBooksNumber($calc_indentical = false)
+{
+    $db = MySqlAPI::getInstance();
+    $db->useDataBase('bookdb');
+    if ($calc_indentical == false) {
+        $res = $db->getRow("select SUM(remaining) from bookinfo");
+        $res = $res['SUM(remaining)'];
+    } else {
+        $res = $db->getRow("select COUNT(*) from bookinfo where remaining >= 1");
+        $res = $res['COUNT(*)'];
+    }
+    $db->close();
+
+    return $res;
+}
+
+/**
+ * 获得书库里所有被借出书的数量
+ * @return int 返回书库里被借出书的数量
+ */
+function getBooksLentNumber()
+{
+    $db = MySqlAPI::getInstance();
+    $db->useDataBase('bookdb');
+    $res = $db->getRow("select SUM(lent) from bookdetail");
+    $db->close();
+
+    if ($res == null) {
+        return 0;
+    }
+
+    return $res['SUM(lent)'];
 }

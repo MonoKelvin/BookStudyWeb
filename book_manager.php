@@ -62,12 +62,6 @@
 
                 <div class="container-fluid">
                     <div class="card">
-                        <div class="card-close">
-                            <div class="dropdown">
-                                <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                                <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-                            </div>
-                        </div>
                         <div class="card-header d-flex align-items-center">
                             <h3 class="h4">所有图书</h3>
                         </div>
@@ -76,60 +70,17 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>排序</th>
-                                            <th>id</th>
-                                            <th>ISBN</th>
-                                            <th>书名</th>
-                                            <th>馆藏数量</th>
-                                            <th>已借出</th>
-                                            <th>其他操作</th>
+                                            <th class="text-center">排序</th>
+                                            <th class="text-center">id</th>
+                                            <th class="text-center">ISBN13</th>
+                                            <th class="text-center">书名</th>
+                                            <th class="text-center">馆藏数量</th>
+                                            <th class="text-center">已借出</th>
+                                            <th class="text-center">其他操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- TODO: 使用php生成图书信息 -->
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>1077942</td>
-                                            <td>9787507208740</td>
-                                            <td>李白诗歌全集</td>
-                                            <td>1</td>
-                                            <td>0</td>
-                                            <td class="row container-fluid">
-                                                <div class="ml-2 col-xs-4">
-                                                    <button type="button" data-toggle="modal" data-target="#bookDetailModel" class="btn btn-sm btn-primary">详情</button>
-                                                    <!-- TODO:该Model使用一个php页面 include 动态显示-->
-                                                    <div id="bookDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
-                                                        <div role="document" class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 id="exampleModalLabel" class="modal-title">Signin Modal</h4>
-                                                                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                                                    <div class="form-group">
-                                                                        <label>Email</label>
-                                                                        <input type="email" placeholder="Email Address" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ml-2 col-xs-4">
-                                                    <button type="button" class="btn btn-sm btn-primary">修改</button>
-                                                    <!-- TODO:添加修改Model -->
-                                                </div>
-                                                <div class="ml-2 col-xs-4">
-                                                    <button type="button" class="btn btn-sm btn-danger">删除</button>
-                                                    <!-- TODO:添加删除警告对话框 -->
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <?php include_once('html/create_book_item.php'); ?>
                                     </tbody>
                                 </table>
                             </div>
