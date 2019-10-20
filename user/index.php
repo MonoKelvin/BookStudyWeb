@@ -19,13 +19,13 @@ function replyWithUserID()
         }
 
         $db = MySqlAPI::getInstance();
-        $sql = "select * from userinfo where u_id=" . $id;
+        $sql = "select * from userinfo where id=" . $id;
         $res = $db->getRow($sql);
         $db->close();
 
         if ($res == null) {
             header('HTTP/1.1 404 Not Found');
-            $res = ['u_id' => -1, 'u_name' => 'unknown', 'error' => 'user id is not exists'];
+            $res = ['id' => -1, 'name' => 'unknown', 'error' => 'user id is not exists'];
         }
     }
     return $res;

@@ -35,7 +35,7 @@ function replyWithUserPrivateInfo($account, $password)
     $db = MySqlAPI::getInstance();
 
     // 找到账号密码对应的用户，主要获取它的id
-    $sql = sprintf("select * from userprivate where u_account='%s' and u_password='%s' limit 1", $account, $password);
+    $sql = sprintf("select * from userprivate where account='%s' and password='%s' limit 1", $account, $password);
     $res = $db->getRow($sql);
 
     if ($res == null) {
@@ -44,7 +44,7 @@ function replyWithUserPrivateInfo($account, $password)
     }
 
     // 找到id对应的用户
-    $sqlFindUser = 'select * from userinfo where u_id=' . $res['u_id'];
+    $sqlFindUser = 'select * from userinfo where id=' . $res['id'];
     $res = array_merge($res, $db->getRow($sqlFindUser));
 
     // 关闭数据库连接
