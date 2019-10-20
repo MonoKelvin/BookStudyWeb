@@ -1,5 +1,11 @@
 <?php
 
+function reply($code = 404, $message = 'error', $res = [])
+{
+    $res = array('code' => $code, 'message' => $message, 'data' => $res);
+    echo json_encode($res);
+}
+
 function isPostValueValid($post_param)
 {
     if (isset($_POST[$post_param])) {
@@ -17,7 +23,7 @@ function isPostValueValid($post_param)
 function downloadNetworkFile($file_url, $save_to)
 {
     $content = file_get_contents($file_url);
-    if(empty($content) || $content == false) {
+    if (empty($content) || $content == false) {
         die('file_download_filed');
     }
     file_put_contents($save_to, $content);

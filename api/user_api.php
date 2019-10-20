@@ -1,6 +1,6 @@
 <?php
 
-require_once('MySqlAPI.php');
+require_once('mysql_api.php');
 
 function getUserInfoWithNumber($number = 50)
 {
@@ -79,7 +79,7 @@ function showBaseInfo($number = 20)
         $str = str_replace('{account}', $account, $str);
         $str = str_replace('{password}', $password, $str);
         $str = str_replace('{online}', $online ? '#54e69d' : '#ff7676', $str);
-        $str = str_replace('{bg-color}', $online ? 'bg-green' : 'bg-red', $str);
+        // $str = str_replace('{bg-color}', $online ? 'bg-green' : 'bg-red', $str);
         $str = str_replace('{number}', $order_num, $str);
         $order_num++;
 

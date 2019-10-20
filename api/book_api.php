@@ -1,6 +1,6 @@
 <?php
 
-require_once('MySqlAPI.php');
+require_once('mysql_api.php');
 require_once('utility.php');
 
 /* 根据ISBN号获得数据库中书的数据

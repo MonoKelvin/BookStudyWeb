@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . '\..\api\BookAPI.php');
+require_once(dirname(__FILE__) . '\..\api\book_api.php');
 
 $books_arr = getBookInfoWithNumber();
 if ($books_arr == null) {
