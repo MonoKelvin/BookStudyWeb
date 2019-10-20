@@ -1,32 +1,40 @@
-$.ajax({
-    url: "../../api/user_lent_books.php",
-    type: "get",
-    dataType: "json",
-    error: function() {
-        alert("请求错误");
-    },
-    success: function(result) {
-        if (result.code == 200) {
-            $.each(result.data, function(key, value) {
-            });
-            online_num = parseInt(result.data["online_num"]);
-            users_num = parseInt(result.data["users_num"]);
-            rm_num = parseInt(result.data["remaining_num"]);
-            lent_num = parseInt(result.data["lent_num"]);
+document.write('<script src="js/utility.js"></script>');
 
-            online_ratio = online_num / users_num * 100;
-            rm_ratio = rm_num / (rm_num + lent_num) * 100;
-            lent_ratio = lent_num / (rm_num + lent_num) * 100;
+function createUserLentBookTableItems(id) {
+    $.ajax({
+        url: '../../api/user_lent_books.php?id=' + id,
+        type: 'get',
+        dataType: 'json',
+        error: function() {
+            alert('请求错误');
+        },
+        success: function(result) {
+            if (result.code == 200) {
+                var html = '';
+                $.each(result.data, function(key, value) {
+                    html += '<tr>';
+                    html += '<td class="text-center">' + value['b_id'] + '</td>';
+                    html += '<td class="text-center">' + value['title'] + '</td>';
+                    html += '<td class="text-center">' + value['author'] + '</td>';
 
-            document.getElementById('online_progress').style.width = online_ratio + "%";
-            document.getElementById('online_number').innerHTML = online_num;
-            document.getElementById('remaining_progress').style.width = rm_ratio + "%";
-            document.getElementById('remaining_number').innerHTML = rm_num;
-            document.getElementById('lent_progress').style.width = lent_ratio + "%";
-            document.getElementById('lent_number').innerHTML = lent_num;
+                    var lent_time = new Date(value['lent_time']);
+                    html += '<td class="text-center">' + dateFormat('yyyy-MM-dd hh:mm:ss', lent_time) + '</td>';
+                    lent_time.setTime(lent_time.getTime() + 1000 * 60 * 60 * 24 * 30); // 默认还书期限为30天
+                    html += '<td class="text-center">' + dateFormat('yyyy-MM-dd hh:mm:ss', lent_time);
+                    +'</td>';
 
-        } else {
-            alert("请求失败，错误码：" + result.code);
+                    html += '<td class="container-fluid d-flex"><div class="flex-fill text-center">';
+                    html += '<form action="book_info_page.php" method="GET">';
+                    html +=
+                        '<button type="submit" name="book_id" value="' +
+                        value['b_id'] +
+                        '" class="btn btn-sm btn-primary">转到</button>';
+                    html += '</form></div></td></tr>';
+                });
+                $('#user_lent_books_table').html(html);
+            } else {
+                alert('请求失败，错误码：' + result.code);
+            }
         }
-    }
-});
+    });
+}

@@ -55,7 +55,7 @@ function getBookInfoWithNumber($number = 50)
 {
     $db = MySqlAPI::getInstance();
     $res = $db->getAll(
-        "select bi.id,bd.isbn13,bi.title,bi.remaining,bd.lent
+        "select bi.id,bi.title,bi.remaining,bd.lent
         from bookinfo as bi
         join bookdetail as bd
         on bi.id = bd.id order by bi.id limit $number"

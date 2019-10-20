@@ -72,7 +72,6 @@
                                         <tr>
                                             <th class="text-center">排序</th>
                                             <th class="text-center">id</th>
-                                            <th class="text-center">ISBN13</th>
                                             <th class="text-center">书名</th>
                                             <th class="text-center">馆藏数量</th>
                                             <th class="text-center">已借出</th>
