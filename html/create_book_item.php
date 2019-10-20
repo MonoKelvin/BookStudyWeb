@@ -10,7 +10,6 @@ function getBooksItem() {
     static $book_no = 1;
     foreach ($books_arr as $book) {
         $id = $book['id'];
-        $isbn13 = $book['isbn13'];
         $title = $book['title'];
         $remaining = $book['remaining'];
         $lent = $book['lent'];
@@ -23,7 +22,6 @@ function getBooksItem() {
         // 替换内容，即动态生成 html的内容
         $str = str_replace('{book_no}', $book_no, $str);
         $str = str_replace('{id}', $id, $str);
-        $str = str_replace('{isbn13}', $isbn13, $str);
         $str = str_replace('{title}', $title, $str);
         $str = str_replace('{remaining}', $remaining, $str);
         $str = str_replace('{lent}', $lent, $str);

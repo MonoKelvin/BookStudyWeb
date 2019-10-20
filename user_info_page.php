@@ -1,21 +1,18 @@
 <?php
 require_once('api/user_api.php');
-require_once('api/user_lent_books.php');
-
 
 global $user;
-
 if (isset($_GET['id'])) {
     $user = getUserInfoById($_GET['id']);
     if ($user['id'] == -1) {
         header('HTTP/1.1 404 Not Found');
         return;
     }
+    // getUserLentBooks($_GET['id']);
 } else {
     header('HTTP/1.1 404 Not Found');
     return;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +25,7 @@ if (isset($_GET['id'])) {
     <?php include_once('html/included_head.php'); ?>
 </head>
 
-<body>
+<body onload="createUserLentBookTableItems(<?php echo $user['id']; ?>);">
     <div class="page">
         <?php include_once('html/header_navbar.php'); ?>
         <div class="page-content d-flex align-items-stretch">
@@ -50,9 +47,6 @@ if (isset($_GET['id'])) {
                 </div>
 
                 <section class="no-padding-bottom">
-                    <div class="col-lg-12 pl-4 pb-2">
-                        <h3>用户信息</h3>
-                    </div>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-4">
@@ -131,13 +125,12 @@ if (isset($_GET['id'])) {
                                             <th class="text-center">id</th>
                                             <th class="text-center">书名</th>
                                             <th class="text-center">作者</th>
-                                            <th class="text-center">借得时间</th>
+                                            <th class="text-center">借书时间</th>
                                             <th class="text-center">应还时间</th>
                                             <th class="text-center">转到</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <!-- <?php include_once('html/create_book_item.php'); ?> -->
+                                    <tbody id="user_lent_books_table">
                                     </tbody>
                                 </table>
                             </div>
@@ -158,6 +151,8 @@ if (isset($_GET['id'])) {
     <script src="js/charts-custom.js"></script>
     <!-- Main File-->
     <script src="js/front.js"></script>
+    <!-- Ajax Request File -->
+    <script src="js/ajax/user_lent_books.js"></script>
 </body>
 
 </html>
