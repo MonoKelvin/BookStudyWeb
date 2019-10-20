@@ -6,10 +6,10 @@ function getUserInfoWithNumber($number = 50)
 {
     $db = MySqlAPI::getInstance();
     $res = $db->getAll(
-        "select ui.u_id,ui.u_name,up.u_account,up.u_password,up.u_online
+        "select ui.id,ui.name,up.account,up.password,up.online
         from userinfo as ui
         join userprivate as up
-        on ui.u_id = up.u_id order by ui.u_id  limit $number"
+        on ui.id = up.id order by ui.id limit $number"
     );
     $db->close();
 
@@ -22,9 +22,13 @@ function getUserInfoWithNumber($number = 50)
  * @return array 具体值如下：
  * ```php
  * [
- *      'u_avator' => '...',    // 头像地址
- *      'u_md5' => '...',       // md5验证码
- *      'u_books' => [          // 借的书的id号
+ *      'id'              // id号
+ *      'name'            // 名字（昵称）
+ *      'avatar'          // 头像地址
+ *      'account'         // 账号
+ *      'password'        // 密码
+ *      'md5'             // md5验证码
+ *      'books' => [      // 借的书id号
  *          0 => 'id',
  *          1 => 'id',
  *          ...
@@ -32,20 +36,20 @@ function getUserInfoWithNumber($number = 50)
  * ]
  * ```
  */
-function getUserDetailFromID($id)
+function getUserInfoById($id)
 {
     $db = MySqlAPI::getInstance();
-    $res = $db->getAll(
-        "select ui.u_avator,ui.u_md5
-        from userinfo as ui
-        join userprivate as up
-        on ui.u_id=" . $id
+    $res = $db->getRow(
+        "select * from userinfo as ui
+        join userprivate as up on ui.id=" . $id
     );
-    $temp_arr = $db->getAll("select b_id from userbooks where u_id=".$id);
-    $res['u_books'] = [];
-    foreach($temp_arr as $arr)
-    {
-        array_push($res['u_books'], $arr['id']);
+    if($res == null) {
+        return ['id'=>'-1', 'msg' => 'user_not_found'];
+    }
+    $temp_arr = $db->getAll("select b_id from userbooks where u_id=" . $id);
+    $res['books'] = [];
+    foreach ($temp_arr as $arr) {
+        array_push($res['books'], $arr['b_id']);
     }
     $db->close();
 
@@ -62,11 +66,11 @@ function showBaseInfo($number = 20)
 
     static $order_num = 1;
     foreach ($users_arr as $user) {
-        $id = $user['u_id'];
-        $name = $user['u_name'];
-        $account = $user['u_account'];
-        $password = $user['u_password'];
-        $online = $user['u_online'];
+        $id = $user['id'];
+        $name = $user['name'];
+        $account = $user['account'];
+        $password = $user['password'];
+        $online = $user['online'];
 
         $temp_file = dirname(__FILE__) . '/../html/template/user_info_item.html';
         $fp = fopen($temp_file, 'r');

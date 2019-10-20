@@ -70,7 +70,6 @@
                                     <tbody>
                                         <?php
                                         include_once('api/user_api.php');
-                                        global $id;
                                         showBaseInfo();
                                         ?>
                                     </tbody>

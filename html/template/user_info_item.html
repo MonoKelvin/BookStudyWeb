@@ -9,42 +9,9 @@
     </td>
     <td class="container-fluid d-flex">
         <div class="flex-fill text-center">
-            <button type="button" data-toggle="modal" data-target="#userDetailModel{id}" class="btn btn-sm btn-primary">详情</button>
-            <div id=" userDetailModel{id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true" class="modal fade text-left">
-                <div role="document" class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 id="exampleModalLabel" class="modal-title">用户详情</h4>
-                            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                                    aria-hidden="true">×</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="client card flex-fill">
-                                <div class="card-body text-center">
-                                    <div class="client-avatar"><img id="img_avatar_{id}" src="" alt="..."
-                                            class="img-fluid rounded-circle">
-                                        <div class="status {bg-color}"></div>
-                                    </div>
-                                    <div class="client-title">
-                                        <h2>{name}</h2><span>id：{id}</span>
-                                    </div>
-                                    <div class="client-info">
-                                        <div class="row">
-                                            <div class="col-6"><small>账号</small><br><strong>{account}</strong></div>
-                                            <div class="col-6"><small>密码</small><br><strong>{password}</strong></div>
-                                        </div>
-                                    </div>
-                                    <div class="client-social flex-column text-left">
-                                        <div><small>MD5：</small><strong id="md5_{id}"></strong></div>
-                                        <div><small>头像地址：</small><strong id="avatar_url_{id}"></strong></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
+            <form action="user_info_page.php" method="GET">
+                <button name="id" type="submit" class="btn btn-sm btn-primary" value="{id}">详情</button>
+            </form>
         </div>
         <div class="flex-fill text-center">
             <button type="button" class="btn btn-sm btn-primary">修改</button>

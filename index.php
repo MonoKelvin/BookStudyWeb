@@ -20,7 +20,7 @@
                         <h2 class="no-margin-bottom">主页</h2>
                     </div>
                 </header>
-                <!-- D  ashboard Counts Section-->
+
                 <section class="dashboard-counts no-padding-bottom">
                     <div class="container-fluid">
                         <div class="row bg-white has-shadow">
