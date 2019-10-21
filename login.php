@@ -1,3 +1,8 @@
+<?php
+session_start();
+$_SESSION['id'] = 1; // 這裡填入用戶id
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -5,27 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>管理员登录</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-    <!-- Fontastic Custom icon font-->
-    <link rel="stylesheet" href="css/fontastic.css">
-    <!-- Google fonts - Poppins -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <?php include_once('html/included_head.php'); ?>
 </head>
 
 <body>
@@ -54,9 +39,9 @@
                                     <div class="form-group">
                                         <input id="login-password" type="password" name="loginPassword" required data-msg="密码" class="input-material">
                                         <label for="login-password" class="label-material">密码</label>
-                                    </div><a id="login" href="index.html" class="btn btn-primary">登录</a>
+                                    </div><a id="login" href="index.php" class="btn btn-primary">登录</a>
                                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                                </form><a href="#" class="forgot-pass">忘记密码?</a><br><small>没有账号? </small><a href="register.html" class="signup">点击注册</a>
+                                </form><a href="#" class="forgot-pass">忘记密码?</a><br><small>没有账号? </small><a href="register.php" class="signup">点击注册</a>
                             </div>
                         </div>
                     </div>

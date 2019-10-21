@@ -1,6 +1,6 @@
 <?php
-
-require_once('mysql_api.php');
+require_once(dirname(__FILE__) . '\mysql_api.php');
+require_once(dirname(__FILE__) . '\utility.php');
 
 function getUserInfoWithNumber($number = 50)
 {
@@ -44,7 +44,8 @@ function getUserInfoById($id)
         join userprivate as up on ui.id=" . $id
     );
     if($res == null) {
-        return ['id'=>'-1', 'msg' => 'user_not_found'];
+        $db->close();
+        isEntry404(true);
     }
     $temp_arr = $db->getAll("select b_id from userbooks where u_id=" . $id);
     $res['books'] = [];

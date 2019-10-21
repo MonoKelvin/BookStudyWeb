@@ -26,7 +26,7 @@ function createUserLentBookTableItems(id) {
                     html += '<td class="container-fluid d-flex"><div class="flex-fill text-center">';
                     html += '<form action="book_info_page.php" method="GET">';
                     html +=
-                        '<button type="submit" name="book_id" value="' +
+                        '<button type="submit" name="id" value="' +
                         value['b_id'] +
                         '" class="btn btn-sm btn-primary">转到</button>';
                     html += '</form></div></td></tr>';

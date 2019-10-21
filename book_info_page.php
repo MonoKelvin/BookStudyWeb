@@ -1,10 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . '\api\user_api.php');
+require_once('api/book_api.php');
 
 global $user;
 if (isset($_GET['id'])) {
-    $user = getUserInfoById($_GET['id']);
-    isEntry404(($user['id'] == -1));
+    isEntry404($user['id'] == -1);
 } else {
     isEntry404(true);
 }

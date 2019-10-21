@@ -1,10 +1,22 @@
+<?PHP
+session_start();
+if (isset($_POST['submit']) && isset($_POST['submit']) == '确定') {
+    if (isset($_SESSION['uid']) && $_SESSION['uid'] > 0) {
+        echo '用戶已登入';
+    } else {
+        header('location: http://bookstudy.com/login.php');
+    }
+} else {
+    header('location: http://bookstudy.com/login.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home</title>
+    <title>主页</title>
     <?php include_once('html/included_head.php'); ?>
 </head>
 

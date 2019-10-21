@@ -3,15 +3,9 @@ require_once('mysql_api.php');
 require_once('utility.php');
 
 if (isset($_GET['id'])) {
-    // $user = getUserInfoById($_GET['id']);
-    // if ($user['id'] == -1) {
-    //     header('HTTP/1.1 404 Not Found');
-    //     return;
-    // }
     getUserLentBooks($_GET['id']);
 } else {
-    header('HTTP/1.1 404 Not Found');
-    return;
+    isEntry404(true);
 }
 
 /**

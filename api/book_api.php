@@ -14,10 +14,7 @@ function getBookFromISBN($isbn)
     $res = $db->getRow($sql);
     $db->close();
 
-    if ($res == null) {
-        header('HTTP/1.1 404 Not Found');
-        $res = ['isbn' => $isbn, 'msg' => 'book_not_found'];
-    }
+    isEntry404(($res == null));
 
     $res = json_encode($res);
     echo $res;
@@ -35,14 +32,9 @@ function getBooksFromTitle($title)
     $res = $db->getAll($sql);
     $db->close();
 
-    if ($res == null) {
-        header('HTTP/1.1 404 Not Found');
-        $res = ['title' => $title, 'msg' => 'book_not_found'];
-    } else {
-        $res = json_encode(res);
-    }
+    isEntry404(($res == null));
 
-    echo $res;
+    $res = json_encode(res);
     return $res;
 }
 
@@ -77,10 +69,7 @@ function storeBookFromDouBan($book_json)
 {
     // TODO: 实现存书的功能
     $json_obj = json_decode($book_json, true);
-    if ($json_obj == null || $json_obj == false) {
-        header('HTTP/1.1 404 Not Found');
-        return false;
-    };
+    isEntry404($json_obj == null || $json_obj == false);
 
     // 存储图书的图片
     $img_url = $json_obj['image'];
@@ -161,9 +150,7 @@ function getBooksLentNumber()
     $res = $db->getRow("select SUM(lent) from bookdetail");
     $db->close();
 
-    if ($res == null) {
-        return 0;
-    }
+    isEntry404($res == null);
 
     return $res['SUM(lent)'];
 }
