@@ -1,8 +1,7 @@
 <?php
-session_start();
-$_SESSION['id'] = 1; // 這裡填入用戶id
+require_once(dirname(__FILE__) . '\api\utility.php');
+isLogedIn(true);
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -15,7 +14,7 @@ $_SESSION['id'] = 1; // 這裡填入用戶id
 
 <body>
     <div class="page login-page">
-        <div class="container d-flex align-items-center">
+        <div class="container d-flex align-items-center p-5">
             <div class="form-holder has-shadow">
                 <div class="row">
                     <div class="col-lg-6">
@@ -31,17 +30,24 @@ $_SESSION['id'] = 1; // 這裡填入用戶id
                     <div class="col-lg-6 bg-white">
                         <div class="form d-flex align-items-center">
                             <div class="content">
-                                <form method="post" class="form-validate">
+                                <form action="/api/login_validate.php" method="post" class="form-validate">
                                     <div class="form-group">
-                                        <input id="login-username" type="text" name="loginUsername" required data-msg="账号" class="input-material">
-                                        <label for="login-username" class="label-material">账号</label>
+                                        <input id="login-username" type="text" name="account" required data-msg="账号" class="input-material">
+                                        <label for="login-username" class="label-material">账号/邮箱</label>
                                     </div>
                                     <div class="form-group">
-                                        <input id="login-password" type="password" name="loginPassword" required data-msg="密码" class="input-material">
+                                        <input maxlength="20" id="login-password" type="password" name="password" required data-msg="密码" class="input-material">
                                         <label for="login-password" class="label-material">密码</label>
-                                    </div><a id="login" href="index.php" class="btn btn-primary">登录</a>
-                                    <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                                </form><a href="#" class="forgot-pass">忘记密码?</a><br><small>没有账号? </small><a href="register.php" class="signup">点击注册</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <button id="login-btn" name="submit" value="submit" class="btn btn-primary">登录</button>
+                                    </div>
+                                </form>
+                                <div class="pb-4">
+                                    <a href="#" class="forgot-pass">忘记密码?</a>
+                                </div>
+                                <small>没有账号? </small>
+                                <a href="register.php" class="signup">点击注册</a>
                             </div>
                         </div>
                     </div>

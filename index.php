@@ -1,14 +1,6 @@
 <?PHP
-session_start();
-if (isset($_POST['submit']) && isset($_POST['submit']) == '确定') {
-    if (isset($_SESSION['uid']) && $_SESSION['uid'] > 0) {
-        echo '用戶已登入';
-    } else {
-        header('location: http://bookstudy.com/login.php');
-    }
-} else {
-    header('location: http://bookstudy.com/login.php');
-}
+require_once('api/utility.php');
+isLogedIn();
 ?>
 <!DOCTYPE html>
 <html>

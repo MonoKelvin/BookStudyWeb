@@ -76,6 +76,7 @@ Button
     bottom: 50px;
     padding: 15px 15px;
     position: absolute;
+    background-color: #ffffff;
     border-top: 1px solid rgba(120, 130, 140, 0.13);
 }
 

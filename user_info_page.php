@@ -1,6 +1,8 @@
 <?php
 require_once(dirname(__FILE__) . '\api\user_api.php');
 
+isLogedIn();
+
 global $user;
 if (isset($_GET['id'])) {
     $user = getUserInfoById($_GET['id']);

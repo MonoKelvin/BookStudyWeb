@@ -31,6 +31,6 @@ $cur_page = $_SERVER['REQUEST_URI'];
             echo "<a href=$page_name>" . $contents . "</li>";
         }
         ?>
-        <li><a href="login.php"> <i class="icon-interface-windows"></i>登陆页面</a></li>
+        <li><a href="login_page.php"> <i class="icon-interface-windows"></i>登陆页面</a></li>
     </ul>
 </nav>

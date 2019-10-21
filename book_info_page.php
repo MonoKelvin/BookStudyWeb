@@ -1,5 +1,6 @@
 <?php
 require_once('api/book_api.php');
+isLogedIn();
 
 global $user;
 if (isset($_GET['id'])) {

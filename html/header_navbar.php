@@ -5,7 +5,7 @@
         <div class="search-box">
             <button class="dismiss"><i class="icon-close"></i></button>
             <form id="searchForm" action="#" role="search">
-                <input type="search" placeholder="What are you looking for..." class="form-control">
+                <input type="search" placeholder="输入要查询的内容..." class="form-control">
             </form>
         </div>
         <div class="container-fluid">
@@ -46,8 +46,13 @@
                             <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages </strong></a></li>
                         </ul>
                     </li> -->
-                    <!-- Logout    -->
-                    <li class="nav-item"><a href="login.php" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                    <!-- Logout -->
+                    <li class="nav-item">
+                        <a href="api/logout.php" class="nav-link logout">
+                            <span class="d-none d-sm-inline">Logout</span>
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

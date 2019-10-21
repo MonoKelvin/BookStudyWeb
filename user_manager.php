@@ -1,3 +1,7 @@
+<?PHP
+require_once('api/utility.php');
+isLogedIn();
+?>
 <!DOCTYPE html>
 <html>
 
