@@ -1,6 +1,7 @@
 <?PHP
 require_once('api/utility.php');
 isLogedIn();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@ isLogedIn();
     <?php include_once('html/included_head.php'); ?>
 </head>
 
-<body>
+<body onload="createBookTableItems(1);">
     <div class="page">
         <?php include_once('html/header_navbar.php'); ?>
         <div class="page-content d-flex align-items-stretch">
@@ -65,6 +66,13 @@ isLogedIn();
                 </section>
 
                 <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <ul id="book-pagination1">
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
                             <h3 class="h4">所有图书</h3>
@@ -82,12 +90,18 @@ isLogedIn();
                                             <th class="text-center">其他操作</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php include_once('html/create_book_item.php'); ?>
+                                    <tbody id="book-items-body">
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <ul id="book-pagination2">
+                        </ul>
                     </div>
                 </div>
 
@@ -101,8 +115,11 @@ isLogedIn();
     <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap-paginator.js"></script>
     <!-- Main File-->
     <script src="js/front.js"></script>
+    <!-- Ajax File -->
+    <script src="js/ajax/create_book_items.js"></script>
 </body>
 
 </html>

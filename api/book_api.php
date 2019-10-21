@@ -41,17 +41,19 @@ function getBooksFromTitle($title)
 /**
  * 根据数量来获取书的基本信息(后台展示用)
  * @param int $number 要一次拿出几个数据
+ * @param int $first 从结果中的第几个位置拿，对分页展示有效
  * @return int 从数据库中去除的书，取出来的数据 <= $number
  */
-function getBookInfoWithNumber($number = 50)
+function getBookInfoWithNumber($first = 0, $number = 50)
 {
     $db = MySqlAPI::getInstance();
     $res = $db->getAll(
         "select bi.id,bi.title,bi.remaining,bd.lent
         from bookinfo as bi
         join bookdetail as bd
-        on bi.id = bd.id order by bi.id limit $number"
+        on bi.id = bd.id order by bi.id limit $first, $number"
     );
+
     $db->close();
 
     return $res;
@@ -67,7 +69,6 @@ function getBookDetailFromID($id)
 
 function storeBookFromDouBan($book_json)
 {
-    // TODO: 实现存书的功能
     $json_obj = json_decode($book_json, true);
     isEntry404($json_obj == null || $json_obj == false);
 
@@ -128,6 +129,7 @@ function storeBookFromDouBan($book_json)
 function getBooksNumber($calc_indentical = false)
 {
     $db = MySqlAPI::getInstance();
+
     if ($calc_indentical == false) {
         $res = $db->getRow("select SUM(remaining) from bookinfo");
         $res = $res['SUM(remaining)'];
@@ -148,6 +150,8 @@ function getBooksLentNumber()
 {
     $db = MySqlAPI::getInstance();
     $res = $db->getRow("select SUM(lent) from bookdetail");
+    var_dump($res);
+
     $db->close();
 
     isEntry404($res == null);

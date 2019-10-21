@@ -50,9 +50,7 @@ class MySqlAPI
     //公用的静态方法
     public static function getInstance()
     {
-        if (self::$dbcon == null) {
-            self::$dbcon = new self;
-        }
+        self::$dbcon = new self;
         return self::$dbcon;
     }
 
@@ -237,6 +235,6 @@ class MySqlAPI
      */
     public function close()
     {
-        return mysqli_close($this->link);
+        mysqli_close($this->link);
     }
 }

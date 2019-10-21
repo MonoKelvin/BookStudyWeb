@@ -6,8 +6,9 @@
     <td class="text-center">{lent}</td>
     <td class="container-fluid d-flex">
         <div class="flex-fill text-center">
-            <button type="button" data-toggle="modal" data-target="#bookDetailModel"
-                class="btn btn-sm btn-primary">详情</button>
+            <form action="book_info_page.php" method="GET">
+                <button name="id" type="submit" class="btn btn-sm btn-primary" value="{id}">详情</button>
+            </form>
         </div>
         <div class="flex-fill text-center">
             <button type="button" class="btn btn-sm btn-primary">修改</button>

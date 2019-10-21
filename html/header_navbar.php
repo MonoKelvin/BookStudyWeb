@@ -46,9 +46,9 @@
                             <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages </strong></a></li>
                         </ul>
                     </li> -->
-                    <!-- Logout -->
+
                     <li class="nav-item">
-                        <a href="api/logout.php" class="nav-link logout">
+                        <a data-toggle="modal" data-target="#logoutAlert" href="api/logout.php" class="nav-link logout">
                             <span class="d-none d-sm-inline">Logout</span>
                             <i class="fa fa-sign-out"></i>
                         </a>
@@ -58,3 +58,22 @@
         </div>
     </nav>
 </header>
+<div id="logoutAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="exampleModalLabel" class="modal-title">退出提示</h4>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>你确定要退出当前管理员的登录状态吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-secondary">取消</button>
+                <form action="api/logout.php">
+                    <button type="submit" class="btn btn-primary">确定</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
