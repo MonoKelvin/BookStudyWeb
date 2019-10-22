@@ -1,19 +1,21 @@
 <?php
 require_once(dirname(__FILE__) . '\book_api.php');
 
-if (isset($_GET['page'])) {
-    if ($_GET['page'] > 0) {
-        getBooksItem($_GET['page']);
-    } else {
-        isEntry404(true);
-    }
-} else {
-    getBooksItem(1);
-}
+getBooksItem($_GET['page']);
+
+// if (isset($_GET['page'])) {
+//     if ($_GET['page'] > 0) {
+//         getBooksItem($_GET['page']);
+//     } else {
+//         isEntry404(true);
+//     }
+// } else {
+//     getBooksItem(1);
+// }
 
 function getBooksItem($page = 1)
 {
-    $fetch_num = 50;
+    $fetch_num = 10;
     $books_arr = getBookInfoWithNumber($page * $fetch_num - $fetch_num, $fetch_num);
 
     static $book_no = 1;

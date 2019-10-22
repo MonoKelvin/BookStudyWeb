@@ -17,7 +17,6 @@ function getBookFromISBN($isbn)
     isEntry404(($res == null));
 
     $res = json_encode($res);
-    echo $res;
     return $res;
 }
 
@@ -25,7 +24,7 @@ function getBookFromISBN($isbn)
  * @param $title 书名，可以只是部分
  * @return 封装图书的json格式数据
  */
-function getBooksFromTitle($title)
+function getBooksByTitle($title)
 {
     $db = MySqlAPI::getInstance();
     $sql = "select * from bookinfo where title like '*" . $title . "*'";
@@ -63,8 +62,21 @@ function getBookInfoWithNumber($first = 0, $number = 50)
  * @param $id 书的 ID 号
  * @return 封装图书的json格式数据
  */
-function getBookDetailFromID($id)
-{ }
+function getBookInfoById($id)
+{
+    $db = MySqlAPI::getInstance();
+    $res = $db->getRow(
+        "select * from
+        bookinfo as bi
+        join bookdetail as bd
+        on bi.id = bd.id and bi.id = " . $id
+    );
+    $db->close();
+
+    isEntry404(($res == null));
+    
+    return $res;
+}
 
 
 function storeBookFromDouBan($book_json)

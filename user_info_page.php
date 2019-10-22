@@ -1,12 +1,10 @@
 <?php
 require_once(dirname(__FILE__) . '\api\user_api.php');
-
 isLogedIn();
 
 global $user;
 if (isset($_GET['id'])) {
     $user = getUserInfoById($_GET['id']);
-    isEntry404(($user['id'] == -1));
 } else {
     isEntry404(true);
 }
@@ -23,7 +21,7 @@ if (isset($_GET['id'])) {
     <?php include_once('html/included_head.php'); ?>
 </head>
 
-<body onload="createUserLentBookTableItems(<?php echo $user['id']; ?>);">
+<body onload="createUserLentBookItems(<?php echo $user['id']; ?>);">
     <div class="page">
         <?php include_once('html/header_navbar.php'); ?>
         <div class="page-content d-flex align-items-stretch">
@@ -128,7 +126,7 @@ if (isset($_GET['id'])) {
                                             <th class="text-center">转到</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="user_lent_books_table">
+                                    <tbody id="user-lent-books-table">
                                     </tbody>
                                 </table>
                             </div>

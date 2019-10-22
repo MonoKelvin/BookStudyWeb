@@ -2,6 +2,17 @@
 require_once('api/utility.php');
 isLogedIn();
 
+global $page;
+if (isset($_GET['page'])) {
+    if ($_GET['page'] > 0) {
+        $page = $_GET['page'];
+    } else {
+        isEntry404(true);
+    }
+} else {
+    $page = 1;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +24,7 @@ isLogedIn();
     <?php include_once('html/included_head.php'); ?>
 </head>
 
-<body onload="createBookTableItems(1);">
+<body onload="createBookTableItems(<?php echo $page; ?>);">
     <div class="page">
         <?php include_once('html/header_navbar.php'); ?>
         <div class="page-content d-flex align-items-stretch">
@@ -119,7 +130,7 @@ isLogedIn();
     <!-- Main File-->
     <script src="js/front.js"></script>
     <!-- Ajax File -->
-    <script src="js/ajax/create_book_items.js"></script>
+    <script src="js/ajax/book_pagination.js"></script>
 </body>
 
 </html>

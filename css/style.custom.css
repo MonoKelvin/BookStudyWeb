@@ -103,3 +103,117 @@ Error Page
     font-weight: 900;
     line-height: 210px;
 }
+
+.badge {
+    font-weight: 400;
+    padding: 0.35em 0.45em;
+}
+
+.badge-xs {
+    font-size: 9px;
+    -webkit-transform: translate(0, -2px);
+    -ms-transform: translate(0, -2px);
+    -o-transform: translate(0, -2px);
+    transform: translate(0, -2px);
+}
+
+.badge-sm {
+    font-size: 12px;
+    -webkit-transform: translate(0, -2px);
+    -ms-transform: translate(0, -2px);
+    -o-transform: translate(0, -2px);
+    transform: translate(0, -2px);
+}
+
+.badge-success {
+    background-color: #6fd96f;
+}
+
+.badge-info {
+    background-color: #4d7cff;
+    color: #fff;
+}
+
+.badge-primary {
+    background-color: #7571f9;
+}
+
+.badge-warning {
+    background-color: #f29d56;
+}
+
+.badge-danger {
+    background-color: #ff5e5e;
+}
+
+.badge-dark {
+    background-color: #464a53;
+}
+
+.badge-light {
+    background-color: #aaa;
+    color: #fff;
+}
+
+.label {
+    padding: 7px 10px;
+    line-height: 15px;
+    font-weight: 600;
+    border-radius: 4px;
+    font-size: 85%;
+}
+
+.label-pill {
+    border-radius: 10rem;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+}
+
+.label-rounded {
+    border-radius: 60px;
+}
+
+.label-secondary {
+    background-color: #7571f9;
+    color: #fff;
+}
+
+.label-primary {
+    background-color: #9097c4;
+    color: #fff;
+}
+
+.label-success {
+    background-color: #6fd96f;
+    color: #fff;
+}
+
+.label-info {
+    background-color: #4d7cff;
+    color: #fff;
+}
+
+.label-warning {
+    background-color: #f29d56;
+    color: #fff;
+}
+
+.label-danger {
+    background-color: #ff5e5e;
+    color: #fff;
+}
+
+.label-dark {
+    background-color: #464a53;
+    color: #fff;
+}
+
+.label-light {
+    background-color: #5e5e5e;
+    color: #fff;
+}
+
+.bootstrap-label .label {
+    margin-bottom: 10px;
+    display: inline-block;
+}
