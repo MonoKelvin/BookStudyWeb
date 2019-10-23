@@ -25,7 +25,7 @@ function getUserAndBookStatistics()
     $data['online_num'] = $db->getRow('select SUM(online) from userprivate')['SUM(online)'];
     $data['users_num'] = $db->getRow('select COUNT(*) from userinfo')['COUNT(*)'];
     $data['remaining_num'] = $db->getRow('select SUM(remaining) from bookinfo')['SUM(remaining)'];
-    $data['lent_num'] = $db->getRow('select SUM(lent) from bookdetail')['SUM(lent)'];
+    $data['lent_num'] = $db->getRow('select COUNT(b_id) from userbooks')['COUNT(b_id)'];
     $db->close();
 
     reply(200, 'success', $data);

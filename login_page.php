@@ -20,34 +20,33 @@ isLogedIn(true);
                     <div class="col-lg-6">
                         <div class="info d-flex align-items-center">
                             <div class="content text-right">
-                                <div class="logo">
-                                    <h1>BookStudy书 斋</h1>
-                                </div>
-                                <p>直当花院里，书斋望晓开。</p>
+                                <h1>BookStudy 书 斋</h1>
+                                <p>—— 网上图书管理系统</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 bg-white">
                         <div class="form d-flex align-items-center">
                             <div class="content">
+                                <div class="text-center">
+                                    <h3 class="pb-5">管理员登录</h3>
+                                </div>
                                 <form action="/api/login_validate.php" method="post" class="form-validate">
                                     <div class="form-group">
                                         <input id="login-username" type="text" name="account" required data-msg="账号" class="input-material">
-                                        <label for="login-username" class="label-material">账号/邮箱</label>
+                                        <label for="login-username" class="label-material">邮箱/手机号</label>
                                     </div>
                                     <div class="form-group">
                                         <input maxlength="20" id="login-password" type="password" name="password" required data-msg="密码" class="input-material">
                                         <label for="login-password" class="label-material">密码</label>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group text-right pt-3">
                                         <button id="login-btn" name="submit" value="submit" class="btn btn-primary">登录</button>
                                     </div>
                                 </form>
-                                <div class="pb-4">
-                                    <a href="#" class="forgot-pass">忘记密码?</a>
-                                </div>
-                                <small>没有账号? </small>
-                                <a href="register.php" class="signup">点击注册</a>
+                                <!-- 暂时不实现注册功能 -->
+                                <!-- <small>没有账号? </small>
+                                <a href="register.php" class="signup">点击注册</a> -->
                             </div>
                         </div>
                     </div>
@@ -55,9 +54,9 @@ isLogedIn(true);
             </div>
         </div>
         <div class="copyrights text-center">
-            <p>Developed by <a href="https://github.com/MonoKelvin">MonoKelvin</a>
+            <p>Developed by <a href="https://github.com/MonoKelvin" target="_blank">MonoKelvin</a>
                 <!-- Please do not remove the back-link to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :) -->
-                <br /> Thanks for the page designed by <a href="https://bootstrapious.com/donate" class="external">Bootstrapious</a>
+                <br /> Thanks for the page designed by <a href="https://bootstrapious.com/donate" class="external" target="_blank">Bootstrapious</a>
             </p>
         </div>
     </div>

@@ -1,15 +1,23 @@
 <?php
-$cur_page = $_SERVER['REQUEST_URI'];
+// session_start();
+
+global $admin_name;
+global $admin_avatar;
+if (isset($_SESSION['name']) && isset($_SESSION['avatar'])) {
+    $admin_name = $_SESSION['name'];
+    $admin_avatar = $_SESSION['avatar'];
+}
+
 ?>
 
 <!-- Side Navbar -->
 <nav class="side-navbar">
     <!-- Sidebar Header-->
     <div class="sidebar-header d-flex align-items-center">
-        <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+        <div class="avatar"><img src=<?php echo "'$admin_avatar'"; ?> alt="..." class="img-fluid rounded-circle"></div>
         <div class="title">
             <h1 class="h4">管理员</h1>
-            <p>Mono Kelvin</p>
+            <p><?php echo $admin_name; ?></p>
         </div>
     </div>
     <!-- Sidebar Navidation Menus-->

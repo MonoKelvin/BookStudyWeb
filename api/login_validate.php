@@ -11,8 +11,9 @@ if ($db == null) {
     exit(0);
 } else {
     $res = $db->getRow(
-        "select id,account,password
-        from userprivate
+        "select ui.id,name,account,avatar
+        from userinfo as ui
+        join userprivate as up
         where account = '$account'
         and password = '$password'"
     );
@@ -20,8 +21,11 @@ if ($db == null) {
 
     if ($res) {
         session_start();
-        $_SESSION['account'] = $account;
         $_SESSION['id'] = $res['id'];
+        $_SESSION['name'] = $res['name'];
+        $_SESSION['account'] = $account;
+        $_SESSION['password'] = $password;
+        $_SESSION['avatar'] = $res['avatar'];
 
         echo '<script>window.location="/../index.php";</script>';
     } else {

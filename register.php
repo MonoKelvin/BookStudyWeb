@@ -31,7 +31,7 @@
                                 <form method="post" class="form-validate">
                                     <div class="form-group">
                                         <input id="register-username" type="text" name="registerUsername" required data-msg="Please enter your username" class="input-material">
-                                        <label for="register-username" class="label-material">管理员名</label>
+                                        <label for="register-username" class="label-material">管理员名称</label>
                                     </div>
                                     <div class="form-group">
                                         <input id="register-email" type="email" name="registerEmail" required data-msg="Please enter a valid email address" class="input-material">

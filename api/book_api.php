@@ -47,12 +47,13 @@ function getBookInfoWithNumber($first = 0, $number = 50)
 {
     $db = MySqlAPI::getInstance();
     $res = $db->getAll(
-        "select bi.id,bi.title,bi.remaining,bd.lent
+        "select bi.id,bi.title,bi.remaining,COUNT(ub.b_id) lent
         from bookinfo as bi
-        join bookdetail as bd
-        on bi.id = bd.id order by bi.id limit $first, $number"
+        left outer join userbooks as ub
+        on bi.id = ub.b_id
+        group by bi.id limit $first, $number"
     );
-
+    
     $db->close();
 
     return $res;
@@ -74,7 +75,7 @@ function getBookInfoById($id)
     $db->close();
 
     isEntry404(($res == null));
-    
+
     return $res;
 }
 

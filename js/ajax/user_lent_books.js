@@ -23,7 +23,7 @@ function createUserLentBookItems(id) {
                     html += '<td class="text-center">' + dateFormat('yyyy-MM-dd hh:mm:ss', lent_time);
                     +'</td>';
 
-                    html += '<td class="container-fluid d-flex"><div class="flex-fill text-center">';
+                    html += '<td class="container-fluid d-flex pt-3"><div class="flex-fill text-center">';
                     html += '<form action="book_info_page.php" method="GET">';
                     html +=
                         '<button type="submit" name="id" value="' +
@@ -59,7 +59,7 @@ function createUserLentItemsForBook(book_id) {
                     html += '<td class="text-center">' + dateFormat('yyyy-MM-dd hh:mm:ss', lent_time) + '</td>';
                     +'</td>';
 
-                    html += '<td class="container-fluid d-flex"><div class="flex-fill text-center">';
+                    html += '<td class="container-fluid d-flex pt-3"><div class="flex-fill text-center">';
                     html += '<form action="user_info_page.php" method="GET">';
                     html +=
                         '<button type="submit" name="id" value="' +

@@ -20,7 +20,6 @@ if (isset($_GET['id'])) {
     <title>图书<?php echo $book['id']; ?></title>
     <?php include_once('html/included_head.php'); ?>
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="css/style.custom.css">
 </head>
 
 <body onload="createUserLentItemsForBook(<?php echo $book['id']; ?>);">
@@ -113,7 +112,6 @@ if (isset($_GET['id'])) {
                     </div>
                 </section>
 
-                <!-- Forms Section-->
                 <section class="forms no-padding">
                     <div class="container-fluid">
                         <div class="row">
@@ -294,7 +292,7 @@ if (isset($_GET['id'])) {
                                             <th class="text-center">用户id</th>
                                             <th class="text-center">用户名</th>
                                             <th class="text-center">借书时间</th>
-                                            <th class="text-center">转到</th>
+                                            <th class="text-center">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody id="users-lent-the-book-table">

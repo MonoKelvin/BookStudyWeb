@@ -8,7 +8,9 @@
 <link rel="stylesheet" href="css/fontastic.css">
 <!-- Google fonts - Poppins -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-<!-- theme stylesheet-->
+<!-- Theme Stylesheet-->
 <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+<!-- Custom Stylesheet -->
+<link rel="stylesheet" href="css/style.custom.css">
 <!-- Favicon-->
 <link rel="shortcut icon" href="img/favicon.ico">
