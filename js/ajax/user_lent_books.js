@@ -23,12 +23,12 @@ function createUserLentBookItems(id) {
                     html += '<td class="text-center">' + dateFormat('yyyy-MM-dd hh:mm:ss', lent_time);
                     +'</td>';
 
-                    html += '<td class="container-fluid d-flex pt-3"><div class="flex-fill text-center">';
+                    html += '<td class="container-fluid d-flex pt-2"><div class="flex-fill text-center">';
                     html += '<form action="book_info_page.php" method="GET">';
                     html +=
                         '<button type="submit" name="id" value="' +
                         value['b_id'] +
-                        '" class="btn btn-sm btn-primary">转到</button>';
+                        '" class="btn btn-primary"><i class="fa fa-share"></i></button>';
                     html += '</form></div></td></tr>';
                 });
                 $('#user-lent-books-table').html(html);
@@ -59,12 +59,12 @@ function createUserLentItemsForBook(book_id) {
                     html += '<td class="text-center">' + dateFormat('yyyy-MM-dd hh:mm:ss', lent_time) + '</td>';
                     +'</td>';
 
-                    html += '<td class="container-fluid d-flex pt-3"><div class="flex-fill text-center">';
+                    html += '<td class="container-fluid d-flex pt-2"><div class="flex-fill text-center">';
                     html += '<form action="user_info_page.php" method="GET">';
                     html +=
                         '<button type="submit" name="id" value="' +
                         value['u_id'] +
-                        '" class="btn btn-sm btn-primary">转到</button>';
+                        '" class="btn btn-primary"><i class="fa fa-share"></i></button>';
                     html += '</form></div></td></tr>';
                 });
                 $('#users-lent-the-book-table').html(html);

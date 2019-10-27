@@ -78,7 +78,7 @@ if (isset($_GET['page'])) {
 
                 <div class="container-fluid">
                     <div class="row justify-content-center">
-                        <ul id="book-pagination1">
+                        <ul id="book-pagination1" class="pagination">
                         </ul>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ if (isset($_GET['page'])) {
 
                 <div class="container-fluid">
                     <div class="row justify-content-center">
-                        <ul id="book-pagination2">
+                        <ul id="book-pagination2" class="pagination">
                         </ul>
                     </div>
                 </div>

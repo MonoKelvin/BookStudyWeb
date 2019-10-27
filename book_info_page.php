@@ -43,134 +43,77 @@ if (isset($_GET['id'])) {
                     </ul>
                 </div>
 
-                <section class="forms no-padding-bottom">
-                    <div class="container-fluid d-flex flex-row">
-                        <div class="row flex-fill p-3">
-                            <div class="card col-lg-4 no-padding">
-                                <div class="card-header">
-                                    <h3>书籍封面</h3>
-                                </div>
-                                <div class="card-body d-flex align-items-center">
-                                    <img src=<?php echo "{$book['image']}"; ?> alt="void" class="img-fluid">
-                                </div>
-                            </div>
-                            <div class="card col-lg-8 no-padding">
+                <section class="forms">
+                    <form id="book-form" action="api/book_update.php" class="form-horizontal" method="post">
+                        <div class="container-fluid d-flex flex-row">
+                            <div class="card col-lg-12 no-padding">
                                 <div class="card-header">
                                     <h3>基本信息</h3>
                                 </div>
-                                <div class="card-body d-flex">
-                                    <div class="flex-fill container-fuild">
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 form-control-label">ID</label>
-                                            <div class="col-lg-9">
-                                                <input type="text" disabled="" placeholder=<?php echo "'{$book['id']}'"; ?> class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 form-control-label">ISBN13</label>
-                                            <div class="col-lg-9">
-                                                <input type="text" disabled="" placeholder=<?php echo "'{$book['isbn13']}'"; ?> class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="line"></div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 form-control-label">书名</label>
-                                            <div class="col-lg-9">
-                                                <input type="text" class="form-control" value=<?php echo "'{$book['title']}'"; ?>>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 form-control-label">副标题</label>
-                                            <div class="col-lg-9">
-                                                <input type="text" class="form-control" value=<?php echo "'{$book['subtitle']}'"; ?>>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 form-control-label">原标题</label>
-                                            <div class="col-lg-9">
-                                                <input type="text" class="form-control" value=<?php echo "'{$book['origin_title']}'"; ?>>
-                                            </div>
-                                        </div>
-                                        <div class="line"></div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 form-control-label">作者</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" value=<?php echo "'{$book['author']}'"; ?>>
-                                            </div>
-                                        </div>
-
+                                <div class="card-body d-flex align-items-center row">
+                                    <div class="col-lg-4 d-flex justify-content-center pb-5">
+                                        <img src=<?php echo "{$book['image']}"; ?> alt="void" class="img-fluid">
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="forms no-padding">
-                    <div class="container-fluid">
-                        <div class="row">
-
-                            <!-- Modal Form-->
-                            <!-- <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Modal Form</h3>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Form in simple modal </button>
-                                        <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
-                                            <div role="document" class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 id="exampleModalLabel" class="modal-title">Signin Modal</h4>
-                                                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                                        <form>
-                                                            <div class="form-group">
-                                                                <label>Email</label>
-                                                                <input type="email" placeholder="Email Address" class="form-control">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Password</label>
-                                                                <input type="password" placeholder="Password" class="form-control">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="submit" value="Signin" class="btn btn-primary">
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="container-fluid">
+                                            <div class="form-group row">
+                                                <label class="col-lg-3 form-control-label">ID</label>
+                                                <div class="col-lg-9">
+                                                    <input name="id" type="text" readonly value=<?php echo "'{$book['id']}'"; ?> class="form-control">
+                                                    <small class="help-block-none">书籍的ID编号不可更改.</small>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-3 form-control-label">ISBN13</label>
+                                                <div class="col-lg-9">
+                                                    <input name="isbn13" type="text" value=<?php echo "'{$book['isbn13']}'"; ?> class="form-control">
+                                                    <small class="help-block-none">书籍的ISBN13分类号尽量不要更改！</small>
+                                                </div>
+                                            </div>
+                                            <div class="line"></div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-3 form-control-label">书名</label>
+                                                <div class="col-lg-9">
+                                                    <input name="title" type="text" class="form-control" value=<?php echo "'{$book['title']}'"; ?>>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-3 form-control-label">副标题</label>
+                                                <div class="col-lg-9">
+                                                    <input name="subtitle" type="text" class="form-control" value=<?php echo "'{$book['subtitle']}'"; ?>>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-3 form-control-label">原标题</label>
+                                                <div class="col-lg-9">
+                                                    <input name="origin_title" type="text" class="form-control" value=<?php echo "'{$book['origin_title']}'"; ?>>
+                                                </div>
+                                            </div>
+                                            <div class="line"></div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 form-control-label">作者</label>
+                                                <div class="col-sm-9">
+                                                    <input name="author" type="text" class="form-control" value=<?php echo "'{$book['author']}'"; ?>>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
+                        </div>
 
-                            <!-- Form Elements -->
-                            <div class="col-lg-12 col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3>详细信息</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <form class="form-horizontal">
-
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3>详细信息</h3>
+                                        </div>
+                                        <div class="card-body">
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">摘要</label>
                                                 <div class="col-sm-9">
-                                                    <textarea class="form-control" rows="6"><?php echo $book['summary']; ?></textarea>
+                                                    <textarea name="summary" class="form-control" rows="6"><?php echo $book['summary']; ?></textarea>
                                                 </div>
                                             </div>
                                             <div class="line"></div>
@@ -178,7 +121,7 @@ if (isset($_GET['id'])) {
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">作者简介</label>
                                                 <div class="col-sm-9">
-                                                    <textarea class="form-control" rows="6"><?php echo $book['author_intro']; ?></textarea>
+                                                    <textarea name="author_intro" class="form-control" rows="6"><?php echo $book['author_intro']; ?></textarea>
                                                 </div>
                                             </div>
                                             <div class="line"></div>
@@ -186,21 +129,21 @@ if (isset($_GET['id'])) {
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">翻译</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" value=<?php echo "'{$book['translator']}'"; ?>>
+                                                    <input name="translator" type="text" class="form-control" value=<?php echo "'{$book['translator']}'"; ?>>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">出版社</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" value=<?php echo "'{$book['publisher']}'"; ?>>
+                                                    <input name="publisher" type="text" class="form-control" value=<?php echo "'{$book['publisher']}'"; ?>>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">出版时间</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" id="datetimepicker" type="text" value=<?php echo "'{$book['pubdate']}'"; ?>>
+                                                    <input name="pubdate" class="form-control" id="datetimepicker" type="text" value=<?php echo "'{$book['pubdate']}'"; ?>>
                                                 </div>
                                             </div>
                                             <div class="line"></div>
@@ -208,7 +151,7 @@ if (isset($_GET['id'])) {
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">页数</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" value=<?php echo "'{$book['pages']}'"; ?> onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <input name="pages" type="text" class="form-control" value=<?php echo "'{$book['pages']}'"; ?> onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                 </div>
                                             </div>
 
@@ -222,7 +165,7 @@ if (isset($_GET['id'])) {
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">装帧形式</label>
                                                 <div class="col-sm-9">
-                                                    <select name="account" class="form-control mb-3">
+                                                    <select name="binding" class="form-control mb-3">
                                                         <option><?php echo $book['binding']; ?></option>
                                                         <option>平装</option>
                                                         <option>精装</option>
@@ -245,13 +188,23 @@ if (isset($_GET['id'])) {
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-sm-3 form-control-label">标签<a href="#" target="_blank"><i class="p-2 fa fa-plus"></i></a></label>
+                                                <label class="col-sm-3 form-control-label">标签</label>
                                                 <div class="col-sm-9">
-                                                    <div class="bootstrap-label">
+                                                    <div id="add-tag-container" class="bootstrap-label">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend pb-2">
+                                                                <button onclick="addTag();" type="button" class="btn btn-primary"> <i class="fa fa-plus"></i> </button>
+                                                            </div>
+                                                            <input id="input-add-tag" class="form-control">
+                                                        </div>
                                                         <?php
                                                         $tags = explode(',', $book['tags']);
-                                                        foreach ($tags as $tag) {
-                                                            echo "<span class='label label-secondary m-1'>$tag</span>";
+                                                        if ($book['tags']) {
+                                                            foreach ($tags as $tag) {
+                                                                echo "<span class='label label-info m-1'>$tag";
+                                                                echo '<a onclick="deleteTag(this);" class="text-white pl-2" style="cursor:pointer">';
+                                                                echo '<i class="fa fa-trash"></i></a></span>';
+                                                            }
                                                         }
                                                         ?>
                                                     </div>
@@ -265,18 +218,30 @@ if (isset($_GET['id'])) {
                                                     <?php
                                                     $nl_count = substr_count($book['catalog'], "\n") * 26;
                                                     $nl_count = $nl_count < 200 ? 200 : ($nl_count > 1000 ? 1000 : $nl_count);
-                                                    echo '<textarea style="height:' . $nl_count . 'px;" class="form-control" rows="6">';
+                                                    echo '<textarea name="catalog" style="height:' . $nl_count . 'px;" class="form-control" rows="6">';
                                                     echo $book['catalog'];
                                                     echo '</textarea>';
                                                     ?>
                                                 </div>
                                             </div>
-                                        </form>
+                                            <div class="line pt-5"></div>
+
+                                            <!-- From -->
+                                            <div class="form-group row justify-content-end">
+                                                <div class="col-sm-2 pb-2">
+                                                    <button id="btn-submit" name="sumbit" value="datas_changed" class="form-control btn btn-primary">保存修改</button>
+                                                </div>
+                                                <div class="col-sm-2 pb-2">
+                                                    <button type="button" onclick="window.location.reload();" class="form-control btn btn-secondary">取消修改</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </section>
 
                 <div class="container-fluid">
@@ -305,35 +270,120 @@ if (isset($_GET['id'])) {
 
             </div>
         </div>
+    </div>
 
-        <!-- JavaScript files-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/popper.js/umd/popper.min.js"> </script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-        <script src="vendor/chart.js/Chart.min.js"></script>
-        <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
-        <script src="js/charts-custom.js"></script>
-        <!-- Main File-->
-        <script src="js/front.js"></script>
-        <!-- Ajax Request File -->
-        <script src="js/ajax/user_lent_books.js"></script>
-        <!-- DataTimePicker Plugin -->
-        <script>
-            var today = new Date();
-            $('#datetimepicker').datetimepicker({
-                language: 'zh-CN',
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                endDate: today,
-                startView: 3,
-                minView: 2,
-                todayBtn: true,
-                todayHighlight: true,
-            });
-        </script>
+    <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="js/charts-custom.js"></script>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
+    <!-- Ajax Request File -->
+    <script src="js/ajax/user_lent_books.js"></script>
+    <!-- DataTimePicker Plugin -->
+    <script>
+        var today = new Date();
+        $('#datetimepicker').datetimepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            endDate: today,
+            startView: 3,
+            minView: 2,
+            todayBtn: true,
+            todayHighlight: true,
+        });
+
+        // 防止input回车键自动提交表单
+        document.onkeydown = function(event) {
+            var target, code, tag;
+            if (!event) {
+                event = window.event; //针对ie浏览器
+                target = event.srcElement;
+                code = event.keyCode;
+                if (code == 13) {
+                    tag = target.tagName;
+                    if (tag == "TEXTAREA") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                target = event.target; //针对遵循w3c标准的浏览器，如Firefox
+                code = event.keyCode;
+                if (code == 13) {
+                    tag = target.tagName;
+                    if (tag == "INPUT") {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        };
+
+        <?php
+        $tmp = explode(',', $book['tags']);
+        foreach ($tmp as $key => $val) {
+            $tmp[$key] = '"' . $val . '"';
+        }
+        $tmp = implode(',', $tmp);
+        echo "var tags = [$tmp];";
+        ?>
+
+        function addTag() {
+            let tag = $('#input-add-tag').val().toString();
+            tag = tag.replace(',', ' ');
+            if (tag && tag.split(" ").join("").length > 0) {
+                // 如果标签不存在，就添加新的
+                if (tags.indexOf(tag) == -1) {
+                    tags.push(tag);
+
+                    let domStr = '<span class="label label-info m-1">' + tag;
+                    domStr += '<a onclick="deleteTag(this);" class="text-white pl-2" style="cursor:pointer">';
+                    domStr += '<i class="fa fa-trash"></i></a></span>';
+
+                    var tmpDiv = document.createElement('div');
+                    tmpDiv.innerHTML = domStr;
+                    document.getElementById('add-tag-container').appendChild(tmpDiv.childNodes[0]);
+
+                    $('#input-add-tag').val('');
+                } else {
+                    alert('标签已经存在！');
+                    $('#input-add-tag').val('');
+                    return;
+                }
+            }
+        }
+
+        Array.prototype.remove = function(val) {
+            var index = this.indexOf(val);
+            if (index > -1) {
+                this.splice(index, 1);
+            }
+        };
+
+        function deleteTag(obj) {
+            let parent = obj.parentNode.parentNode;
+            parent.removeChild(obj.parentNode);
+            tags.remove(obj.parentNode.innerText);
+        }
+
+        document.getElementById('btn-submit').addEventListener('click', () => {
+            let bookForm = $('#book-form');
+            let tmpTagsInput = $("<input type='text' name='tags' style='display:none'/>");
+            tmpTagsInput.val(tags.join(','));
+            bookForm.append(tmpTagsInput);
+            bookForm.submit();
+        });
+    </script>
 </body>
 
 </html>

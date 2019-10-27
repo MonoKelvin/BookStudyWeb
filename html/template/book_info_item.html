@@ -4,14 +4,14 @@
     <td class="text-center">{title}</td>
     <td class="text-center">{remaining}</td>
     <td class="text-center">{lent}</td>
-    <td class="container-fluid d-flex pt-3">
+    <td class="container-fluid d-flex pt-2">
         <div class="flex-fill text-center">
             <form action="book_info_page.php" method="GET">
-                <button name="id" type="submit" class="btn btn-sm btn-primary" value="{id}">详情</button>
+                <button name="id" type="submit" class="btn btn-primary" value="{id}"><i class="fa fa-pencil"></i></button>
             </form>
         </div>
         <div class="flex-fill text-center">
-            <button type="button" class="btn btn-sm btn-danger">删除</button>
+            <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
             <!-- TODO:添加删除警告对话框 -->
         </div>
     </td>
