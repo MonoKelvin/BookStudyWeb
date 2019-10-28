@@ -272,6 +272,7 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 
+
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
@@ -384,6 +385,23 @@ if (isset($_GET['id'])) {
             bookForm.submit();
         });
     </script>
+
+    <script src="js/plugin/toastr/toastr.min.js"></script>
+    <script src="js/plugin/toastr/toastr.init.js"></script>
+
+    <div class="toastr">
+        <button type="button" class="btn btn-success mb-10 ml-5" id="toastr-success-top-right">Success</button>
+    </div>
+
+    <div style="z-index: 100000000; position: fixed; top: 0px; left: 0px; width: 120px; height: 120px; border-radius: 3px; background-position: center bottom; background-size: contain; background-repeat: no-repeat; display: none;"></div>
+    <div id="toast-container" class="toast-top-right">
+        <div class="toast toast-success" aria-live="polite" style="">
+            <div class="toast-progress" style="width: 81.96%;"></div><button type="button" class="toast-close-button" role="button">×</button>
+            <div class="toast-title">Top Right</div>
+            <div class="toast-message">This Is Success Message</div>
+        </div>
+    </div>
+
 </body>
 
 </html>
