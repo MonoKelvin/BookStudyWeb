@@ -7,16 +7,15 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
     $id = @$_POST['id'] ? $_POST['id'] : -1;
     if ($id > 0) {
         $db = MySqlAPI::getInstance();
-        $image = @$_FILES['image'] ? $_FILES['image']['name'] : null;
-        if (!empty($image)) {
+        if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name'])) {
             $ori_image = $db->getRow('select image from bookinfo where id=' . $id)['image'];
             $ori_image = substr($ori_image, strripos($ori_image, '/') + 1, 100);
 
             $save_path = dirname(__FILE__) . '/../../bookstudy_api/book/image/' . $ori_image;
             if (!move_uploaded_file($_FILES['image']['tmp_name'], $save_path)) {
-                die('书籍封面上传失败！');
                 $db->close();
                 unset($_FILES['image']);
+                die('书籍封面上传失败！');
             }
         }
 

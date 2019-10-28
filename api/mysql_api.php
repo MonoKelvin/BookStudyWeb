@@ -143,7 +143,7 @@ class MySqlAPI
     /**
      * 定义添加数据的方法
      * @param string $table 表名
-     * @param array $data 插入的数据，元素的格式为 ['filed_name'] => 'data'
+     * @param array $data 插入的数据，元素的格式为 ['filed_name' => 'data' ]
      * @return int 最新添加的id
      */
     public function insert($table, $data)

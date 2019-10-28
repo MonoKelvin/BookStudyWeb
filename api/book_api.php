@@ -87,7 +87,7 @@ function storeBookFromDouBan($book_json)
 
     // 存储图书的图片
     $img_url = $json_obj['image'];
-    $img_file_name = substr($img_url, strripos($img_url, '/') + 1, 100);
+    $img_file_name = $json_obj['id'] . substr($img_url, strripos($img_url, '.'));
     $local_img_path = "http://api.bookstudy.com/book/image/$img_file_name";
     downloadNetworkFile($img_url, dirname(__FILE__)."/../bookstudy_api/book/image/$img_file_name");
 

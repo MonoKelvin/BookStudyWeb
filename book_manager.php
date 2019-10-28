@@ -85,8 +85,11 @@ if (isset($_GET['page'])) {
 
                 <div class="container-fluid">
                     <div class="card">
-                        <div class="card-header d-flex align-items-center">
+                        <div class="card-header d-flex align-items-center justify-content-between">
                             <h3 class="h4">所有图书</h3>
+                            <form action="add_new_book.php">
+                                <button class="btn btn-primary mr-5">新增书籍</button>
+                            </form>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
