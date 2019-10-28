@@ -44,15 +44,18 @@ if (isset($_GET['id'])) {
                 </div>
 
                 <section class="forms">
-                    <form id="book-form" action="api/book_update.php" class="form-horizontal" method="post">
+                    <form id="book-form" action="api/book_update.php" class="form-horizontal" method="post" enctype="multipart/form-data">
                         <div class="container-fluid d-flex flex-row">
                             <div class="card col-lg-12 no-padding">
                                 <div class="card-header">
                                     <h3>基本信息</h3>
                                 </div>
                                 <div class="card-body d-flex align-items-center row">
-                                    <div class="col-lg-4 d-flex justify-content-center pb-5">
-                                        <img src=<?php echo "{$book['image']}"; ?> alt="void" class="img-fluid">
+                                    <div class="col-lg-4 d-flex justify-content-center pb-3 flex-column">
+                                        <img id="book-image" src=<?php echo "{$book['image']}"; ?> alt="void" class="img-fluid">
+                                        <button type="button" class="btn btn-primary mt-3" onclick="$('#tmp-file-input').click();">更换封面</button>
+                                        <small class="help-block-none mt-2">请选择不大于1M的png、jpg或jpeg格式的图片文件</small>
+                                        <input id="tmp-file-input" name="image" onchange="changeBookImage(this);" type="file" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;">
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="container-fluid">
@@ -66,7 +69,7 @@ if (isset($_GET['id'])) {
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">ISBN13</label>
                                                 <div class="col-lg-9">
-                                                    <input name="isbn13" type="text" value=<?php echo "'{$book['isbn13']}'"; ?> class="form-control">
+                                                    <input name="isbn13" type="text" value=<?php echo "'{$book['isbn13']}'"; ?> class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                     <small class="help-block-none">书籍的ISBN13分类号尽量不要更改！</small>
                                                 </div>
                                             </div>
@@ -272,7 +275,6 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 
-
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
@@ -339,43 +341,12 @@ if (isset($_GET['id'])) {
         echo "var tags = [$tmp];";
         ?>
 
-        function addTag() {
-            let tag = $('#input-add-tag').val().toString();
-            tag = tag.replace(',', ' ');
-            if (tag && tag.split(" ").join("").length > 0) {
-                // 如果标签不存在，就添加新的
-                if (tags.indexOf(tag) == -1) {
-                    tags.push(tag);
-
-                    let domStr = '<span class="label label-info m-1">' + tag;
-                    domStr += '<a onclick="deleteTag(this);" class="text-white pl-2" style="cursor:pointer">';
-                    domStr += '<i class="fa fa-trash"></i></a></span>';
-
-                    var tmpDiv = document.createElement('div');
-                    tmpDiv.innerHTML = domStr;
-                    document.getElementById('add-tag-container').appendChild(tmpDiv.childNodes[0]);
-
-                    $('#input-add-tag').val('');
-                } else {
-                    alert('标签已经存在！');
-                    $('#input-add-tag').val('');
-                    return;
-                }
-            }
-        }
-
         Array.prototype.remove = function(val) {
             var index = this.indexOf(val);
             if (index > -1) {
                 this.splice(index, 1);
             }
         };
-
-        function deleteTag(obj) {
-            let parent = obj.parentNode.parentNode;
-            parent.removeChild(obj.parentNode);
-            tags.remove(obj.parentNode.innerText);
-        }
 
         document.getElementById('btn-submit').addEventListener('click', () => {
             let bookForm = $('#book-form');
@@ -386,21 +357,29 @@ if (isset($_GET['id'])) {
         });
     </script>
 
-    <script src="js/plugin/toastr/toastr.min.js"></script>
-    <script src="js/plugin/toastr/toastr.init.js"></script>
+    <!-- Utility Js File -->
+    <script src="js/utility.js"> </script>
+    <!-- <script src="vendor/toastr/js/toastr.min.js">
+        </script>
+        <script src="vendor/toastr/js/toastr.init.js"></script>
 
-    <div class="toastr">
-        <button type="button" class="btn btn-success mb-10 ml-5" id="toastr-success-top-right">Success</button>
-    </div>
-
-    <div style="z-index: 100000000; position: fixed; top: 0px; left: 0px; width: 120px; height: 120px; border-radius: 3px; background-position: center bottom; background-size: contain; background-repeat: no-repeat; display: none;"></div>
-    <div id="toast-container" class="toast-top-right">
-        <div class="toast toast-success" aria-live="polite" style="">
-            <div class="toast-progress" style="width: 81.96%;"></div><button type="button" class="toast-close-button" role="button">×</button>
-            <div class="toast-title">Top Right</div>
-            <div class="toast-message">This Is Success Message</div>
-        </div>
-    </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Toastr Top Right</h4>
+                    <div class="card-content">
+                        <div class="toastr m-t-15">
+                            <div class="text-left">
+                                <button type="button" class="btn btn-success m-b-10 m-l-5" id="toastr-success-top-right">Success</button>
+                                <button type="button" class="btn btn-info m-b-10 m-l-5" id="toastr-info-top-right">Info</button>
+                                <button type="button" class="btn btn-warning m-b-10 m-l-5" id="toastr-warning-top-right">Warning</button>
+                                <button type="button" class="btn btn-danger m-b-10 m-l-5" id="toastr-danger-top-right">Error</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
 
 </body>
 

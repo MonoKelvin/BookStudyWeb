@@ -53,7 +53,7 @@ function getBookInfoWithNumber($first = 0, $number = 50)
         on bi.id = ub.b_id
         group by bi.id limit $first, $number"
     );
-    
+
     $db->close();
 
     return $res;
@@ -89,7 +89,7 @@ function storeBookFromDouBan($book_json)
     $img_url = $json_obj['image'];
     $img_file_name = substr($img_url, strripos($img_url, '/') + 1, 100);
     $local_img_path = "http://api.bookstudy.com/book/image/$img_file_name";
-    downloadNetworkFile($img_url, "../book/image/$img_file_name");
+    downloadNetworkFile($img_url, dirname(__FILE__)."/../bookstudy_api/book/image/$img_file_name");
 
     // 打开数据库
     $db = MySqlAPI::getInstance();

@@ -1128,3 +1128,55 @@ nav.side-navbar {
 .page-link:focus {
     box-shadow: none;
 }
+
+.custom-file {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    margin-bottom: 0;
+}
+.custom-file-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+}
+.custom-file-label:focus {
+  background-color: #fefeff;
+  border-color: #95a0f4;
+}
+.custom-file,
+.custom-file-label,
+.custom-select,
+.custom-file-label:after {
+  height: calc(2.25rem + 6px);
+}
+
+.custom-file-label {
+  line-height: 2.2;
+}
+.custom-file-label:after {
+  height: calc(2.25rem + 4px);
+  line-height: 2.2;
+  border-color: transparent;
+}
+.custom-file-label:focus, .custom-file-label:active {
+  box-shadow: none;
+  outline: none;
+}
+
+.custom-file-input:focus + .custom-file-label {
+  box-shadow: none;
+  border-color: #6777ef;
+}
+.custom-file-input:focus + .custom-file-label:after {
+  border-color: transparent;
+}
