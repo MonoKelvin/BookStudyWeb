@@ -7,12 +7,35 @@
     <td class="container-fluid d-flex pt-2">
         <div class="flex-fill text-center">
             <form action="book_info_page.php" method="GET">
-                <button name="id" type="submit" class="btn btn-primary" value="{id}"><i class="fa fa-pencil"></i></button>
+                <button name="id" type="submit" class="btn btn-primary" value="{id}"><i
+                        class="fa fa-pencil"></i></button>
             </form>
         </div>
         <div class="flex-fill text-center">
-            <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-            <!-- TODO:添加删除警告对话框 -->
+            <button type="button" data-toggle="modal" data-target="#deleteBookAlert{id}" class="btn btn-danger"><i
+                    class="fa fa-trash"></i></button>
+            <div id="deleteBookAlert{id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true" class="modal fade text-left">
+                <div role="document" class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 id="exampleModalLabel" class="modal-title">数据改动提示</h4>
+                            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                                    aria-hidden="true">×</span></button>
+                        </div>
+                        <form action="../../api/book_delete.php?id={id}" method="post">
+                            <div class="modal-body">
+                                <p>你确定要删除<strong>《{title}》</strong>这本书吗？</p>
+                                <input name="password" type="password" class="form-control" placeholder="输入管理员密码">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-dismiss="modal" class="btn btn-secondary">取消</button>
+                                <button type="submit" name="submit" value="submit" class="btn btn-primary">确定</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </td>
 </tr>

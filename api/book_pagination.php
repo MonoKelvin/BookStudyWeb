@@ -18,7 +18,7 @@ function getBooksItem($page = 1)
     $fetch_num = 10;
     $books_arr = getBookInfoWithNumber($page * $fetch_num - $fetch_num, $fetch_num);
 
-    static $book_no = 1;
+    $book_no = ($page - 1) * $fetch_num + 1;
     $resultStr = '';
     foreach ($books_arr as $book) {
         $htmlStr = '';
