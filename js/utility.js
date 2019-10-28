@@ -46,7 +46,7 @@ function addTag() {
 }
 
 function deleteTag(obj) {
-    let parent = obj.parentNode.parentNode;
+    var parent = obj.parentNode.parentNode;
     parent.removeChild(obj.parentNode);
     tags.remove(obj.parentNode.innerText);
 }
@@ -69,9 +69,7 @@ function changeBookImage(obj) {
     var reader = new FileReader();
     reader.onload = function(e) {
         var data = e.target.result;
-        var bookImg = $('#book-image');
-        bookImg.attr('src', data);
-        $('#tmp-file-input').attr('value', data);
+        $('#book-image').attr('src', data);
     };
     reader.readAsDataURL(file);
     return;

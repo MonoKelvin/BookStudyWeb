@@ -53,9 +53,9 @@ if (isset($_GET['id'])) {
                                 <div class="card-body d-flex align-items-center row">
                                     <div class="col-lg-4 d-flex justify-content-center pb-3 flex-column">
                                         <img id="book-image" src=<?php echo "{$book['image']}"; ?> alt="void" class="img-fluid">
+                                        <input id="tmp-file-input" name="image" onchange="changeBookImage(this)" type="file" class="hidden-form-control">
                                         <button type="button" class="btn btn-primary mt-3" onclick="$('#tmp-file-input').click();">更换封面</button>
                                         <small class="help-block-none mt-2">请选择不大于1M的png、jpg或jpeg格式的图片文件</small>
-                                        <input id="tmp-file-input" name="image" onchange="changeBookImage(this);" type="file" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;">
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="container-fluid">
@@ -229,10 +229,28 @@ if (isset($_GET['id'])) {
                                             </div>
                                             <div class="line pt-5"></div>
 
-                                            <!-- From -->
                                             <div class="form-group row justify-content-end">
                                                 <div class="col-sm-2 pb-2">
-                                                    <button id="btn-submit" name="sumbit" value="datas_changed" class="form-control btn btn-primary">保存修改</button>
+                                                    <button type="button" data-toggle="modal" data-target="#alterAlert" class="form-control btn btn-primary">保存修改</button>
+                                                    <div id="alterAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                                                        <div role="document" class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 id="exampleModalLabel" class="modal-title">数据改动提示</h4>
+                                                                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>你确定要保存当前数据的修改吗？</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" data-dismiss="modal" class="btn btn-secondary">取消</button>
+                                                                    <form action="book_update.php" method="post">
+                                                                        <button id="btn-submit" type="submit" name="submit" value="submit" class="btn btn-primary">确定</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-2 pb-2">
                                                     <button type="button" onclick="window.location.reload();" class="form-control btn btn-secondary">取消修改</button>
@@ -246,6 +264,8 @@ if (isset($_GET['id'])) {
                         </div>
                     </form>
                 </section>
+
+
 
                 <div class="container-fluid">
                     <div class="card">
@@ -333,12 +353,16 @@ if (isset($_GET['id'])) {
         };
 
         <?php
-        $tmp = explode(',', $book['tags']);
-        foreach ($tmp as $key => $val) {
-            $tmp[$key] = '"' . $val . '"';
+        if ($book['tags'] != '') {
+            $tmp = explode(',', $book['tags']);
+            foreach ($tmp as $key => $val) {
+                $tmp[$key] = '"' . $val . '"';
+            }
+            $tmp = implode(',', $tmp);
+            echo "var tags = [$tmp];";
+        } else {
+            echo "var tags = [];";
         }
-        $tmp = implode(',', $tmp);
-        echo "var tags = [$tmp];";
         ?>
 
         Array.prototype.remove = function(val) {
@@ -359,28 +383,6 @@ if (isset($_GET['id'])) {
 
     <!-- Utility Js File -->
     <script src="js/utility.js"> </script>
-    <!-- <script src="vendor/toastr/js/toastr.min.js">
-        </script>
-        <script src="vendor/toastr/js/toastr.init.js"></script>
-
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Toastr Top Right</h4>
-                    <div class="card-content">
-                        <div class="toastr m-t-15">
-                            <div class="text-left">
-                                <button type="button" class="btn btn-success m-b-10 m-l-5" id="toastr-success-top-right">Success</button>
-                                <button type="button" class="btn btn-info m-b-10 m-l-5" id="toastr-info-top-right">Info</button>
-                                <button type="button" class="btn btn-warning m-b-10 m-l-5" id="toastr-warning-top-right">Warning</button>
-                                <button type="button" class="btn btn-danger m-b-10 m-l-5" id="toastr-danger-top-right">Error</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
 </body>
 
 </html>
