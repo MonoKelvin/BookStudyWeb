@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '\api\user_api.php');
 isLogedIn();
+refreshOnce();
 
 global $user;
 if (isset($_GET['id'])) {
@@ -41,19 +42,20 @@ if (isset($_GET['id'])) {
                 </div>
 
                 <section class="no-padding-bottom">
-                    <form action="user_update.php" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <form action="api/user_update.php" class="form-horizontal" method="post" enctype="multipart/form-data">
                         <div class="container-fluid d-flex flex-row">
                             <div class="card col-lg-12 no-padding">
                                 <div class="card-body d-flex align-items-center row">
-                                    <div class="col-lg-4 d-flex justify-content-center pb-3 flex-column">
-                                        <div class="client card">
+
+                                    <div class="col-lg-4 d-flex justify-content-center flex-column">
+                                        <div class="client card pb-4 pt-4">
                                             <div class="card-body text-center">
-                                                <div class="client-avatar"><img src=<?php echo "{$user['avatar']}"; ?> alt="void" class="img-fluid rounded-circle">
+                                                <div class="client-avatar">
+                                                    <img id="user-avatar" src="<?php echo $user['avatar']; ?>" alt="void" class="user-avatar">
                                                     <div class="status <?php echo $user['online'] ? 'bg-green' : 'bg-red'; ?>"></div>
                                                 </div>
                                                 <div class="client-title">
                                                     <h3><?php echo $user['name']; ?></h3>
-                                                    <span>id：<?php echo $user['id']; ?></span>
                                                     <!-- <a href="javascript:void(0);">发送消息</a> -->
                                                 </div>
                                                 <div class="client-info">
@@ -66,29 +68,41 @@ if (isset($_GET['id'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <input id="tmp-file-input" name="image" onchange="changeBookImage(this)" type="file" class="hidden-form-control">
+                                        <input id="tmp-file-input" name="image" onchange="changeUserAvatar(this)" type="file" class="hidden-form-control">
                                         <button type="button" class="btn btn-primary mt-2" onclick="$('#tmp-file-input').click();">更换头像</button>
                                         <small class="help-text mt-2">请选择不大于1M的png、jpg或jpeg格式的图片文件</small>
                                     </div>
 
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-8 pt-4">
                                         <div class="container-fluid">
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-lg-3 form-control-label">用户ID</label>
+                                                <div class="col-lg-9">
+                                                    <input name="id" type="text" class="form-control" readonly value=<?php echo "'{$user['id']}'"; ?>>
+                                                    <small class="help-text">用户ID号不可更改</small>
+                                                </div>
+                                            </div>
                                             <div class="form-group row align-items-center">
                                                 <label class="col-lg-3 form-control-label">用户名（昵称）<span class="required-label-star">*</span></label>
                                                 <div class="col-lg-9">
-                                                    <input name="name" type="text" class="form-control" value=<?php echo "'{$user['name']}'"; ?>>
+                                                    <input name="name" type="text" class="form-control" maxlength="16" autocomplete="off" value=<?php echo "'{$user['name']}'"; ?>>
+                                                    <small class="help-text">用户名最长为16个字符</small>
                                                 </div>
                                             </div>
                                             <div class="form-group row align-items-center">
                                                 <label class="col-lg-3 form-control-label">账号<span class="required-label-star">*</span></label>
                                                 <div class="col-lg-9">
-                                                    <input name="account" type="text" class="form-control" value=<?php echo "'{$user['account']}'"; ?>>
+                                                    <input name="account" type="text" class="form-control" maxlength="32" autocomplete="off" value=<?php echo "'{$user['account']}'"; ?>>
+                                                    <small class="help-text">账号最长为32个字符</small>
                                                 </div>
                                             </div>
+                                            <div class="line"></div>
+
                                             <div class="form-group row align-items-center">
                                                 <label class="col-lg-3 form-control-label">密码<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
-                                                    <input name="password" type="text" class="form-control" value=<?php echo "'{$user['password']}'"; ?>>
+                                                    <input name="password" type="text" class="form-control" maxlength="16" autocomplete="off" value=<?php echo "'{$user['password']}'"; ?>>
+                                                    <small class="help-text">密码长度范围为6-16个字符</small>
                                                 </div>
                                             </div>
                                             <div class="form-group row align-items-center">
@@ -101,10 +115,11 @@ if (isset($_GET['id'])) {
                                                     <a class="btn btn-warning" href=<?php echo "'{$user['avatar']}'" ?> target='_blank'>查看图片</a>
                                                 </div>
                                             </div>
+                                            <div class="line"></div>
 
                                             <!-- 表单按钮 -->
                                             <div class="form-group row justify-content-end">
-                                                <div class="col-sm-2 pb-2">
+                                                <div class="col-lg-2 pb-2">
                                                     <button type="button" data-toggle="modal" data-target="#alterUserAlert" class="form-control btn btn-primary">保存修改</button>
                                                     <div id="alterUserAlert" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
                                                         <div role="document" class="modal-dialog">
@@ -125,7 +140,7 @@ if (isset($_GET['id'])) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-2 pb-2">
+                                                <div class="col-lg-2 pb-2">
                                                     <button type="button" onclick="window.location.reload();" class="form-control btn btn-secondary">还原</button>
                                                 </div>
                                             </div>
@@ -184,6 +199,31 @@ if (isset($_GET['id'])) {
     <script src="js/front.js"></script>
     <!-- Ajax Request File -->
     <script src="js/ajax/user_lent_books.js"></script>
+    <script>
+        function changeUserAvatar(obj) {
+            var file = obj.files && obj.files.length > 0 ? obj.files[0] : null;
+
+            if (!file) {
+                return;
+            }
+            if (file.size >= 1 * 1024 * 1024) {
+                alert('文件不允许大于1M');
+                return;
+            }
+            if (file.type !== 'image/png' && file.type !== 'image/jpg' && file.type !== 'image/jpeg') {
+                alert('文件格式必须为：png/jpg/jpeg');
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var data = e.target.result;
+                $('#user-avatar').attr('src', data);
+            };
+            reader.readAsDataURL(file);
+            return;
+        }
+    </script>
 </body>
 
 </html>

@@ -85,7 +85,7 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
     unset($_FILES['image']);
 
     // echo "<script>location.href='{$_SERVER['HTTP_REFERER']}';</script>";
-    echo '<script>location.href="/../book_info_page.php?id=' . $id . '";</script>';
+    echo '<script>location.href="/../book_info_page.php?id=' . $the_id . '";</script>';
 } else {
     echo '<script>alert("请联系管理员进行操作");location.href="/../index.php"</script>';
 }

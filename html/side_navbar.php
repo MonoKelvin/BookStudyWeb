@@ -14,7 +14,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['avatar'])) {
 <nav class="side-navbar">
     <!-- Sidebar Header-->
     <div class="sidebar-header d-flex align-items-center">
-        <div class="avatar"><img src=<?php echo "'$admin_avatar'"; ?> alt="..." class="img-fluid rounded-circle"></div>
+        <img src=<?php echo "'$admin_avatar'"; ?> alt="..." class="side-navbar-avatar">
         <div class="title">
             <h1 class="h4">管理员</h1>
             <p><?php echo $admin_name; ?></p>

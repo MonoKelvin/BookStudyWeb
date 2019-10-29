@@ -4,7 +4,7 @@ isLogedIn();
 refreshOnce();
 
 global $book;
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && !empty($_GET['id'])) {
     $book = getBookInfoById($_GET['id']);
 } else {
     isEntry404(true);

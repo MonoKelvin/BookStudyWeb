@@ -1,6 +1,8 @@
 <?php
 require_once(dirname(__FILE__) . '\api\utility.php');
 isLogedIn(true);
+refreshOnce();
+
 ?>
 <!DOCTYPE html>
 <html>

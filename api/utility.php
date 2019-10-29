@@ -14,19 +14,19 @@ function reply($code = 404, $message = 'error', $res = [])
 
 /**
  * 提供一次刷新机会的函数
- * @summary 必须放在跳转到新页面的那个页面开始
+ * @see function refreshCheck()
  */
 function refreshOnce()
 {
     if (!session_id()) {
         session_start();
     }
-    $_SESSION['refresh_code'] = md5(time());
+    $_SESSION['refresh_code'] = random_int(0, 10000);
 }
 
 /**
  * 刷新检测函数，用于检测是否多次刷新页面
- * @summary 必须放在要检测是否会重复刷新的页面的`开始`
+ * @see function refreshOnce()
  */
 function refreshCheck()
 {

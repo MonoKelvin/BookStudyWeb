@@ -6,6 +6,7 @@ refreshCheck();
 
 if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
     $password = @$_POST['password'] ? $_POST['password'] : null;
+    session_start();
     if ($password == $_SESSION['password']) {
         $db = MySqlAPI::getInstance();
         $img = $db->getRow('select image from bookinfo where id=' . $_GET['id'])['image'];
@@ -18,8 +19,7 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
             unlink($local_file);
         }
 
-        // 返回上一页面并刷新
-        echo "<script>location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
+        echo '<script>history.go(-1);</script>';
     } else {
         echo '<script>alert("密码错误！您没有权限执行删除操作。");history.go(-1);</script>';
     }

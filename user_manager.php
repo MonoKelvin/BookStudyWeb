@@ -1,6 +1,7 @@
 <?PHP
 require_once('api/utility.php');
 isLogedIn();
+refreshOnce();
 
 global $page;
 if (isset($_GET['page'])) {

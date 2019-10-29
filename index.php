@@ -1,6 +1,7 @@
 <?PHP
 require_once('api/utility.php');
 isLogedIn();
+refreshOnce();
 
 // // 设置一些全局变量在这
 // $GLOBALS['book_page'] = 1;

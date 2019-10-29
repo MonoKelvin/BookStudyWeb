@@ -14,5 +14,4 @@
 <link rel="stylesheet" href="css/style.custom.css">
 <!-- Toastr Plugin -->
 <!-- <link rel="stylesheet" href="vendor/toastr/css/toastr.min.css"> -->
-<!-- Favicon-->
-<link rel="shortcut icon" href="img/favicon.ico">
+
