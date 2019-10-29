@@ -4,6 +4,32 @@ require_once(dirname(__FILE__) . '/mysql_api.php');
 require_once(dirname(__FILE__) . '/utility.php');
 
 if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
+
+    if (!isISBN($_POST['isbn13'])) {
+        echo '<script>alert("ISBN13码不合法，请重新确认！");history.go(-1);</script>';
+        die;
+    }
+    if (!isPositiveInteger($_POST['pages'], true)) {
+        echo '<script>alert("页数必须为整数或不填！");history.go(-1);</script>';
+        die;
+    }
+    if (!isPositiveInteger($_POST['remaining'])) {
+        echo '<script>alert("新增数量必须为非负整数！");history.go(-1);</script>';
+        die;
+    }
+    if (!isValidString($_POST['title'])) {
+        echo '<script>alert("书名不合法，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if (!isValidString($_POST['author'])) {
+        echo '<script>alert("作者名不合法，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if (!isValidDate($_POST['pubdate'], true)) {
+        echo '<script>alert("出版日期不合法，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+
     $id = @$_POST['id'] ? $_POST['id'] : -1;
     if ($id > 0) {
         $db = MySqlAPI::getInstance();

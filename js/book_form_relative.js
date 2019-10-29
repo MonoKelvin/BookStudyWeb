@@ -1,9 +1,8 @@
-var today = new Date();
 $('#datetimepicker').datetimepicker({
     language: 'zh-CN',
     format: 'yyyy-mm-dd',
     autoclose: true,
-    endDate: today,
+    endDate: new Date(),
     startView: 3,
     minView: 2,
     todayBtn: true,
@@ -14,7 +13,7 @@ $('#datetimepicker2').datetimepicker({
     language: 'zh-CN',
     format: 'yyyy-mm-dd',
     autoclose: true,
-    endDate: today,
+    endDate: new Date(),
     startView: 3,
     minView: 2,
     todayBtn: true,

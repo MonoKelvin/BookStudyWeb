@@ -30,7 +30,8 @@ $book['tags'] = '';
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">主页</a></li>
-                        <li class="breadcrumb-item"><a href="book_manager.php">图书管理</a></li>
+                        <li class="breadcrumb-item"><a href=<?php $page = @$_GET['page'] ? $_GET['page'] : 1;
+                                                            echo "'book_manager.php?page={$page}'"; ?>>图书管理</a></li>
                         <li class="breadcrumb-item active">新增书籍</li>
                     </ul>
                 </div>
@@ -39,8 +40,9 @@ $book['tags'] = '';
                     <form id="new-book-form" action="api/book_add.php" class="form-horizontal" method="post" enctype="multipart/form-data">
                         <div class="container-fluid d-flex flex-row">
                             <div class="card col-lg-12 no-padding">
-                                <div class="card-header">
+                                <div class="card-header justify-content-between">
                                     <h3>基本信息</h3>
+                                    <p class="no-margin"><strong class="required-label-star">*</strong>为必填信息</p>
                                 </div>
                                 <div class="card-body d-flex align-items-center row">
                                     <div class="col-lg-4 d-flex justify-content-center pb-3 flex-column">
@@ -52,13 +54,13 @@ $book['tags'] = '';
                                     <div class="col-lg-8">
                                         <div class="container-fluid">
                                             <div class="form-group row">
-                                                <label class="col-lg-3 form-control-label">新增数量</label>
+                                                <label class="col-lg-3 form-control-label">新增数量<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
-                                                    <input name="remaining" required value="1" type="text" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <input name="remaining" required value="1" type="text" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-lg-3 form-control-label">ISBN13</label>
+                                                <label class="col-lg-3 form-control-label">ISBN13<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
                                                     <input name="isbn13" type="text" required class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                     <small class="help-block-none">请再三确认书籍的ISBN13分类号</small>
@@ -66,7 +68,7 @@ $book['tags'] = '';
                                             </div>
                                             <div class="line"></div>
                                             <div class="form-group row">
-                                                <label class="col-lg-3 form-control-label">书名</label>
+                                                <label class="col-lg-3 form-control-label">书名<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
                                                     <input name="title" required type="text" class="form-control">
                                                 </div>
@@ -85,9 +87,9 @@ $book['tags'] = '';
                                             </div>
                                             <div class="line"></div>
                                             <div class="form-group row">
-                                                <label class="col-sm-3 form-control-label">作者</label>
+                                                <label class="col-sm-3 form-control-label">作者<strong class="required-label-star">*</strong></label>
                                                 <div class="col-sm-9">
-                                                    <input name="author" type="text" class="form-control">
+                                                    <input name="author" required type="text" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -138,6 +140,7 @@ $book['tags'] = '';
                                                 <label class="col-sm-3 form-control-label">出版时间</label>
                                                 <div class="col-sm-9">
                                                     <input name="pubdate" class="form-control" id="datetimepicker2" type="text">
+                                                    <small class="help-block-none">格式为：yyyy-mm-dd，如：2019-10-01 </small>
                                                 </div>
                                             </div>
                                             <div class="line"></div>
@@ -145,7 +148,7 @@ $book['tags'] = '';
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">页数</label>
                                                 <div class="col-sm-9">
-                                                    <input name="pages" type="text" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <input name="pages" value="0" type="text" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                 </div>
                                             </div>
 

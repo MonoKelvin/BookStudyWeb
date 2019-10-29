@@ -87,7 +87,7 @@ if (isset($_GET['page'])) {
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h3 class="h4">所有图书</h3>
-                            <form action="add_new_book.php">
+                            <form action=<?php echo "add_new_book.php?page=$page";?> method="post">
                                 <button class="btn btn-primary mr-5">新增书籍</button>
                             </form>
                         </div>

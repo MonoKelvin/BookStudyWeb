@@ -28,17 +28,16 @@ if (isset($_GET['id'])) {
         <div class="page-content d-flex align-items-stretch">
             <?php include_once('html/side_navbar.php'); ?>
             <div class="content-inner">
-                <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
                         <h2 class="no-margin-bottom">用户管理</h2>
                     </div>
                 </header>
-                <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">主页</a></li>
-                        <li class="breadcrumb-item"><a href="book_manager.php">图书管理</a></li>
+                        <li class="breadcrumb-item"><a href=<?php $page = @$_GET['page'] ? $_GET['page'] : 1;
+                                                            echo "'book_manager.php?page={$page}'"; ?>>图书管理</a></li>
                         <li class="breadcrumb-item active">图书<?php echo $book['id']; ?></li>
                     </ul>
                 </div>

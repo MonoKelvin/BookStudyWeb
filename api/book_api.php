@@ -1,7 +1,7 @@
 <?php
 
-require_once('mysql_api.php');
-require_once('utility.php');
+require_once(dirname(__FILE__) . '\mysql_api.php');
+require_once(dirname(__FILE__) . '\utility.php');
 
 /* 根据ISBN号获得数据库中书的数据
  * @param $isbn ISBN分类号
@@ -89,7 +89,7 @@ function storeBookFromDouBan($book_json)
     $img_url = $json_obj['image'];
     $img_file_name = $json_obj['id'] . substr($img_url, strripos($img_url, '.'));
     $local_img_path = "http://api.bookstudy.com/book/image/$img_file_name";
-    downloadNetworkFile($img_url, dirname(__FILE__)."/../bookstudy_api/book/image/$img_file_name");
+    downloadNetworkFile($img_url, dirname(__FILE__) . "/../bookstudy_api/book/image/$img_file_name");
 
     // 打开数据库
     $db = MySqlAPI::getInstance();
