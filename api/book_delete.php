@@ -6,7 +6,7 @@ refreshCheck();
 
 if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
     $password = @$_POST['password'] ? $_POST['password'] : null;
-    if ($password == $_SESSION['password']) {
+    if ($password && $password == $_SESSION['password']) {
         $db = MySqlAPI::getInstance();
         $img = $db->getRow('select image from bookinfo where id=' . $_GET['id'])['image'];
         $db->deleteOne('bookinfo', 'id=' . $_GET['id']);

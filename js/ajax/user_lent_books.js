@@ -42,12 +42,10 @@ function createUserLentBookItems(id) {
                         value.title +
                         '》</strong></p><p class="text-red">一旦确定就无法撤销，你要继续吗？</p>';
                     html +=
-                        '<input name="password" type="password" class="form-control" placeholder="输入管理员密码"><input name="id" value="';
+                        '<input name="password" type="password" class="form-control" placeholder="输入管理员密码"><input name="u_id" value="';
                     html +=
                         id +
-                        '" type="text" class="hidden-form-control"><input name="' +
-                        value.b_id +
-                        '" value="' +
+                        '" type="text" class="hidden-form-control"><input name="b_id" value="' +
                         value.b_id +
                         '" type="text" class="hidden-form-control"></div>';
                     html +=

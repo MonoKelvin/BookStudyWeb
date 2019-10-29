@@ -164,19 +164,12 @@ class MySqlAPI
     /**
      * 删除一条数据方法
      * @param string $table 表名
-     * @param array $where 条件，比如：array('id'=>'1')
+     * @param array $where 条件
      * @return int 受影响的行数
      */
     public function deleteOne($table, $where)
     {
-        if (is_array($where)) {
-            foreach ($where as $key => $val) {
-                $condition = $key . '=' . $val;
-            }
-        } else {
-            $condition = $where;
-        }
-        $sql = "delete from $table where $condition";
+        $sql = "delete from $table where $where";
         $this->query($sql);
         //返回受影响的行数
         return mysqli_affected_rows($this->link);
