@@ -1,6 +1,18 @@
 <?PHP
 require_once('api/utility.php');
 isLogedIn();
+
+global $page;
+if (isset($_GET['page'])) {
+    if ($_GET['page'] > 0) {
+        $page = $_GET['page'];
+    } else {
+        isEntry404(true);
+    }
+} else {
+    $page = 1;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,8 +24,8 @@ isLogedIn();
     <?php include_once('html/included_head.php'); ?>
 </head>
 
-<body>
-    <div class="page">
+<body onload="createUserTableItems(<?php echo $page; ?>);">
+    <div class=" page">
         <?php include_once('html/header_navbar.php'); ?>
         <div class="page-content d-flex align-items-stretch">
             <?php include_once('html/side_navbar.php'); ?>
@@ -34,8 +46,8 @@ isLogedIn();
 
                 <section class="dashboard-header">
                     <div class="container-fluid">
+                        <!-- TODO:图书分类的数据使用php页面动态生成 -->
                         <div class="row">
-                            <!-- Statistics -->
                             <div class="col-lg-6">
                                 <div class="statistic d-flex align-items-center bg-white has-shadow">
                                     <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
@@ -44,13 +56,20 @@ isLogedIn();
                             </div>
                             <div class="col-lg-6">
                                 <div class="statistic d-flex align-items-center bg-white has-shadow">
-                                    <div class="icon bg-green"><i class="fa fa-calendar-o"></i></div>
+                                    <div class="icon bg-green"><i class="fa fa-tasks"></i></div>
                                     <div class="text"><strong>分类2</strong><br><small>12本</small></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <ul id="user-pagination1" class="pagination">
+                        </ul>
+                    </div>
+                </div>
 
                 <div class="container-fluid">
                     <div class="card">
@@ -62,7 +81,7 @@ isLogedIn();
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">序号</th>
+                                            <th class="text-center">排序</th>
                                             <th class="text-center">用户id</th>
                                             <th class="text-center">用户名（昵称）</th>
                                             <th class="text-center">账号</th>
@@ -71,15 +90,18 @@ isLogedIn();
                                             <th class="text-center">其他操作</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php
-                                        include_once('api/user_api.php');
-                                        showBaseInfo();
-                                        ?>
+                                    <tbody id="user-items-body">
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <ul id="user-pagination2" class="pagination">
+                        </ul>
                     </div>
                 </div>
 
@@ -93,9 +115,12 @@ isLogedIn();
     <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap-paginator.js"></script>
     <script src="js/charts-custom.js"></script>
     <!-- Main File-->
     <script src="js/front.js"></script>
+    <!-- Ajax File -->
+    <script src="js/ajax/pagination.js"></script>
 </body>
 
 </html>

@@ -112,19 +112,3 @@ function changeBookImage(obj) {
     reader.readAsDataURL(file);
     return;
 }
-
-document.getElementById('new-book-submit').addEventListener('click', () => {
-    var bookForm = $('#new-book-form');
-    var tmpTagsInput = $("<input type='text' name='tags' class='hidden-form-control'/>");
-    tmpTagsInput.val(tags.join(','));
-    bookForm.append(tmpTagsInput);
-    bookForm.submit();
-});
-
-document.getElementById('change-book-submit').addEventListener('click', () => {
-    var bookForm = $('#book-form');
-    var tmpTagsInput = $("<input type='text' name='tags' class='hidden-form-control'/>");
-    tmpTagsInput.val(tags.join(','));
-    bookForm.append(tmpTagsInput);
-    bookForm.submit();
-});

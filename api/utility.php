@@ -13,6 +13,34 @@ function reply($code = 404, $message = 'error', $res = [])
 }
 
 /**
+ * 提供一次刷新机会的函数
+ * @summary 必须放在跳转到新页面的那个页面开始
+ */
+function refreshOnce()
+{
+    if (!session_id()) {
+        session_start();
+    }
+    $_SESSION['refresh_code'] = md5(time());
+}
+
+/**
+ * 刷新检测函数，用于检测是否多次刷新页面
+ * @summary 必须放在要检测是否会重复刷新的页面的`开始`
+ */
+function refreshCheck()
+{
+    if (!session_id()) {
+        session_start();
+    }
+    if (isset($_SESSION["refresh_code"])) {
+        unset($_SESSION["refresh_code"]);
+    } else {
+        isEntry404(true);
+    }
+}
+
+/**
  * 下载网络文件
  * @param string $file_url 网络文件的地址
  * @param string $save_to 要保存下载下来的文件的路径

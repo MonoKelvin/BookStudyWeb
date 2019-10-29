@@ -3,6 +3,8 @@
 require_once(dirname(__FILE__) . '\mysql_api.php');
 require_once(dirname(__FILE__) . '\utility.php');
 
+refreshCheck();
+
 if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
 
     if (!isISBN($_POST['isbn13'])) {
@@ -83,6 +85,7 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
     unset($_FILES['image']);
 
     // echo "<script>location.href='{$_SERVER['HTTP_REFERER']}';</script>";
+    echo '<script>location.href="/../book_info_page.php?id=' . $id . '";</script>';
 } else {
-    echo '<script>alert("请联系管理员添加书籍");history.go(-1)</script>';
+    echo '<script>alert("请联系管理员进行操作");location.href="/../index.php"</script>';
 }

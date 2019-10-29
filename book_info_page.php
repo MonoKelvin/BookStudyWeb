@@ -1,6 +1,7 @@
 <?php
 require_once('api/book_api.php');
 isLogedIn();
+refreshOnce();
 
 global $book;
 if (isset($_GET['id'])) {
@@ -66,7 +67,7 @@ if (isset($_GET['id'])) {
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-lg-3 form-control-label">ISBN13</label>
+                                                <label class="col-lg-3 form-control-label">ISBN13<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
                                                     <input name="isbn13" type="text" value=<?php echo "'{$book['isbn13']}'"; ?> class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                     <small class="help-block-none">书籍的ISBN13分类号尽量不要更改！</small>
@@ -74,7 +75,7 @@ if (isset($_GET['id'])) {
                                             </div>
                                             <div class="line"></div>
                                             <div class="form-group row">
-                                                <label class="col-lg-3 form-control-label">书名</label>
+                                                <label class="col-lg-3 form-control-label">书名<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
                                                     <input name="title" type="text" class="form-control" value=<?php echo "'{$book['title']}'"; ?>>
                                                 </div>
@@ -93,7 +94,7 @@ if (isset($_GET['id'])) {
                                             </div>
                                             <div class="line"></div>
                                             <div class="form-group row">
-                                                <label class="col-sm-3 form-control-label">作者</label>
+                                                <label class="col-sm-3 form-control-label">作者<strong class="required-label-star">*</strong></label>
                                                 <div class="col-sm-9">
                                                     <input name="author" type="text" class="form-control" value=<?php echo "'{$book['author']}'"; ?>>
                                                 </div>
@@ -252,7 +253,7 @@ if (isset($_GET['id'])) {
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2 pb-2">
-                                                    <button type="button" onclick="window.location.reload();" class="form-control btn btn-secondary">取消修改</button>
+                                                    <button type="button" onclick="window.location.reload();" class="form-control btn btn-secondary">还原</button>
                                                 </div>
                                             </div>
 
@@ -320,6 +321,15 @@ if (isset($_GET['id'])) {
             echo "var tags = [];";
         }
         ?>
+
+        document.getElementById('change-book-submit').addEventListener('click', function() {
+            var bookForm = $('#book-form');
+            var tmpTagsInput = $("<input type='text' name='tags' class='hidden-form-control'/>");
+            tmpTagsInput.val(tags.join(','));
+            bookForm.append(tmpTagsInput);
+            bookForm.submit();
+        });
+
     </script>
     <script src="js/book_form_relative.js"></script>
 </body>

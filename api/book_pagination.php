@@ -1,17 +1,15 @@
 <?php
 require_once(dirname(__FILE__) . '\book_api.php');
 
-getBooksItem($_GET['page']);
-
-// if (isset($_GET['page'])) {
-//     if ($_GET['page'] > 0) {
-//         getBooksItem($_GET['page']);
-//     } else {
-//         isEntry404(true);
-//     }
-// } else {
-//     getBooksItem(1);
-// }
+if (isset($_GET['page'])) {
+    if ($_GET['page'] > 0) {
+        getBooksItem($_GET['page']);
+    } else {
+        isEntry404(true);
+    }
+} else {
+    getBooksItem(1);
+}
 
 function getBooksItem($page = 1)
 {

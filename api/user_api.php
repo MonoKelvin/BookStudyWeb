@@ -2,14 +2,14 @@
 require_once(dirname(__FILE__) . '\mysql_api.php');
 require_once(dirname(__FILE__) . '\utility.php');
 
-function getUserInfoWithNumber($number = 50)
+function getUserInfoWithNumber($first = 0, $number = 50)
 {
     $db = MySqlAPI::getInstance();
     $res = $db->getAll(
         "select ui.id,ui.name,up.account,up.password,up.online
         from userinfo as ui
         join userprivate as up
-        on ui.id = up.id order by ui.id limit $number"
+        on ui.id = up.id order by ui.id limit $first, $number"
     );
     $db->close();
 
@@ -57,37 +57,23 @@ function getUserInfoById($id)
     return $res;
 }
 
-
-function showBaseInfo($number = 20)
+/**
+ * 获得用户库里所有用户的数量
+ * @param bool $isOnline 是否只计算在线用户
+ * @return int 返回所有用户的数量
+ */
+function getUsersNumber($isOnline = false)
 {
-    $users_arr = getUserInfoWithNumber($number);
-    if ($users_arr == null) {
-        return;
+    $db = MySqlAPI::getInstance();
+
+    if ($isOnline) {
+        $res = $db->getRow("select COUNT(*) from userinfo where online=1");
+        $res = $res['COUNT(*)'];
+    } else {
+        $res = $db->getRow("select SUM(id) from userinfo");
+        $res = $res['SUM(id)'];
     }
+    $db->close();
 
-    static $order_num = 1;
-    foreach ($users_arr as $user) {
-        $id = $user['id'];
-        $name = $user['name'];
-        $account = $user['account'];
-        $password = $user['password'];
-        $online = $user['online'];
-
-        $temp_file = dirname(__FILE__) . '/../html/template/user_info_item.html';
-        $fp = fopen($temp_file, 'r');
-        $str = fread($fp, filesize($temp_file));
-        fclose($fp);
-
-        // 替换内容，即动态生成 html的内容
-        $str = str_replace('{id}', $id, $str);
-        $str = str_replace('{name}', $name, $str);
-        $str = str_replace('{account}', $account, $str);
-        $str = str_replace('{password}', $password, $str);
-        $str = str_replace('{online}', $online ? '#54e69d' : '#ff7676', $str);
-        // $str = str_replace('{bg-color}', $online ? 'bg-green' : 'bg-red', $str);
-        $str = str_replace('{number}', $order_num, $str);
-        $order_num++;
-
-        echo $str;
-    }
+    return $res;
 }

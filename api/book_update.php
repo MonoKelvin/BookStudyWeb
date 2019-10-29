@@ -3,6 +3,8 @@
 require_once(dirname(__FILE__) . '/mysql_api.php');
 require_once(dirname(__FILE__) . '/utility.php');
 
+refreshCheck();
+
 if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
 
     if (!isISBN($_POST['isbn13'])) {
@@ -11,10 +13,6 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
     }
     if (!isPositiveInteger($_POST['pages'], true)) {
         echo '<script>alert("页数必须为整数或不填！");history.go(-1);</script>';
-        die;
-    }
-    if (!isPositiveInteger($_POST['remaining'])) {
-        echo '<script>alert("新增数量必须为非负整数！");history.go(-1);</script>';
         die;
     }
     if (!isValidString($_POST['title'])) {
@@ -84,7 +82,8 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
         unset($_FILES['image']);
     }
 
-    echo "<script>location.href='{$_SERVER['HTTP_REFERER']}';</script>";
+    // echo "<script>location.href='{$_SERVER['HTTP_REFERER']}';</script>";
+    header('location:/../book_info_page.php?id=' . $id);
 } else {
     isEntry404(true);
 }

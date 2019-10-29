@@ -1,6 +1,7 @@
 <?PHP
 require_once('api/utility.php');
 isLogedIn();
+refreshOnce();
 
 global $book;
 $book['tags'] = '';
@@ -14,6 +15,7 @@ $book['tags'] = '';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>新增书籍</title>
     <?php include_once('html/included_head.php'); ?>
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-datetimepicker.min.css">
 </head>
 
 <body>
@@ -56,13 +58,13 @@ $book['tags'] = '';
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">新增数量<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
-                                                    <input name="remaining" required value="1" type="text" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <input name="remaining" required value="1" type="text" autocomplete="off" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">ISBN13<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
-                                                    <input name="isbn13" type="text" required class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <input name="isbn13" type="text" autocomplete="off" required class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                     <small class="help-block-none">请再三确认书籍的ISBN13分类号</small>
                                                 </div>
                                             </div>
@@ -70,26 +72,26 @@ $book['tags'] = '';
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">书名<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
-                                                    <input name="title" required type="text" class="form-control">
+                                                    <input name="title" required autocomplete="off" type="text" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">副标题</label>
                                                 <div class="col-lg-9">
-                                                    <input name="subtitle" type="text" class="form-control">
+                                                    <input name="subtitle" type="text" autocomplete="off" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">原标题</label>
                                                 <div class="col-lg-9">
-                                                    <input name="origin_title" type="text" class="form-control">
+                                                    <input name="origin_title" type="text" autocomplete="off" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="line"></div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">作者<strong class="required-label-star">*</strong></label>
                                                 <div class="col-sm-9">
-                                                    <input name="author" required type="text" class="form-control">
+                                                    <input name="author" autocomplete="off" required type="text" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -125,21 +127,21 @@ $book['tags'] = '';
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">翻译</label>
                                                 <div class="col-sm-9">
-                                                    <input name="translator" type="text" class="form-control">
+                                                    <input name="translator" autocomplete="off" type="text" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">出版社</label>
                                                 <div class="col-sm-9">
-                                                    <input name="publisher" type="text" class="form-control">
+                                                    <input name="publisher" autocomplete="off" type="text" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">出版时间</label>
                                                 <div class="col-sm-9">
-                                                    <input name="pubdate" class="form-control" id="datetimepicker2" type="text">
+                                                    <input name="pubdate" class="form-control" id="datetimepicker2" autocomplete="off">
                                                     <small class="help-block-none">格式为：yyyy-mm-dd，如：2019-10-01 </small>
                                                 </div>
                                             </div>
@@ -148,7 +150,7 @@ $book['tags'] = '';
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">页数</label>
                                                 <div class="col-sm-9">
-                                                    <input name="pages" value="0" type="text" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <input name="pages" value="0" autocomplete="off" type="text" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                 </div>
                                             </div>
 
@@ -185,7 +187,7 @@ $book['tags'] = '';
                                                             <div class="input-group-prepend pb-2">
                                                                 <button onclick="addTag();" type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                                                             </div>
-                                                            <input id="input-add-tag" class="form-control">
+                                                            <input id="input-add-tag" autocomplete="off" class="form-control">
                                                         </div>
                                                         <?php
                                                         $tags = explode(',', $book['tags']);
@@ -272,6 +274,8 @@ $book['tags'] = '';
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap-paginator.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <!-- Main File-->
     <script src="js/front.js"></script>
     <script>
@@ -287,6 +291,14 @@ $book['tags'] = '';
             echo "var tags = [];";
         }
         ?>
+
+        document.getElementById('new-book-submit').addEventListener('click', function() {
+            var bookForm = $('#new-book-form');
+            var tmpTagsInput = $("<input type='text' name='tags' class='hidden-form-control'/>");
+            tmpTagsInput.val(tags.join(','));
+            bookForm.append(tmpTagsInput);
+            bookForm.submit();
+        });
     </script>
     <script src="js/book_form_relative.js"></script>
 </body>
