@@ -27,13 +27,11 @@ if (isset($_GET['id'])) {
         <div class="page-content d-flex align-items-stretch">
             <?php include_once('html/side_navbar.php'); ?>
             <div class="content-inner">
-                <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
                         <h2 class="no-margin-bottom">用户管理</h2>
                     </div>
                 </header>
-                <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">主页</a></li>
@@ -43,72 +41,109 @@ if (isset($_GET['id'])) {
                 </div>
 
                 <section class="no-padding-bottom">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="client card">
-                                    <div class="card-body text-center">
-                                        <div class="client-avatar"><img src=<?php echo "{$user['avatar']}"; ?> alt="void" class="img-fluid rounded-circle">
-                                            <div class="status <?php echo $user['online'] ? 'bg-green' : 'bg-red'; ?>"></div>
-                                        </div>
-                                        <div class="client-title">
-                                            <h3><?php echo $user['name']; ?></h3>
-                                            <span>id：<?php echo $user['id']; ?></span>
-                                            <a href="javascript:void(0);">发送消息</a>
-                                        </div>
-                                        <div class="client-info">
-                                            <div class="row">
-                                                <div class="col-4"><strong><?php echo count($user['books']); ?></strong><br><small>借书/本</small></div>
-                                                <!-- TODO: 暂时可不实现以下功能 -->
-                                                <div class="col-4"><strong><?php echo count($user['books']); ?></strong><br><small>预约/本</small></div>
-                                                <div class="col-4"><strong><?php echo count($user['books']); ?></strong><br><small>已还/本</small></div>
+                    <form action="user_update.php" class="form-horizontal" method="post" enctype="multipart/form-data">
+                        <div class="container-fluid d-flex flex-row">
+                            <div class="card col-lg-12 no-padding">
+                                <div class="card-body d-flex align-items-center row">
+                                    <div class="col-lg-4 d-flex justify-content-center pb-3 flex-column">
+                                        <div class="client card">
+                                            <div class="card-body text-center">
+                                                <div class="client-avatar"><img src=<?php echo "{$user['avatar']}"; ?> alt="void" class="img-fluid rounded-circle">
+                                                    <div class="status <?php echo $user['online'] ? 'bg-green' : 'bg-red'; ?>"></div>
+                                                </div>
+                                                <div class="client-title">
+                                                    <h3><?php echo $user['name']; ?></h3>
+                                                    <span>id：<?php echo $user['id']; ?></span>
+                                                    <!-- <a href="javascript:void(0);">发送消息</a> -->
+                                                </div>
+                                                <div class="client-info">
+                                                    <div class="row">
+                                                        <div class="col-lg-12"><strong><?php echo count($user['books']); ?></strong><br><small>借书/本</small></div>
+                                                        <!-- TODO: 暂时可不实现以下功能 -->
+                                                        <!-- <div class="col-4"><strong>0</strong><br><small>预约/本</small></div> -->
+                                                        <!-- <div class="col-4"><strong>0</strong><br><small>已还/本</small></div> -->
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        <input id="tmp-file-input" name="image" onchange="changeBookImage(this)" type="file" class="hidden-form-control">
+                                        <button type="button" class="btn btn-primary mt-2" onclick="$('#tmp-file-input').click();">更换头像</button>
+                                        <small class="help-text mt-2">请选择不大于1M的png、jpg或jpeg格式的图片文件</small>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="col-lg-8">
-                                <div class="statistic d-flex align-items-center no-padding">
-                                    <div class="container-fluid no-padding">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="statistic d-flex align-items-center bg-white has-shadow">
-                                                    <div class="icon bg-red"><i class="fa fa-user"></i></div>
-                                                    <div>
-                                                        <h3>账号</h3><?php echo $user['account']; ?>
-                                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="container-fluid">
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-lg-3 form-control-label">用户名（昵称）<span class="required-label-star">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <input name="name" type="text" class="form-control" value=<?php echo "'{$user['name']}'"; ?>>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="statistic d-flex align-items-center bg-white has-shadow">
-                                                    <div class="icon bg-green"><i class="fa fa-lock"></i></div>
-                                                    <div>
-                                                        <h3>密码</h3><?php echo $user['password']; ?>
-                                                    </div>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-lg-3 form-control-label">账号<span class="required-label-star">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <input name="account" type="text" class="form-control" value=<?php echo "'{$user['account']}'"; ?>>
                                                 </div>
                                             </div>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-lg-3 form-control-label">密码<strong class="required-label-star">*</strong></label>
+                                                <div class="col-lg-9">
+                                                    <input name="password" type="text" class="form-control" value=<?php echo "'{$user['password']}'"; ?>>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-lg-3 form-control-label">MD5</label>
+                                                <div class="col-lg-9"><?php echo $user['md5']; ?></div>
+                                            </div>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-lg-3 form-control-label">头像地址</label>
+                                                <div class="col-lg-9 text-wrap ">
+                                                    <a class="btn btn-warning" href=<?php echo "'{$user['avatar']}'" ?> target='_blank'>查看图片</a>
+                                                </div>
+                                            </div>
+
+                                            <!-- 表单按钮 -->
+                                            <div class="form-group row justify-content-end">
+                                                <div class="col-sm-2 pb-2">
+                                                    <button type="button" data-toggle="modal" data-target="#alterUserAlert" class="form-control btn btn-primary">保存修改</button>
+                                                    <div id="alterUserAlert" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
+                                                        <div role="document" class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">数据改动提示</h4>
+                                                                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>你确定要保存当前用户数据的修改吗？</p>
+                                                                    <p class="text-red">注意：更改任何一项都会导致用户无法正常登录，请谨慎操作！</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" data-dismiss="modal" class="btn btn-secondary">取消</button>
+                                                                    <button id="alter-user-submit" type="submit" name="submit" value="submit" class="btn btn-primary">确定</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 pb-2">
+                                                    <button type="button" onclick="window.location.reload();" class="form-control btn btn-secondary">还原</button>
+                                                </div>
+                                            </div>
+
+                                            <small class="help-text float-right">
+                                                注意：更改任何一项都会导致用户无法正常登录，请谨慎操作！
+                                            </small>
+
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="statistic d-flex align-items-center bg-white has-shadow">
-                                    <div class="icon bg-orange"><i class="fa fa-check-circle"></i></div>
-                                    <div>
-                                        <h3>MD5</h3><?php echo $user['md5']; ?>
-                                    </div>
-                                </div>
-                                <div class="statistic d-flex align-items-center bg-white has-shadow">
-                                    <div class="icon bg-orange"><i class="fa fa-image"></i></div>
-                                    <div class="text-xsmall">
-                                        <h3>头像地址</h3><?php echo "<a href='{$user['avatar']}' target='_blank'>{$user['avatar']}</a>"; ?>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </section>
 
-                <div class="container-fluid">
+                <div class="container-fluid pt-3">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
                             <h3 class="h4">借书列表</h3>
@@ -123,7 +158,7 @@ if (isset($_GET['id'])) {
                                             <th class="text-center">作者</th>
                                             <th class="text-center">借书时间</th>
                                             <th class="text-center">应还时间</th>
-                                            <th class="text-center">转到</th>
+                                            <th class="text-center">转到 / 还书</th>
                                         </tr>
                                     </thead>
                                     <tbody id="user-lent-books-table">

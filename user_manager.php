@@ -44,27 +44,7 @@ if (isset($_GET['page'])) {
                     </ul>
                 </div>
 
-                <section class="dashboard-header">
-                    <div class="container-fluid">
-                        <!-- TODO:图书分类的数据使用php页面动态生成 -->
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="statistic d-flex align-items-center bg-white has-shadow">
-                                    <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
-                                    <div class="text"><strong>分类1</strong><br><small>10本</small></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="statistic d-flex align-items-center bg-white has-shadow">
-                                    <div class="icon bg-green"><i class="fa fa-tasks"></i></div>
-                                    <div class="text"><strong>分类2</strong><br><small>12本</small></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="container-fluid">
+                <div class="container-fluid mt-5">
                     <div class="row justify-content-center">
                         <ul id="user-pagination1" class="pagination">
                         </ul>
@@ -87,7 +67,7 @@ if (isset($_GET['page'])) {
                                             <th class="text-center">账号</th>
                                             <th class="text-center">密码</th>
                                             <th class="text-center">是否在线</th>
-                                            <th class="text-center">其他操作</th>
+                                            <th class="text-center">编辑 / 删除</th>
                                         </tr>
                                     </thead>
                                     <tbody id="user-items-body">

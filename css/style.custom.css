@@ -1033,19 +1033,21 @@ nav.navbar,
 nav.navbar .search-box {
     color: #212529;
     background: #fff;
-    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
 }
 
+nav.navbar,
+nav.side-navbar,
+nav.navbar .search-box {
+    -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.03);
+}
 .has-shadow {
-    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    -webkit-box-shadow: 0 8px 12px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.03);
 }
 
 nav.side-navbar {
     color: #212529;
-    -webkit-box-shadow: 4px 0 8px rgba(0, 0, 0, 0.03);
-    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.03);
 }
 
 .page-header {
@@ -1185,4 +1187,16 @@ nav.side-navbar {
 
 .required-label-star {
     color: red;
+}
+
+.help-text {
+    font-size: 0.8em;
+    color: #999;
+    font-weight: 300;
+}
+
+nav.navbar .menu-btn span,
+nav.navbar .menu-btn span:nth-of-type(2)::before,
+nav.navbar .menu-btn span:nth-of-type(2)::after {
+    background: #212529;
 }

@@ -5,7 +5,7 @@
     <td class="text-center">{account}</td>
     <td class="text-center">{password}</td>
     <td class="text-center">
-        <i class="fa fa-close" style="color: {online} !important;"></i>
+        <i class="fa fa-circle" style="color: {online} !important;"></i>
     </td>
     <td class="container-fluid d-flex pt-2">
         <div class="flex-fill text-center">
@@ -17,12 +17,11 @@
         <div class="flex-fill text-center">
             <button type="button" data-toggle="modal" data-target="#deleteUserAlert{id}" class="btn btn-danger"><i
                     class="fa fa-trash"></i></button>
-            <div id="deleteUserAlert{id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true" class="modal fade text-left">
+            <div id="deleteUserAlert{id}" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
                 <div role="document" class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 id="exampleModalLabel" class="modal-title">提示</h4>
+                            <h4 class="modal-title">提示</h4>
                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
                                     aria-hidden="true">×</span></button>
                         </div>

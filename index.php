@@ -33,8 +33,20 @@ isLogedIn();
                 <section class="dashboard-counts no-padding-bottom">
                     <div class="container-fluid">
                         <div class="row bg-white has-shadow">
-                            <!-- Item -->
-                            <div class="col-xl-4 col-sm-6">
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="item d-flex align-items-center">
+                                    <div class="icon bg-violet"><i class="fa fa-users"></i></div>
+                                    <div class="title"><span>用户<br>总人数</span>
+                                        <div class="progress">
+                                            <div role="progressbar" style="width: 100%; height: 4px;" class="progress-bar bg-violet"></div>
+                                        </div>
+                                    </div>
+                                    <div class="number">
+                                        <strong id="users_number"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6">
                                 <div class="item d-flex align-items-center">
                                     <div class="icon bg-violet"><i class="fa fa-user"></i></div>
                                     <div class="title"><span>用户<br>在线人数</span>
@@ -47,8 +59,7 @@ isLogedIn();
                                     </div>
                                 </div>
                             </div>
-                            <!-- Item -->
-                            <div class="col-xl-4 col-sm-6">
+                            <div class="col-xl-3 col-sm-6">
                                 <div class="item d-flex align-items-center">
                                     <div class="icon bg-green"><i class="fa fa-book"></i></div>
                                     <div class="title"><span>图书<br>馆藏数量</span>
@@ -61,7 +72,7 @@ isLogedIn();
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-sm-6">
+                            <div class="col-xl-3 col-sm-6">
                                 <div class="item d-flex align-items-center">
                                     <div class="icon bg-red"><i class="fa fa-address-book"></i></div>
                                     <div class="title"><span>图书<br>已被借出</span>
@@ -77,17 +88,19 @@ isLogedIn();
                         </div>
                     </div>
                 </section>
+
             </div>
         </div>
     </div>
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
-    <!-- <script src="vendor/popper.js/umd/popper.min.js"> </script> -->
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="js/charts-home.js"></script>
+    <script src="js/charts-custom.js"></script>
     <!-- Main File-->
     <script src="js/front.js"></script>
     <!-- Ajax Request File -->

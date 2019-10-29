@@ -232,11 +232,11 @@ if (isset($_GET['id'])) {
                                             <div class="form-group row justify-content-end">
                                                 <div class="col-sm-2 pb-2">
                                                     <button type="button" data-toggle="modal" data-target="#alterAlert" class="form-control btn btn-primary">保存修改</button>
-                                                    <div id="alterAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                                                    <div id="alterAlert" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade text-left">
                                                         <div role="document" class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 id="exampleModalLabel" class="modal-title">数据改动提示</h4>
+                                                                    <h4 class="modal-title">数据改动提示</h4>
                                                                     <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                                                 </div>
                                                                 <div class="modal-body">
@@ -278,7 +278,7 @@ if (isset($_GET['id'])) {
                                             <th class="text-center">用户id</th>
                                             <th class="text-center">用户名</th>
                                             <th class="text-center">借书时间</th>
-                                            <th class="text-center">操作</th>
+                                            <th class="text-center">转到</th>
                                         </tr>
                                     </thead>
                                     <tbody id="users-lent-the-book-table">

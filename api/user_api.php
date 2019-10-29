@@ -66,13 +66,13 @@ function getUsersNumber($isOnline = false)
 {
     $db = MySqlAPI::getInstance();
 
+    $res = 0;
     if ($isOnline) {
         $res = $db->getRow("select COUNT(*) from userinfo where online=1");
-        $res = $res['COUNT(*)'];
     } else {
-        $res = $db->getRow("select SUM(id) from userinfo");
-        $res = $res['SUM(id)'];
+        $res = $db->getRow("select COUNT(*) from userinfo");
     }
+    $res = $res['COUNT(*)'];
     $db->close();
 
     return $res;

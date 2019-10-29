@@ -18,6 +18,7 @@ $.ajax({
             rm_ratio = rm_num / (rm_num + lent_num) * 100;
             lent_ratio = lent_num / (rm_num + lent_num) * 100;
 
+            document.getElementById('users_number').innerHTML = users_num;
             document.getElementById('online_progress').style.width = online_ratio + "%";
             document.getElementById('online_number').innerHTML = online_num;
             document.getElementById('remaining_progress').style.width = rm_ratio + "%";
