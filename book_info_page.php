@@ -77,26 +77,26 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">书名<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
-                                                    <input name="title" type="text" class="form-control" value=<?php echo "'{$book['title']}'"; ?>>
+                                                    <input name="title" maxlength="100" type="text" class="form-control" value=<?php echo "'{$book['title']}'"; ?>>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">副标题</label>
                                                 <div class="col-lg-9">
-                                                    <input name="subtitle" type="text" class="form-control" value=<?php echo "'{$book['subtitle']}'"; ?>>
+                                                    <input name="subtitle" maxlength="100" type="text" class="form-control" value=<?php echo "'{$book['subtitle']}'"; ?>>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">原标题</label>
                                                 <div class="col-lg-9">
-                                                    <input name="origin_title" type="text" class="form-control" value=<?php echo "'{$book['origin_title']}'"; ?>>
+                                                    <input name="origin_title" maxlength="100" type="text" class="form-control" value=<?php echo "'{$book['origin_title']}'"; ?>>
                                                 </div>
                                             </div>
                                             <div class="line"></div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">作者<strong class="required-label-star">*</strong></label>
                                                 <div class="col-sm-9">
-                                                    <input name="author" type="text" class="form-control" value=<?php echo "'{$book['author']}'"; ?>>
+                                                    <input name="author" maxlength="100" type="text" class="form-control" value=<?php echo "'{$book['author']}'"; ?>>
                                                 </div>
                                             </div>
                                         </div>
@@ -132,14 +132,14 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">翻译</label>
                                                 <div class="col-sm-9">
-                                                    <input name="translator" type="text" class="form-control" value=<?php echo "'{$book['translator']}'"; ?>>
+                                                    <input name="translator" maxlength="32" type="text" class="form-control" value=<?php echo "'{$book['translator']}'"; ?>>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">出版社</label>
                                                 <div class="col-sm-9">
-                                                    <input name="publisher" type="text" class="form-control" value=<?php echo "'{$book['publisher']}'"; ?>>
+                                                    <input name="publisher" maxlength="32" type="text" class="form-control" value=<?php echo "'{$book['publisher']}'"; ?>>
                                                 </div>
                                             </div>
 
@@ -154,7 +154,15 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">页数</label>
                                                 <div class="col-sm-9">
-                                                    <input name="pages" type="text" class="form-control" value=<?php echo "'{$book['pages']}'"; ?> onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <input name="pages" type="text" class="form-control" maxlength="10" value=<?php echo "'{$book['pages']}'"; ?> onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 form-control-label">定价</label>
+                                                <div class="col-sm-9">
+                                                    <input name="price" type="text" class="form-control" maxlength="16" value=<?php echo "'{$book['price']}'"; ?> onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <small class="help-block-none">默认计价单位为‘元’</small>
                                                 </div>
                                             </div>
 
@@ -329,7 +337,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             bookForm.append(tmpTagsInput);
             bookForm.submit();
         });
-
     </script>
     <script src="js/book_form_relative.js"></script>
 </body>
