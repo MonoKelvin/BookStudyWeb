@@ -16,3 +16,11 @@
 - [ ] 用户详情页：管理员发送消息
 - [ ] ~~管理员：点击头像展示管理员信息~~
 - [ ] ...
+
+## 部分截图展示
+![主页](https://github.com/MonoKelvin/BookStudyWeb/blob/master/img/screenshot/home.png)
+![主页](https://github.com/MonoKelvin/BookStudyWeb/blob/master/img/screenshot/login.png)
+![主页](https://github.com/MonoKelvin/BookStudyWeb/blob/master/img/screenshot/book_management.png)
+![主页](https://github.com/MonoKelvin/BookStudyWeb/blob/master/img/screenshot/book_info1.png)
+![主页](https://github.com/MonoKelvin/BookStudyWeb/blob/master/img/screenshot/user_management.png)
+![主页](https://github.com/MonoKelvin/BookStudyWeb/blob/master/img/screenshot/user_info.png)
