@@ -72,26 +72,26 @@ $book['tags'] = '';
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">书名<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
-                                                    <input name="title" required autocomplete="off" type="text" class="form-control">
+                                                    <input name="title" maxlength="100" required autocomplete="off" type="text" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">副标题</label>
                                                 <div class="col-lg-9">
-                                                    <input name="subtitle" type="text" autocomplete="off" class="form-control">
+                                                    <input name="subtitle" maxlength="100" type="text" autocomplete="off" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">原标题</label>
                                                 <div class="col-lg-9">
-                                                    <input name="origin_title" type="text" autocomplete="off" class="form-control">
+                                                    <input name="origin_title" maxlength="100" type="text" autocomplete="off" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="line"></div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">作者<strong class="required-label-star">*</strong></label>
                                                 <div class="col-sm-9">
-                                                    <input name="author" autocomplete="off" required type="text" class="form-control">
+                                                    <input name="author" maxlength="100" autocomplete="off" required type="text" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -127,14 +127,14 @@ $book['tags'] = '';
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">翻译</label>
                                                 <div class="col-sm-9">
-                                                    <input name="translator" autocomplete="off" type="text" class="form-control">
+                                                    <input name="translator" maxlength="32" autocomplete="off" type="text" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">出版社</label>
                                                 <div class="col-sm-9">
-                                                    <input name="publisher" autocomplete="off" type="text" class="form-control">
+                                                    <input name="publisher" maxlength="32" autocomplete="off" type="text" class="form-control">
                                                 </div>
                                             </div>
 
@@ -150,7 +150,15 @@ $book['tags'] = '';
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-control-label">页数</label>
                                                 <div class="col-sm-9">
-                                                    <input name="pages" value="0" autocomplete="off" type="text" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <input name="pages" maxlength="6" value="0" autocomplete="off" maxlength="11" type="text" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 form-control-label">定价</label>
+                                                <div class="col-sm-9">
+                                                    <input name="price" type="text" class="form-control" maxlength="16" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <small class="help-block-none">默认计价单位为‘元’</small>
                                                 </div>
                                             </div>
 
@@ -187,7 +195,7 @@ $book['tags'] = '';
                                                             <div class="input-group-prepend pb-2">
                                                                 <button onclick="addTag();" type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                                                             </div>
-                                                            <input id="input-add-tag" autocomplete="off" class="form-control">
+                                                            <input id="input-add-tag" maxlength="16" autocomplete="off" class="form-control">
                                                         </div>
                                                         <?php
                                                         $tags = explode(',', $book['tags']);

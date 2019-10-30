@@ -13,7 +13,7 @@ if (isset($_GET['page'])) {
 
 function getBooksItem($page = 1)
 {
-    $fetch_num = 10;
+    $fetch_num = 20;
     $books_arr = getBookInfoWithNumber($page * $fetch_num - $fetch_num, $fetch_num);
 
     $book_no = ($page - 1) * $fetch_num + 1;

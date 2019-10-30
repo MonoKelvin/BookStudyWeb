@@ -27,6 +27,51 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
         echo '<script>alert("出版日期不合法，请重新输入！");history.go(-1);</script>';
         die;
     }
+    if(strlen($_POST['title']) > 100 ) {
+        echo '<script>alert("书名不允许超过100个字符，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if (strlen($_POST['subtitle']) > 100) {
+        echo '<script>alert("副标题不允许超过100个字符，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if (strlen($_POST['origin_title']) > 100) {
+        echo '<script>alert("原标题不允许超过100个字符，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if (strlen($_POST['author']) > 100) {
+        echo '<script>alert("作者名不允许超过100个字符，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if (strlen($_POST['publisher']) > 64) {
+        echo '<script>alert("出版社名不允许超过64个字符，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if (strlen($_POST['translator']) > 60) {
+        echo '<script>alert("翻译不允许超过60个字符，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if (strlen($_POST['pages']) > 10) {
+        echo '<script>alert("页数不允许超过10个数字，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if(strlen($_POST['binding']) > 8) {
+        echo '<script>alert("装帧形式不允许超过8个字符，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    $price = $_POST['price'];
+    if (strlen($price) > 16) {
+        echo '<script>alert("定价字符长度超过16个字符，请重新输入！");history.go(-1);</script>';
+        die;
+    }
+    if (!is_numeric($price) && $price !== '') {
+        preg_match('/\d+/', $price, $price);
+        $pages = $pages[0];
+        if (!is_numeric($price) && $price !== '') {
+            echo '<script>alert("定价不合法，请重新输入！");history.go(-1);</script>';
+            die;
+        }
+    }
 
     $id = @$_POST['id'] ? $_POST['id'] : -1;
     if ($id > 0) {
@@ -67,7 +112,8 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
             'binding' => $_POST['binding'],
             'tags' => $_POST['tags'],
             'author_intro' => $_POST['author_intro'],
-            'catalog' => $_POST['catalog']
+            'catalog' => $_POST['catalog'],
+            'price' => $price,
         ];
         foreach ($datas as $key => $value) {
             if ($value == '') {
@@ -82,7 +128,6 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
         unset($_FILES['image']);
     }
 
-    // echo "<script>location.href='{$_SERVER['HTTP_REFERER']}';</script>";
     header('location:/../book_info_page.php?id=' . $id);
 } else {
     isEntry404(true);
