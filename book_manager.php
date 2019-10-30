@@ -14,6 +14,15 @@ if (isset($_GET['page'])) {
     $page = 1;
 }
 
+global $key;
+if (isset($_GET['search']) && $_GET['search'] == 1) {
+    if (isset($_GET['key'])) {
+        $key = $_GET['key'];
+    } else {
+        isEntry404(true);
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +34,7 @@ if (isset($_GET['page'])) {
     <?php include_once('html/included_head.php'); ?>
 </head>
 
-<body onload="createBookTableItems(<?php echo $page; ?>);">
+<body onload="createBookTableItems(<?php echo $page . ',' . $key; ?>);">
     <div class="page">
         <?php include_once('html/header_navbar.php'); ?>
         <div class="page-content d-flex align-items-stretch">
@@ -45,9 +54,25 @@ if (isset($_GET['page'])) {
                     </ul>
                 </div>
 
-                <section class="dashboard-header">
+                <section>
+                    <div class="col-10 offset-1">
+                        <form action="" method="get">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button name="search" value="1" type="submit" class="btn btn-primary" style="padding-left:50px; padding-right:50px;">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                    <input name="key" type="text" placeholder="输入ISBN、书名、作者查找图书" class="form-control search-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- <section class="dashboard-header">
                     <div class="container-fluid">
-                        <!-- TODO:图书分类的数据使用php页面动态生成 -->
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="statistic d-flex align-items-center bg-white has-shadow">
@@ -75,7 +100,7 @@ if (isset($_GET['page'])) {
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
 
                 <div class="container-fluid">
                     <div class="row justify-content-center">

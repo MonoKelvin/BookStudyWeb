@@ -1,9 +1,9 @@
-function createBookTableItems(page) {
+function createBookTableItems(page, key = null) {
     // 获取数据
     $.ajax({
         url: '../../api/book_pagination.php',
         type: 'get',
-        data: {page : page},
+        data: { page: page, key: key },
         dataType: 'json',
         error: function() {
             alert('请求错误');

@@ -49,10 +49,10 @@ refreshOnce();
                             </div>
                             <div class="col-xl-3 col-sm-6">
                                 <div class="item d-flex align-items-center">
-                                    <div class="icon bg-violet"><i class="fa fa-user"></i></div>
+                                    <div class="icon bg-green"><i class="fa fa-user"></i></div>
                                     <div class="title"><span>用户<br>在线人数</span>
                                         <div class="progress">
-                                            <div id="online_progress" role="progressbar" style="height: 4px;" class="progress-bar bg-violet"></div>
+                                            <div id="online_progress" role="progressbar" style="height: 4px;" class="progress-bar bg-green"></div>
                                         </div>
                                     </div>
                                     <div class="number">
@@ -62,10 +62,10 @@ refreshOnce();
                             </div>
                             <div class="col-xl-3 col-sm-6">
                                 <div class="item d-flex align-items-center">
-                                    <div class="icon bg-green"><i class="fa fa-book"></i></div>
+                                    <div class="icon bg-orange"><i class="fa fa-book"></i></div>
                                     <div class="title"><span>图书<br>馆藏数量</span>
                                         <div class="progress">
-                                            <div id="remaining_progress" role="progressbar" style="height: 4px;" class="progress-bar bg-green"></div>
+                                            <div id="remaining_progress" role="progressbar" style="height: 4px;" class="progress-bar bg-orange"></div>
                                         </div>
                                     </div>
                                     <div class="number">

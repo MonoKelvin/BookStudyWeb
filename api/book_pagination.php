@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . '\book_api.php');
 
 if (isset($_GET['page'])) {
     if ($_GET['page'] > 0) {
-        getBooksItem($_GET['page']);
+        getBooksItem($_GET['page'], @$_GET['key'] ? $_GET['key'] : null);
     } else {
         isEntry404(true);
     }
@@ -11,10 +11,10 @@ if (isset($_GET['page'])) {
     getBooksItem(1);
 }
 
-function getBooksItem($page = 1)
+function getBooksItem($page = 1, $key = null)
 {
     $fetch_num = 20;
-    $books_arr = getBookInfoWithNumber($page * $fetch_num - $fetch_num, $fetch_num);
+    $books_arr = getBookInfoWithNumber($page * $fetch_num - $fetch_num, $fetch_num, $key);
 
     $book_no = ($page - 1) * $fetch_num + 1;
     $resultStr = '';

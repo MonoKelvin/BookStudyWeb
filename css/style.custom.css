@@ -1083,12 +1083,12 @@ nav.side-navbar {
 }
 .page-link {
     border-color: transparent;
-    background-color: #f9fafe;
+    background-color: #fff;
     font-weight: 600;
 }
 .page-link:hover {
     background-color: #6777ef;
-    color: #fff;
+    color: #fff !important;
     border-color: transparent;
 }
 .page-link:focus {
@@ -1236,5 +1236,9 @@ nav.navbar .menu-btn span:nth-of-type(2)::after {
 }
 
 .page {
-  background: rgb(247, 250, 251);
+    background: rgb(247, 250, 251);
+}
+
+.search-control {
+    height: 50px;
 }

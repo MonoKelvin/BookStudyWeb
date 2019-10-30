@@ -41,18 +41,24 @@ function getBooksByTitle($title)
  * 根据数量来获取书的基本信息(后台展示用)
  * @param int $number 要一次拿出几个数据
  * @param int $first 从结果中的第几个位置拿，对分页展示有效
- * @return int 从数据库中去除的书，取出来的数据 <= $number
+ * @param string $key 根据关键字查找
+ * @return int 从数据库中取出的书，取出来的数据 <= $number
  */
-function getBookInfoWithNumber($first = 0, $number = 50)
+function getBookInfoWithNumber($first = 0, $number = 50, $key = null)
 {
     $db = MySqlAPI::getInstance();
-    $res = $db->getAll(
-        "select bi.id,bi.title,bi.remaining,COUNT(ub.b_id) lent
-        from bookinfo as bi
-        left outer join userbooks as ub
-        on bi.id = ub.b_id
-        group by bi.id limit $first, $number"
-    );
+
+    $res = [];
+
+    if ($key != null) { } else {
+        $res = $db->getAll(
+            "select bi.id,bi.title,bi.remaining,COUNT(ub.b_id) lent
+            from bookinfo as bi
+            left outer join userbooks as ub
+            on bi.id = ub.b_id
+            group by bi.id limit $first, $number"
+        );
+    }
 
     $db->close();
 
