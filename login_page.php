@@ -36,7 +36,7 @@ refreshOnce();
                                 <form action="/api/login_validate.php" method="post" class="form-validate">
                                     <div class="form-group">
                                         <input id="login-username" type="text" name="account" required data-msg="账号" class="input-material">
-                                        <label for="login-username" class="label-material">邮箱/手机号</label>
+                                        <label for="login-username" class="label-material">qq邮箱</label>
                                     </div>
                                     <div class="form-group">
                                         <input maxlength="20" id="login-password" type="password" name="password" required data-msg="密码" class="input-material">

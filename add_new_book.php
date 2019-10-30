@@ -58,7 +58,7 @@ $book['tags'] = '';
                                             <div class="form-group row">
                                                 <label class="col-lg-3 form-control-label">新增数量<strong class="required-label-star">*</strong></label>
                                                 <div class="col-lg-9">
-                                                    <input name="remaining" required value="1" type="text" autocomplete="off" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+                                                    <input name="remaining" maxlength="3" required value="1" type="text" autocomplete="off" class="form-control" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">

@@ -31,6 +31,10 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
         echo '<script>alert("出版日期不合法，请重新输入！");history.go(-1);</script>';
         die;
     }
+    if ($_POST['remaining'] > 255) {
+        echo '<script>alert("新增数量不允许超过255，请重新输入！");history.go(-1);</script>';
+        die;
+    }
     if (strlen($_POST['title']) > 100) {
         echo '<script>alert("书名不允许超过100个字符，请重新输入！");history.go(-1);</script>';
         die;
