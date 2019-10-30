@@ -36,13 +36,16 @@ refreshOnce();
                                 <form action="/api/login_validate.php" method="post" class="form-validate">
                                     <div class="form-group">
                                         <input id="login-username" type="text" name="account" required data-msg="账号" class="input-material">
-                                        <label for="login-username" class="label-material">qq邮箱</label>
+                                        <label for="login-username" class="label-material">QQ邮箱</label>
                                     </div>
                                     <div class="form-group">
                                         <input maxlength="20" id="login-password" type="password" name="password" required data-msg="密码" class="input-material">
                                         <label for="login-password" class="label-material">密码</label>
                                     </div>
-                                    <div class="form-group text-right pt-3">
+                                    <div class="form-group text-right">
+                                        <small> <a href="forget_password.php">忘记密码?</a></small>
+                                    </div>
+                                    <div class="form-group text-right">
                                         <button id="login-btn" name="submit" value="submit" class="btn btn-primary">登录</button>
                                     </div>
                                 </form>

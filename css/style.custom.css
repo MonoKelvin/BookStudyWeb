@@ -394,8 +394,8 @@ Button
     color: #67757c;
     left: 0px;
     right: 0;
-    bottom: 50px;
-    padding: 15px 15px;
+    bottom: 0;
+    padding: 20px 15px;
     position: absolute;
     background-color: #ffffff;
     border-top: 1px solid rgba(120, 130, 140, 0.13);
@@ -1073,7 +1073,7 @@ nav.side-navbar {
     background-color: #6777ef;
     border-color: #6777ef;
     -webkit-box-shadow: 4px 0 8px rgba(0, 0, 0, 0.03);
-    box-shadow: 4px 0 8px rgba(103, 119, 239, 0.3);
+    box-shadow: 4px 0 8px rgba(103, 119, 239, 0.03);
 }
 .page-item.disabled .page-link {
     border-color: transparent;
@@ -1224,4 +1224,17 @@ nav.navbar .menu-btn span:nth-of-type(2)::after {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+}
+
+.logo-brand {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #666;
+    text-align: center;
+}
+
+.page {
+  background: rgb(247, 250, 251);
 }

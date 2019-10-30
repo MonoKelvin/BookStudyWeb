@@ -1,5 +1,6 @@
 <?php
 require_once(dirname(__FILE__) . '\phpmailer_config.php');
+require_once(dirname(__FILE__) . '\utility.php');
 
 /******************************************************************************
  *
@@ -7,6 +8,31 @@ require_once(dirname(__FILE__) . '\phpmailer_config.php');
  * 比如基类为 IMail 包括初始化设置、配置SMTP内容等虚方法，实现该接口就可制定邮件发送类
  *
  ******************************************************************************/
+
+refreshCheck();
+
+$submit = @$_POST['submit'] ? $_POST['submit'] : null;
+if ($submit) {
+    if ($submit === 'get_verify_code') {
+        $htmlStr = md5(time());
+        $tempFile = dirname(__FILE__) . '\..\html\template\reset_password.html';
+        $file = fopen($tempFile, 'r');
+        $htmlStr = fread($file, filesize($tempFile));
+        fclose($file);
+
+        $code = random_int(10000, 999999);
+        $_SESSION['verify_code'] = $_POST['email'] . ",$code," . time();
+        $htmlStr = str_replace('{code}', $code, $htmlStr);
+
+        if (sendMail($_POST['email'], '找回密码', $htmlStr)) {
+            echo '<script>alert("邮件发送成功，请注意查收！");</script>';
+        } else {
+            echo '<script>alert("邮件发送失败，请返回重新发送！");</script>';
+        }
+    }
+}
+// 不刷新上一页面，防止邮箱被刷新掉
+echo '<script>window.history.back(-1);</script>';
 
 function getMailObject()
 {
@@ -37,6 +63,10 @@ function getMailObject()
  */
 function sendMail($who, $subject, $htmlBody)
 {
+    if (empty($htmlBody)) {
+        return false;
+    }
+
     $mail = getMailObject();
 
     $mail->addAddress($who);
@@ -44,7 +74,7 @@ function sendMail($who, $subject, $htmlBody)
     $mail->Body = $htmlBody;
 
     $status = $mail->send();
-    unset($mail);
 
+    unset($mail);
     return $status;
 }
