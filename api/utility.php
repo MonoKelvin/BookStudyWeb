@@ -59,7 +59,7 @@ function downloadNetworkFile($file_url, $save_to)
  * 是否要进入404页面
  * @param bool $condition 进入404页面的条件，为`true`则进入
  */
-function isEntry404($condition)
+function isEntry404($condition = true)
 {
     if ($condition) {
         require_once(dirname(__FILE__) . '\..\pages_error_404.html');
@@ -77,7 +77,7 @@ function isLogedIn($isLoginPage = false)
 {
     session_start();
     // 如果没有登录信息
-    if (isset($_SESSION['account']) && isset($_SESSION['id'])) {
+    if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
         if ($isLoginPage == true) {
             echo '<script>alert("您已经登录过了！"); window.location="/../index.php";</script>';
         }

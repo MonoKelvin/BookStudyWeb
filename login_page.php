@@ -35,8 +35,8 @@ refreshOnce();
                                 </div>
                                 <form action="/api/login_validate.php" method="post" class="form-validate">
                                     <div class="form-group">
-                                        <input id="login-username" type="text" name="account" required data-msg="账号" class="input-material">
-                                        <label for="login-username" class="label-material">QQ邮箱</label>
+                                        <input id="login-username" type="text" name="email" required data-msg="账号" class="input-material">
+                                        <label for="login-username" class="label-material">邮箱</label>
                                     </div>
                                     <div class="form-group">
                                         <input maxlength="20" id="login-password" type="password" name="password" required data-msg="密码" class="input-material">
@@ -46,12 +46,10 @@ refreshOnce();
                                         <small> <a href="forget_password.php">忘记密码?</a></small>
                                     </div>
                                     <div class="form-group text-right">
-                                        <button id="login-btn" name="submit" value="submit" class="btn btn-primary">登录</button>
+                                        <button id="login-btn" name="submit" value="login" class="btn btn-lg btn-primary">登录</button>
+                                        <button id="register-btn" onclick="location.href='register.php';" type="button" class="btn btn-lg btn-primary ml-3">注册</button>
                                     </div>
                                 </form>
-                                <!-- 暂时不实现注册功能 -->
-                                <!-- <small>没有账号? </small>
-                                <a href="register.php" class="signup">点击注册</a> -->
                             </div>
                         </div>
                     </div>

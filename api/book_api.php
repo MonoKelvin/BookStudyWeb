@@ -60,7 +60,7 @@ function getBookInfoWithNumber($first = 0, $number = 50, $key = null)
                 $where = 'id=' . $key;
             }
         } else {
-            $where = "author like '%$key%' or title like '%$key%'";
+            $where = "author like '%$key%' or title like '%$key%' or tags like '%$key%'";
         }
         $res = $db->getAll(
             "select SQL_CALC_FOUND_ROWS id,title,author,remaining,lent

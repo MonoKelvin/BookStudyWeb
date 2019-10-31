@@ -1,3 +1,8 @@
+<?php
+require_once(dirname(__FILE__) . '\api\utility.php');
+refreshOnce();
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -30,27 +35,39 @@
                             <div class="content">
                                 <form method="post" class="form-validate">
                                     <div class="form-group">
-                                        <input id="register-username" type="text" name="registerUsername" required data-msg="Please enter your username" class="input-material">
+                                        <input id="register-username" type="text" name="adminname" required data-msg="请输入至少一个非空格字符" maxlength="16" class="input-material">
                                         <label for="register-username" class="label-material">管理员名称</label>
                                     </div>
-                                    <div class="form-group">
-                                        <input id="register-email" type="email" name="registerEmail" required data-msg="Please enter a valid email address" class="input-material">
-                                        <label for="register-email" class="label-material">邮件/电话</label>
+                                    <div class="row justify-content-between no-margin">
+                                        <div class="col-9">
+                                            <div class="form-group">
+                                                <input id="register-email" type="email" name="email" required data-msg="请输入一个有效的邮件地址" class="input-material">
+                                                <label for="register-email" class="label-material">QQ邮箱地址</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                            <button onclick="sendVerifyCodeMail($('#register-email'));" type="button" class="btn btn-primary">
+                                                获取验证码
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <input id="register-password" type="password" name="registerPassword" required data-msg="Please enter your password" class="input-material">
+                                        <input id="register-password" type="password" name="password" required data-msg="请输入6-16个字符作为密码" minlength="6" maxlength="16" class="input-material">
                                         <label for="register-password" class="label-material">密码</label>
                                     </div>
+                                    <div class="form-group">
+                                        <input id="register-code" type="text" name="verify_code" required data-msg="请输入验证码" class="input-material">
+                                        <label for="register-code" class="label-material">验证码</label>
+                                    </div>
                                     <div class="form-group terms-conditions">
-                                        <input id="register-agree" name="registerAgree" type="checkbox" required value="1" data-msg="Your agreement is required" class="checkbox-template">
+                                        <input id="register-agree" name="registerAgree" type="checkbox" required checked="checked" data-msg="必须同意才能进行注册" class="checkbox-template">
                                         <label for="register-agree">同意遵守《书斋管理员规章制度》</label>
                                     </div>
-                                    <div class="form-group">
-                                        <button id="regidter" type="submit" name="registerSubmit" class="btn btn-primary">注册</button>
+                                    <div class="form-group text-right">
+                                        <button type="submit" name="submit" value="register_account" class="btn btn-lg btn-primary">完成注册</button>
+                                        <button type="button" onclick="location.href='login_page.php';" class="btn btn-lg btn-primary ml-3">返回登录</button>
                                     </div>
                                 </form>
-                                <small>已有账号? </small>
-                                <a href="login_page.php" class="signup">点击登录</a>
                             </div>
                         </div>
                     </div>
@@ -73,6 +90,7 @@
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <!-- Main File-->
     <script src="js/front.js"></script>
+    <script src="js/utility.js"></script>
 </body>
 
 </html>

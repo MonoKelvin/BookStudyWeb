@@ -34,9 +34,9 @@ if (isset($_SESSION['name']) && isset($_SESSION['avatar'])) {
             } else {
                 echo '<li>';
             }
-            echo "<a href=$page_name>" . $contents . "</li>";
+            echo "<a class='p-4' href=$page_name>" . $contents . "</li>";
         }
         ?>
-        <li><a href="login_page.php"> <i class="fa fa-sign-in"></i>登陆页面</a></li>
+        <li><a class="p-4" href="login_page.php"> <i class="fa fa-sign-in"></i>登陆页面</a></li>
     </ul>
 </nav>
