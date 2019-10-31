@@ -9,30 +9,33 @@ require_once(dirname(__FILE__) . '\utility.php');
  *
  ******************************************************************************/
 
-refreshCheck();
+// refreshCheck();
 
-$submit = @$_POST['submit'] ? $_POST['submit'] : null;
+$submit = @$_POST['submit'];
 if ($submit) {
     if ($submit === 'get_verify_code') {
-        $htmlStr = md5(time());
+        // $htmlStr = md5(time());
         $tempFile = dirname(__FILE__) . '\..\html\template\reset_password.html';
         $file = fopen($tempFile, 'r');
         $htmlStr = fread($file, filesize($tempFile));
         fclose($file);
 
         $code = random_int(10000, 999999);
+        session_start();
         $_SESSION['verify_code'] = $_POST['email'] . ",$code," . time();
         $htmlStr = str_replace('{code}', $code, $htmlStr);
 
         if (sendMail($_POST['email'], '找回密码', $htmlStr)) {
-            echo '<script>alert("邮件发送成功，请注意查收！");</script>';
+            reply(200, 'success', ['data' => 'null']);
         } else {
-            echo '<script>alert("邮件发送失败，请返回重新发送！");</script>';
+            reply(666, 'failed', ['data' => 'null']);
         }
+
+        exit(0);
     }
 }
-// 不刷新上一页面，防止邮箱被刷新掉
-echo '<script>window.history.back(-1);</script>';
+
+isEntry404(true);
 
 function getMailObject()
 {

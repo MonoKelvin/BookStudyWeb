@@ -35,23 +35,21 @@ refreshOnce();
                         </div>
 
                         <div class="card-body p-5">
-                            <form method="post" action="api/phpmailer_api.php">
+                            <form method="post" action="api/reset_password.php">
                                 <div class="row d-flex justify-content-between">
                                     <div class="col-lg-8">
                                         <div class="form-group-material">
-                                            <input id="input-email" type="email" name="email" required autocomplete="off" class="input-material">
+                                            <input id="input-email" type="email" name="email" required class="input-material">
                                             <label for="input-email" class="label-material">邮件地址</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
-                                        <button type="submit" name="submit" value="get_verify_code" class="btn btn-primary">
+                                        <button onclick="sendVerifyCodeMail();" type="button" class="btn btn-primary">
                                             获取验证码
                                         </button>
                                     </div>
                                 </div>
-                            </form>
 
-                            <form method="post" action="api/reset_password.php">
                                 <div class="mt-2">
                                     <div class="form-group-material">
                                         <input id="input-password" minlength="6" maxlength="16" type="password" name="password" required autocomplete="off" class="input-material">
@@ -81,6 +79,36 @@ refreshOnce();
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
     <script src="js/front.js"></script>
+    <script>
+        function sendVerifyCodeMail() {
+            var inputEmail = $('#input-email');
+            var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if (!myreg.test(inputEmail.val())) {
+                alert('请输入正确的邮件地址');
+                inputEmail.focus();
+                return;
+            }
+            $.ajax({
+                url: '/api/phpmailer_api.php',
+                type: 'post',
+                data: {
+                    submit: 'get_verify_code',
+                    email: inputEmail.val()
+                },
+                dataType: 'json',
+                error: function() {
+                    alert('邮件发送失败，请重新发送邮件！');
+                },
+                success: function(result) {
+                    if (result.code == 200) {
+                        alert('邮件发送成功，请注意查收！');
+                    } else {
+                        alert('发送邮件失败，请重新发送邮件！');
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

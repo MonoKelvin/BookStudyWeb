@@ -217,7 +217,6 @@ class MySqlAPI
         $str = rtrim($str, ',');
 
         $sql = "update $table set $str where $where";
-        var_dump($sql);
         $this->query($sql);
 
         return mysqli_affected_rows($this->link);
