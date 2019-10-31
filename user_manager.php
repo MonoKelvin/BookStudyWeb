@@ -78,7 +78,7 @@ if (isset($_GET['key'])) {
                 </div>
 
                 <div class="container-fluid">
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header d-flex align-items-center">
                             <h3 class="h4">所有用户</h3>
                         </div>

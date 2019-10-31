@@ -1,5 +1,4 @@
 <?php
-require_once(dirname(__FILE__) . '\mysql_api.php');
 require_once(dirname(__FILE__) . '\utility.php');
 
 refreshCheck();
@@ -9,7 +8,12 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
     if ($password && $password == $_SESSION['password']) {
         $db = MySqlAPI::getInstance();
         $img = $db->getRow('select image from bookinfo where id=' . $_GET['id'])['image'];
-        $db->deleteOne('bookinfo', 'id=' . $_GET['id']);
+        if($db->deleteOne('bookinfo', 'id=' . $_GET['id']) == 0) {
+            $db->close();
+            // 返回上一页面并刷新
+            echo "<script>location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
+            die;
+        }
         $db->close();
 
         $img = substr($img, strripos($img, '/') + 1, 100);

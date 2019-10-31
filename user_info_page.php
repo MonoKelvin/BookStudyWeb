@@ -44,7 +44,7 @@ if (isset($_GET['id'])) {
                 <section class="no-padding-bottom">
                     <form action="api/user_update.php" class="form-horizontal" method="post" enctype="multipart/form-data">
                         <div class="container-fluid d-flex flex-row">
-                            <div class="card col-lg-12 no-padding">
+                            <div class="card card-primary col-lg-12 no-padding">
                                 <div class="card-body d-flex align-items-center row">
 
                                     <div class="col-lg-4 d-flex justify-content-center flex-column">
@@ -159,7 +159,7 @@ if (isset($_GET['id'])) {
                 </section>
 
                 <div class="container-fluid pt-3">
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header d-flex align-items-center">
                             <h3 class="h4">借书列表</h3>
                         </div>

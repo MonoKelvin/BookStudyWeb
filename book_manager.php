@@ -109,7 +109,7 @@ if (isset($_GET['key'])) {
                 </div>
 
                 <div class="container-fluid">
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h3 class="h4">所有图书</h3>
                             <form action="add_new_book.php" method="post">

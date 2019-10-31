@@ -1,6 +1,4 @@
 <?php
-
-require_once(dirname(__FILE__) . '/mysql_api.php');
 require_once(dirname(__FILE__) . '/utility.php');
 
 refreshCheck();

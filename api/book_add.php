@@ -1,6 +1,4 @@
 <?php
-
-require_once(dirname(__FILE__) . '\mysql_api.php');
 require_once(dirname(__FILE__) . '\utility.php');
 
 refreshCheck();
@@ -63,8 +61,8 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'submit') {
         echo '<script>alert("页数不允许超过10个数字，请重新输入！");history.go(-1);</script>';
         die;
     }
-    if (strlen($_POST['binding']) > 8) {
-        echo '<script>alert("装帧形式不允许超过8个字符，请重新输入！");history.go(-1);</script>';
+    if (strlen($_POST['binding']) > 10) {
+        echo '<script>alert("装帧形式不允许超过10个字符，请重新输入！");history.go(-1);</script>';
         die;
     }
     $price = $_POST['price'];

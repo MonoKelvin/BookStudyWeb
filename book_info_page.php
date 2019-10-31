@@ -46,7 +46,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 <section class="forms">
                     <form id="book-form" action="api/book_update.php" class="form-horizontal" method="post" enctype="multipart/form-data">
                         <div class="container-fluid d-flex flex-row">
-                            <div class="card col-lg-12 no-padding">
+                            <div class="card  card-primary col-lg-12 no-padding">
                                 <div class="card-header">
                                     <h3>基本信息</h3>
                                 </div>
@@ -108,7 +108,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-12 col-12">
-                                    <div class="card">
+                                    <div class="card card-primary">
                                         <div class="card-header">
                                             <h3>详细信息</h3>
                                         </div>
@@ -274,7 +274,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 </section>
 
                 <div class="container-fluid">
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header d-flex align-items-center">
                             <h3 class="h4">正借此书的用户</h3>
                         </div>

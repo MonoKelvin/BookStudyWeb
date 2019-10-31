@@ -1,5 +1,4 @@
 <?php
-require_once(dirname(__FILE__) . '\mysql_api.php');
 require_once(dirname(__FILE__) . '\utility.php');
 
 function getUserInfoWithNumber($first = 0, $number = 50, $key = null)
@@ -79,11 +78,11 @@ function getUsersNumber($isOnline = false)
 
     $res = 0;
     if ($isOnline) {
-        $res = $db->getRow("select COUNT(*) from userinfo where online=1");
+        $res = $db->getRow("select COUNT(id) from userinfo where online=1");
     } else {
-        $res = $db->getRow("select COUNT(*) from userinfo");
+        $res = $db->getRow("select COUNT(id) from userinfo");
     }
-    $res = $res['COUNT(*)'];
+    $res = $res['COUNT(id)'];
     $db->close();
 
     return $res;
