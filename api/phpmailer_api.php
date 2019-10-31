@@ -12,27 +12,24 @@ require_once(dirname(__FILE__) . '\utility.php');
 // refreshCheck();
 
 $submit = @$_POST['submit'];
-if ($submit) {
-    if ($submit === 'get_verify_code') {
-        // $htmlStr = md5(time());
-        $tempFile = dirname(__FILE__) . '\..\html\template\reset_password.html';
-        $file = fopen($tempFile, 'r');
-        $htmlStr = fread($file, filesize($tempFile));
-        fclose($file);
+if ($submit && $submit === 'get_verify_code') {
+    $tempFile = dirname(__FILE__) . '\..\html\template\reset_password.html';
+    $file = fopen($tempFile, 'r');
+    $htmlStr = fread($file, filesize($tempFile));
+    fclose($file);
 
-        $code = random_int(10000, 999999);
-        session_start();
-        $_SESSION['verify_code'] = $_POST['email'] . ",$code," . time();
-        $htmlStr = str_replace('{code}', $code, $htmlStr);
+    $code = random_int(10000, 999999);
+    session_start();
+    $_SESSION['verify_code'] = $_POST['email'] . ",$code," . time();
+    $htmlStr = str_replace('{code}', $code, $htmlStr);
 
-        if (sendMail($_POST['email'], '找回密码', $htmlStr)) {
-            reply(200, 'success', ['data' => 'null']);
-        } else {
-            reply(666, 'failed', ['data' => 'null']);
-        }
-
-        exit(0);
+    if (sendMail($_POST['email'], '验证码', $htmlStr)) {
+        reply(200, 'success', ['data' => 'null']);
+    } else {
+        reply(666, 'failed', ['data' => 'null']);
     }
+
+    exit(0);
 }
 
 isEntry404(true);

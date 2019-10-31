@@ -33,7 +33,7 @@ refreshOnce();
                     <div class="col-lg-6 bg-white">
                         <div class="form d-flex align-items-center">
                             <div class="content">
-                                <form method="post" class="form-validate">
+                                <form method="post" class="form-validate" action="api/verify_code.php">
                                     <div class="form-group">
                                         <input id="register-username" type="text" name="adminname" required data-msg="请输入至少一个非空格字符" maxlength="16" class="input-material">
                                         <label for="register-username" class="label-material">管理员名称</label>

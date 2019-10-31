@@ -24,9 +24,9 @@ refreshOnce();
         <div class="container">
             <div class="row">
                 <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
-                    <!-- <div class="logo-brand mt-1">
-                        <img src="img/appicon/AppLogo.png" alt="logo" width="80">
-                    </div> -->
+                    <div class="logo-brand">
+                        <img src="img/appicon/BookStudy.png" alt="logo" width="160">
+                    </div>
 
                     <div class="card card-primary">
                         <div class="card-header d-flex justify-content-between">
