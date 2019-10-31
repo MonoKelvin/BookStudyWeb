@@ -63,7 +63,7 @@ if (isset($_GET['key'])) {
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </div>
-                                    <input name="key" type="text" placeholder="输入ID、ISBN、书名、作者查找图书" class="form-control search-control">
+                                    <input name="key" type="text" placeholder="输入ID、ISBN、书名、作者、标签查找图书" class="form-control search-control">
                                 </div>
                             </div>
                         </form>

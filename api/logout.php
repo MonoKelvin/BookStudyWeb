@@ -7,7 +7,7 @@ session_start();
 
 // 退出后online置为0，表示不在线，并可以在其他设备登录
 $db = MySqlAPI::getInstance();
-$db->query('update userprivate set online=0 where id=' . $_SESSION['id']);
+$db->query('update admininfo set online=0 where id=' . $_SESSION['id']);
 $db->close();
 
 // 清空session信息

@@ -17,3 +17,31 @@ function dateFormat(fmt, date) {
     }
     return fmt;
 }
+
+function sendVerifyCodeMail(mailInputObj) {
+    var mailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    if (!mailReg.test(mailInputObj.val())) {
+        alert('请输入正确的邮件地址');
+        mailInputObj.focus();
+        return;
+    }
+    $.ajax({
+        url: '/../api/phpmailer_api.php',
+        type: 'post',
+        data: {
+            submit: 'get_verify_code',
+            email: mailInputObj.val()
+        },
+        dataType: 'json',
+        error: function() {
+            alert('邮件发送失败，请重新发送邮件！');
+        },
+        success: function(result) {
+            if (result.code == 200) {
+                alert('邮件发送成功，请注意查收！');
+            } else {
+                alert('发送邮件失败，请重新发送邮件！');
+            }
+        }
+    });
+}
