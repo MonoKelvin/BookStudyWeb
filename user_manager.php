@@ -14,6 +14,13 @@ if (isset($_GET['page'])) {
     $page = 1;
 }
 
+global $key;
+if (isset($_GET['key'])) {
+    $key = $_GET['key'];
+} else {
+    $key = null;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +32,7 @@ if (isset($_GET['page'])) {
     <?php include_once('html/included_head.php'); ?>
 </head>
 
-<body onload="createUserTableItems(<?php echo $page; ?>);">
+<body onload="createUserTableItems(<?php echo $page . ",'$key'"; ?>);">
     <div class=" page">
         <?php include_once('html/header_navbar.php'); ?>
         <div class="page-content d-flex align-items-stretch">
@@ -45,7 +52,25 @@ if (isset($_GET['page'])) {
                     </ul>
                 </div>
 
-                <div class="container-fluid mt-5">
+                <!-- 搜索栏 -->
+                <section>
+                    <div class="col-10 offset-1">
+                        <form action="" method="get">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button type="submit" class="btn btn-primary" style="padding-left:50px; padding-right:50px;">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                    <input name="key" type="text" placeholder="输入ID、用户名、账号查找用户" class="form-control search-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <div class="container-fluid">
                     <div class="row justify-content-center">
                         <ul id="user-pagination1" class="pagination">
                         </ul>

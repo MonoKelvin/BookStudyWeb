@@ -244,7 +244,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                                                         <div role="document" class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">数据改动提示</h4>
+                                                                    <h3 class="modal-title">数据改动提示</h3>
                                                                     <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                                                 </div>
                                                                 <div class="modal-body">

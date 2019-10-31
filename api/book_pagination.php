@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . '\book_api.php');
 
 if (isset($_GET['page'])) {
     if ($_GET['page'] > 0) {
-        getBooksItem($_GET['page'], @$_GET['key'] ? $_GET['key'] : null);
+        getBooksItem($_GET['page'], @$_GET['key']);
     } else {
         isEntry404(true);
     }
@@ -16,12 +16,16 @@ function getBooksItem($page = 1, $key = null)
     $fetch_num = 20;
     $books_arr = getBookInfoWithNumber($page * $fetch_num - $fetch_num, $fetch_num, $key);
 
+    $book_num = 0 + $books_arr['count'];
+    unset($books_arr['count']);
+
     $book_no = ($page - 1) * $fetch_num + 1;
     $resultStr = '';
     foreach ($books_arr as $book) {
         $htmlStr = '';
         $id = $book['id'];
         $title = $book['title'];
+        $author = $book['author'];
         $remaining = $book['remaining'];
         $lent = $book['lent'];
 
@@ -34,6 +38,7 @@ function getBooksItem($page = 1, $key = null)
         $htmlStr = str_replace('{book_no}', $book_no, $htmlStr);
         $htmlStr = str_replace('{id}', $id, $htmlStr);
         $htmlStr = str_replace('{title}', $title, $htmlStr);
+        $htmlStr = str_replace('{author}', $author, $htmlStr);
         $htmlStr = str_replace('{remaining}', $remaining, $htmlStr);
         $htmlStr = str_replace('{lent}', $lent, $htmlStr);
         $book_no++;
@@ -41,9 +46,8 @@ function getBooksItem($page = 1, $key = null)
         $resultStr .= $htmlStr;
     }
 
-    $books_num = getBooksNumber(true);
     $data = [
-        'book_num' => $books_num,
+        'book_num' => $book_num,
         'item_pre_page' => $fetch_num,
         'data' => $resultStr,
     ];

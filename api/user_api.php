@@ -2,15 +2,26 @@
 require_once(dirname(__FILE__) . '\mysql_api.php');
 require_once(dirname(__FILE__) . '\utility.php');
 
-function getUserInfoWithNumber($first = 0, $number = 50)
+function getUserInfoWithNumber($first = 0, $number = 50, $key = null)
 {
+    if (!isValidString($key)) {
+        $key = null;
+    }
+
     $db = MySqlAPI::getInstance();
-    $res = $db->getAll(
-        "select ui.id,ui.name,up.account,up.password,up.online
-        from userinfo as ui
-        join userprivate as up
-        on ui.id = up.id order by ui.id limit $first, $number"
-    );
+
+    if ($key != null) {
+        $where = "name like '%$key%' or id='$key' or account like '%$key%'";
+        $res = $db->getAll(
+            "select SQL_CALC_FOUND_ROWS * from users_base_info
+            where $where limit $first, $number"
+        );
+    } else {
+        $res = $db->getAll("select SQL_CALC_FOUND_ROWS * from users_base_info limit $first, $number");
+    }
+
+    $res['count'] = $db->getRow("select found_rows() num")['num'];
+
     $db->close();
 
     return $res;
@@ -43,7 +54,7 @@ function getUserInfoById($id)
         "select * from userinfo as ui
         join userprivate as up on ui.id=" . $id
     );
-    if($res == null) {
+    if ($res == null) {
         $db->close();
         isEntry404(true);
     }

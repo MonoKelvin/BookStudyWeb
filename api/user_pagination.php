@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . '\user_api.php');
 
 if (isset($_GET['page'])) {
     if ($_GET['page'] > 0) {
-        getUsersItem($_GET['page']);
+        getUsersItem($_GET['page'], @$_GET['key']);
     } else {
         isEntry404(true);
     }
@@ -11,10 +11,13 @@ if (isset($_GET['page'])) {
     getUsersItem(1);
 }
 
-function getUsersItem($page = 1)
+function getUsersItem($page = 1, $key = null)
 {
-    $fetch_num = 10;
-    $users_arr = getUserInfoWithNumber($page * $fetch_num - $fetch_num, $fetch_num);
+    $fetch_num = 20;
+    $users_arr = getUserInfoWithNumber($page * $fetch_num - $fetch_num, $fetch_num, $key);
+
+    $user_num = 0 + $users_arr['count'];
+    unset($users_arr['count']);
 
     $user_no = ($page - 1) * $fetch_num + 1;
     $resultStr = '';
@@ -43,7 +46,6 @@ function getUsersItem($page = 1)
         $resultStr .= $htmlStr;
     }
 
-    $user_num = getUsersNumber();
     $data = [
         'user_num' => $user_num,
         'item_pre_page' => $fetch_num,

@@ -10,7 +10,7 @@ require_once(dirname(__FILE__) . '\utility.php');
 function getBookFromISBN($isbn)
 {
     $db = MySqlAPI::getInstance();
-    $sql = "select * from bookinfo where isbn=" . $isbn;
+    $sql = "select * from bookdetail where isbn13=" . $isbn;
     $res = $db->getRow($sql);
     $db->close();
 
@@ -47,18 +47,36 @@ function getBooksByTitle($title)
 function getBookInfoWithNumber($first = 0, $number = 50, $key = null)
 {
     $db = MySqlAPI::getInstance();
-
     $res = [];
 
-    if ($key != null) { } else {
+    if (!isValidString($key)) {
+        $key = null;
+    }
+
+    if ($key != null) {
+        $where = '';
+        if (is_numeric($key)) {
+            if (strlen($key) == 13) {
+                $where = 'isbn13=' . $key;
+            } else {
+                $where = 'id=' . $key;
+            }
+        } else {
+            $where = "author like '%$key%' or title like '%$key%'";
+        }
         $res = $db->getAll(
-            "select bi.id,bi.title,bi.remaining,COUNT(ub.b_id) lent
-            from bookinfo as bi
-            left outer join userbooks as ub
-            on bi.id = ub.b_id
-            group by bi.id limit $first, $number"
+            "select SQL_CALC_FOUND_ROWS id,title,author,remaining,lent
+            from books_base_info where $where
+            limit $first, $number"
+        );
+    } else {
+        $res = $db->getAll(
+            "select SQL_CALC_FOUND_ROWS id,title,author,remaining,lent
+            from books_base_info limit $first, $number"
         );
     }
+
+    $res['count'] = $db->getRow("select found_rows() num")['num'];
 
     $db->close();
 
@@ -153,8 +171,8 @@ function getBooksNumber($calc_indentical = false)
         $res = $db->getRow("select SUM(remaining) from bookinfo");
         $res = $res['SUM(remaining)'];
     } else {
-        $res = $db->getRow("select COUNT(*) from bookinfo where remaining >= 1");
-        $res = $res['COUNT(*)'];
+        $res = $db->getRow("select COUNT(id) from bookinfo where remaining >= 1");
+        $res = $res['COUNT(id)'];
     }
     $db->close();
 

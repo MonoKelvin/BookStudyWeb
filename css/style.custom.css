@@ -1163,17 +1163,19 @@ nav.side-navbar {
     width: 100%;
     pointer-events: auto;
     background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 4px;
     border-radius: 0.3rem;
-    outline: 0;
+    outline: none;
+    border: none;
+    -webkit-box-shadow: 0 10px 50px #00000020;
+    box-shadow: 0 10px 50px #00000020;
 }
 .modal-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     padding: 1rem;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px dashed rgb(230, 230, 230);
     border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
 }
@@ -1182,7 +1184,10 @@ nav.side-navbar {
     align-items: center;
     justify-content: flex-end;
     padding: 1rem;
-    border-top: 1px solid #e9ecef;
+    border-top: 1px dashed rgb(230, 230, 230);
+}
+.modal-backdrop.show {
+    opacity: 0;
 }
 
 .required-label-star {

@@ -15,12 +15,10 @@ if (isset($_GET['page'])) {
 }
 
 global $key;
-if (isset($_GET['search']) && $_GET['search'] == 1) {
-    if (isset($_GET['key'])) {
-        $key = $_GET['key'];
-    } else {
-        isEntry404(true);
-    }
+if (isset($_GET['key'])) {
+    $key = $_GET['key'];
+} else {
+    $key = null;
 }
 
 ?>
@@ -34,7 +32,7 @@ if (isset($_GET['search']) && $_GET['search'] == 1) {
     <?php include_once('html/included_head.php'); ?>
 </head>
 
-<body onload="createBookTableItems(<?php echo $page . ',' . $key; ?>);">
+<body onload="createBookTableItems(<?php echo $page . ",'$key'"; ?>);">
     <div class="page">
         <?php include_once('html/header_navbar.php'); ?>
         <div class="page-content d-flex align-items-stretch">
@@ -54,17 +52,18 @@ if (isset($_GET['search']) && $_GET['search'] == 1) {
                     </ul>
                 </div>
 
+                <!-- 搜索栏 -->
                 <section>
                     <div class="col-10 offset-1">
                         <form action="" method="get">
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button name="search" value="1" type="submit" class="btn btn-primary" style="padding-left:50px; padding-right:50px;">
+                                        <button type="submit" class="btn btn-primary" style="padding-left:50px; padding-right:50px;">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </div>
-                                    <input name="key" type="text" placeholder="输入ISBN、书名、作者查找图书" class="form-control search-control">
+                                    <input name="key" type="text" placeholder="输入ID、ISBN、书名、作者查找图书" class="form-control search-control">
                                 </div>
                             </div>
                         </form>
@@ -125,6 +124,7 @@ if (isset($_GET['search']) && $_GET['search'] == 1) {
                                             <th class="text-center">排序</th>
                                             <th class="text-center">id</th>
                                             <th class="text-center">书名</th>
+                                            <th class="text-center">作者</th>
                                             <th class="text-center">馆藏数量</th>
                                             <th class="text-center">已借出</th>
                                             <th class="text-center">其他操作</th>

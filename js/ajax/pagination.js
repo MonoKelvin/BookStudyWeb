@@ -1,4 +1,4 @@
-function createBookTableItems(page, key = null) {
+function createBookTableItems(page, key) {
     // 获取数据
     $.ajax({
         url: '../../api/book_pagination.php',
@@ -10,9 +10,9 @@ function createBookTableItems(page, key = null) {
         },
         success: function(result) {
             if (result.code == 200) {
-                $('#book-items-body').html(result.data['data']);
-                item_per_page = result.data['item_pre_page'];
-                var pages = Math.ceil(result.data['book_num'] / item_per_page);
+                $('#book-items-body').html(result.data.data);
+                item_per_page = result.data.item_pre_page;
+                var pages = Math.ceil(result.data.book_num / item_per_page);
                 var options = {
                     bootstrapMajorVersion: 3,
                     currentPage: page,
@@ -34,7 +34,7 @@ function createBookTableItems(page, key = null) {
                     },
                     onPageClicked: function(event, originalEvent, type, page) {
                         currentPage = page;
-                        createBookTableItems(page);
+                        createBookTableItems(page, key);
                     }
                 };
                 $('#book-pagination1').bootstrapPaginator(options);
@@ -46,21 +46,21 @@ function createBookTableItems(page, key = null) {
     });
 }
 
-function createUserTableItems(page) {
+function createUserTableItems(page, key) {
     // 获取数据
     $.ajax({
         url: '../../api/user_pagination.php',
         type: 'get',
-        data: { page: page },
+        data: { page: page, key: key },
         dataType: 'json',
         error: function() {
             alert('请求错误');
         },
         success: function(result) {
             if (result.code == 200) {
-                $('#user-items-body').html(result.data['data']);
-                item_per_page = result.data['item_pre_page'];
-                var pages = Math.ceil(result.data['user_num'] / item_per_page);
+                $('#user-items-body').html(result.data.data);
+                item_per_page = result.data.item_pre_page;
+                var pages = Math.ceil(result.data.user_num / item_per_page);
                 var options = {
                     bootstrapMajorVersion: 3,
                     currentPage: page,
@@ -82,7 +82,7 @@ function createUserTableItems(page) {
                     },
                     onPageClicked: function(event, originalEvent, type, page) {
                         currentPage = page;
-                        createUserTableItems(page);
+                        createUserTableItems(page, key);
                     }
                 };
                 $('#user-pagination1').bootstrapPaginator(options);
