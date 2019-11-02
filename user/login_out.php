@@ -11,7 +11,6 @@ if ($type) {
             header('HTTP/1.1 401.1 Unauthorized');
             return "401";
         } else {
-            // 获得数据库实例
             $db = MySqlAPI::getInstance();
 
             $res = $db->getRow(
@@ -33,13 +32,12 @@ if ($type) {
                 return '403';
             }
 
-            $db->query('update userprivate set online=1 where id=' . $res['id']);
+            // $db->query('update userprivate set online=1 where id=' . $res['id']);
 
             $db->close();
 
             $return_data = json_encode($res);
             echo $return_data;
-            return $return_data;
         }
     } else if ($type == 'logout') {
         $db = MySqlAPI::getInstance();
@@ -49,12 +47,10 @@ if ($type) {
 
         if ($id) {
             $res = $db->query('update userprivate set online=0 where id=' . $id);
-            return 'success';
         }
 
         if (!$res) {
             header('HTTP/1.1 401.1 Unauthorized');
-            return 'error';
         }
 
         $db->close();
