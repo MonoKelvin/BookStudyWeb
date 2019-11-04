@@ -35,11 +35,11 @@ refreshOnce();
                         </div>
 
                         <div class="card-body pl-5 pr-5 pt-4 pb-4">
-                            <form method="post" action="api/verify_code.php?obj=admin">
+                            <form method="post" action="api/forget_pwd_validate.php?obj=admin">
                                 <div class="row justify-content-between">
                                     <div class="col-lg-8">
                                         <div class="form-group-material">
-                                            <input id="input-email" type="email" name="email" required class="input-material">
+                                            <input id="input-email" type="email" name="account" required class="input-material">
                                             <label for="input-email" class="label-material">邮件地址</label>
                                         </div>
                                     </div>

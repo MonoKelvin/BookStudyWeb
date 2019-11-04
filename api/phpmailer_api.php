@@ -12,42 +12,62 @@ require_once(dirname(__FILE__) . '\utility.php');
 // 获得提交信息，只有用户主动提交才能获取验证码
 $submit = @$_POST['submit'];
 
-// 获得要取得验证码的对象，一般为用户和管理员
+// 获取附加的验证信息：要取得验证码的对象和是否为注册
 $obj = @$_GET['obj'];
+$register = @$_GET['register'];
 
 if ($submit === 'get_verify_code') {
-    if ($obj) {
+    $account = @$_POST['account'];
+
+    if ($obj && $account) {
         // 生成随机的验证码，并记录:邮件 + 时间，即形式为`account,code,time`
         $code = random_int(10000, 999999);
-        $verify_msg = $_POST['account'] . ",$code," . time();
+        $verify_msg = $account . ",$code," . time();
 
         $db = MySqlAPI::getInstance();
 
-        // 把验证消息写入数据库的用于缓冲信息的字段
+        // 根据get请求选择表
         if ($obj === 'admin') {
             $obj = 'admininfo';
         } else if ($obj === 'user') {
             $obj = 'userprivate';
-        }
-        $res = $db->getRow("select id from $obj where account=$account");
-        if ($res) {
-            $db->query("update $obj set verify_msg=$verify_msg where id={$res['id']}");
         } else {
             $db->close();
-            reply(404, 'failed', ['msg' => '该账号尚未注册！']);
+            reply(404, 'failed', ['msg' => '无法为空用户发送验证码！']);
             header('HTTP/1.1 404 NOT FOUND');
             die;
         }
 
-        $db->close();
+        // 判断是否该账号已经注册了
+        $res = $db->getRow("select id from $obj where account='$account'");
+        if ($register == 'true') {
+            // 如果是注册新号号的情况下存在账号
+            if ($res) {
+                $db->close();
+                reply(404, 'failed', ['msg' => '该账号已经存在！']);
+                die;
+            } else {
+                // 否则把注册请求放入数据库的`注册消息队列`中
+                $db->insert('register', ['verify_msg' => $verify_msg]);
+            }
+        } else if ($res) {
+            // 把验证消息写入数据库中用于缓冲信息的字段
+            $db->query("update $obj set verify_msg='$verify_msg' where id={$res['id']}");
+        } else {
+            $db->close();
+            reply(404, 'failed', ['msg' => '该账号尚未注册！']);
+            die;
+        }
 
         // 发送邮件，无论成功与否都不返回额外信息，因为信息都在缓冲字段里
-        if (sendMail($_POST['account'], '验证码', createHtmlMailWithVerifyCode($code))) {
-            reply(200, 'success', ['msg' => 'null']);
+        if (sendMail($account, '验证码', createHtmlMailWithVerifyCode($code))) {
+            $register_id = $db->query('select LAST_INSERT_ID()');
+            reply(200, 'success', ['msg' => $register_id]);
         } else {
             reply(666, 'failed', ['msg' => 'null']);
         }
 
+        $db->close();
         exit(0);
     }
 }

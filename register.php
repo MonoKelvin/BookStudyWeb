@@ -33,10 +33,11 @@ refreshOnce();
                     <div class="col-lg-6 bg-white">
                         <div class="form d-flex align-items-center">
                             <div class="content">
-                                <form method="post" class="form-validate" action="api/verify_code.php">
+                                <form method="post" class="form-validate" action="api/register_validate.php?obj=admin">
+                                    <input id="register-id" name="register_id" class="hidden-form-control">
                                     <div class="form-group">
-                                        <input id="register-username" type="text" name="adminname" required data-msg="请输入至少一个非空格字符" maxlength="16" class="input-material">
-                                        <label for="register-username" class="label-material">管理员名称</label>
+                                        <input id="register-name" type="text" name="name" required data-msg="请输入至少一个非空格字符" maxlength="16" class="input-material">
+                                        <label for="register-name" class="label-material">管理员名称</label>
                                     </div>
                                     <div class="row justify-content-between no-margin">
                                         <div class="col-9">
@@ -46,7 +47,7 @@ refreshOnce();
                                             </div>
                                         </div>
                                         <div class="col-3 text-right">
-                                            <button onclick="sendVerifyCodeMail($('#register-email'));" type="button" class="btn btn-primary">
+                                            <button onclick="sendVerifyCodeMail($('#register-email'), true);" type="button" class="btn btn-primary">
                                                 获取验证码
                                             </button>
                                         </div>
@@ -64,7 +65,7 @@ refreshOnce();
                                         <label for="register-agree">同意遵守《书斋管理员规章制度》</label>
                                     </div>
                                     <div class="form-group text-right">
-                                        <button type="submit" name="submit" value="register_account" class="btn btn-lg btn-primary">完成注册</button>
+                                        <button type="submit" name="submit" value="submit" class="btn btn-lg btn-primary">完成注册</button>
                                         <button type="button" onclick="location.href='login_page.php';" class="btn btn-lg btn-primary ml-3">返回登录</button>
                                     </div>
                                 </form>
