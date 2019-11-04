@@ -41,14 +41,14 @@ if ($submit === 'get_verify_code') {
         // 判断是否该账号已经注册了
         $res = $db->getRow("select id from $obj where account='$account'");
         if ($register == 'true') {
-            // 如果是注册新号号的情况下存在账号
+            // 如果是注册新号的情况下存在账号
             if ($res) {
                 $db->close();
                 reply(404, 'failed', ['msg' => '该账号已经存在！']);
                 die;
             } else {
                 // 否则把注册请求放入数据库的`注册消息队列`中
-                $db->insert('register', ['verify_msg' => $verify_msg]);
+                $db->insert('register_queue', ['verify_msg' => $verify_msg]);
             }
         } else if ($res) {
             // 把验证消息写入数据库中用于缓冲信息的字段
@@ -59,9 +59,9 @@ if ($submit === 'get_verify_code') {
             die;
         }
 
-        // 发送邮件，无论成功与否都不返回额外信息，因为信息都在缓冲字段里
+        // 发送邮件
         if (sendMail($account, '验证码', createHtmlMailWithVerifyCode($code))) {
-            $register_id = $db->query('select LAST_INSERT_ID()');
+            $register_id = $db->getRow('select LAST_INSERT_ID() id')['id'];
             reply(200, 'success', ['msg' => $register_id]);
         } else {
             reply(666, 'failed', ['msg' => 'null']);

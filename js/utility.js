@@ -47,7 +47,8 @@ function sendVerifyCodeMail(mailInputObj, verifyEMail = false) {
                 $('#register-id').attr('value', result.data.msg);
                 alert('邮件发送成功，请注意查收！');
             } else {
-                alert('发送邮件失败，请重新发送邮件！');
+                $('#register-id').attr('value', -1);
+                alert(result.data.msg);
             }
         }
     });
