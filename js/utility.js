@@ -26,11 +26,11 @@ function sendVerifyCodeMail(mailInputObj) {
         return;
     }
     $.ajax({
-        url: '/../api/phpmailer_api.php',
+        url: '/../api/phpmailer_api.php?obj=admin',
         type: 'post',
         data: {
             submit: 'get_verify_code',
-            email: mailInputObj.val()
+            account: mailInputObj.val()
         },
         dataType: 'json',
         error: function() {

@@ -51,7 +51,8 @@ function getUserInfoById($id)
     $db = MySqlAPI::getInstance();
     $res = $db->getRow(
         "select * from userinfo as ui
-        join userprivate as up on ui.id=" . $id
+        join userprivate as up
+        on ui.id=up.id and ui.id=$id"
     );
     if ($res == null) {
         $db->close();

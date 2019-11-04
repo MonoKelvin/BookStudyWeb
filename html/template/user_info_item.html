@@ -10,7 +10,7 @@
     <td class="container-fluid d-flex pt-2">
         <div class="flex-fill text-center">
             <form action="user_info_page.php" method="get">
-                <button name="id" type="submit" class="btn btn-primary" value="{id}"><i
+                <button name="id" value="{id}" type="submit" class="btn btn-primary"><i
                         class="fa fa-pencil"></i></button>
             </form>
         </div>
@@ -25,7 +25,7 @@
                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
                                     aria-hidden="true">×</span></button>
                         </div>
-                        <form action="../../api/user_delete.php?id={id}" method="post">
+                        <form action="api/user_delete.php?id={id}" method="post">
                             <div class="modal-body">
                                 <p>你确定要删除用户：<strong>{name}</strong></p>
                                 <input name="password" type="password" class="form-control" placeholder="输入管理员密码">

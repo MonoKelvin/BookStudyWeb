@@ -5,19 +5,19 @@ refreshCheck();
 
 if (@$_POST['submit'] === 'login') {
     $db = MySqlAPI::getInstance();
-    $email = @$_POST['email'];
+    $account = @$_POST['account'];
     $password = @$_POST['password'];
 
     if ($db == null) {
         echo '<script> alert("数据库连接失败"); history.go(-1);</script>';
     } else {
-        if (!$email || !$password) {
+        if (!$account || !$password) {
             echo '<script> alert("信息获取失败，请重新登录！"); history.go(-1);</script>';
             die;
         }
         $res = $db->getRow(
-            "select id,email,name,password,avatar,online from admininfo
-            where email = '$email' and password = '$password'"
+            "select id,account,name,password,avatar,online from admininfo
+            where account = '$account' and password = '$password'"
         );
 
         if ($res) {
@@ -29,7 +29,7 @@ if (@$_POST['submit'] === 'login') {
 
             // 获取登录信息
             $_SESSION['id'] = $res['id'];
-            $_SESSION['email'] = $res['email'];
+            $_SESSION['account'] = $res['account'];
             $_SESSION['name'] = $res['name'];
             $_SESSION['password'] = $res['password'];
             $_SESSION['avatar'] = $res['avatar'];

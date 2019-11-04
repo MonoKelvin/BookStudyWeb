@@ -25,7 +25,7 @@ refreshOnce();
             <div class="row">
                 <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
                     <div class="logo-brand">
-                        <img src="img/appicon/BookStudy.png" alt="logo" width="160">
+                        <img src="img/appicon/BookStudy.png" alt="logo" width="180">
                     </div>
 
                     <div class="card card-primary">
@@ -34,16 +34,16 @@ refreshOnce();
                             <small class="help-text">目前仅支持QQ邮箱找回密码</small>
                         </div>
 
-                        <div class="card-body p-5">
-                            <form method="post" action="api/verify_code.php">
-                                <div class="row d-flex justify-content-between">
+                        <div class="card-body pl-5 pr-5 pt-4 pb-4">
+                            <form method="post" action="api/verify_code.php?obj=admin">
+                                <div class="row justify-content-between">
                                     <div class="col-lg-8">
                                         <div class="form-group-material">
                                             <input id="input-email" type="email" name="email" required class="input-material">
                                             <label for="input-email" class="label-material">邮件地址</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 text-right">
                                         <button onclick="sendVerifyCodeMail($('#input-email'));" type="button" class="btn btn-primary">
                                             获取验证码
                                         </button>
@@ -63,7 +63,7 @@ refreshOnce();
                                     </div>
                                 </div>
                                 <div class="mt-4">
-                                    <button name="submit" value="reset_password" type="submit" class="btn btn-primary btn-lg btn-block">
+                                    <button name="submit" value="forget_password" type="submit" class="btn btn-primary btn-lg btn-block">
                                         确认提交
                                     </button>
                                 </div>
@@ -73,8 +73,8 @@ refreshOnce();
                 </div>
             </div>
         </div>
+        <!-- <footer class="footer text-center">&copy; 2019 Book Study.</footer> -->
     </section>
-    <footer class="footer text-center">&copy; 2019 Book Study.</footer>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>

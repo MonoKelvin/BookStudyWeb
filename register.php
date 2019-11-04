@@ -41,7 +41,7 @@ refreshOnce();
                                     <div class="row justify-content-between no-margin">
                                         <div class="col-9">
                                             <div class="form-group">
-                                                <input id="register-email" type="email" name="email" required data-msg="请输入一个有效的邮件地址" class="input-material">
+                                                <input id="register-email" type="email" name="account" required data-msg="请输入一个有效的邮件地址" class="input-material">
                                                 <label for="register-email" class="label-material">QQ邮箱地址</label>
                                             </div>
                                         </div>

@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
                                             <div class="card-body text-center">
                                                 <div class="client-avatar">
                                                     <img id="user-avatar" src="<?php echo $user['avatar']; ?>" alt="void" class="user-avatar">
-                                                    <div class="status <?php echo $user['online'] ? 'bg-green' : 'bg-red'; ?>"></div>
+                                                    <div class="status <?php echo ($user['online'] == 1) ? 'bg-green' : 'bg-red'; ?>"></div>
                                                 </div>
                                                 <div class="client-title">
                                                     <h3><?php echo $user['name']; ?></h3>

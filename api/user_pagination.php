@@ -40,7 +40,7 @@ function getUsersItem($page = 1, $key = null)
         $htmlStr = str_replace('{name}', $name, $htmlStr);
         $htmlStr = str_replace('{account}', $account, $htmlStr);
         $htmlStr = str_replace('{password}', $password, $htmlStr);
-        $htmlStr = str_replace('{online}', $online ? '#54e69d' : '#ff7676', $htmlStr);
+        $htmlStr = str_replace('{online}', ($online == 1) ? '#54e69d' : '#ff7676', $htmlStr);
         $user_no++;
 
         $resultStr .= $htmlStr;

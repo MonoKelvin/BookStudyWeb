@@ -35,7 +35,7 @@ refreshOnce();
                                 </div>
                                 <form action="/api/login_validate.php" method="post" class="form-validate">
                                     <div class="form-group">
-                                        <input id="login-username" type="text" name="email" required data-msg="账号" class="input-material">
+                                        <input id="login-username" type="text" name="account" required data-msg="账号" class="input-material">
                                         <label for="login-username" class="label-material">邮箱</label>
                                     </div>
                                     <div class="form-group">
