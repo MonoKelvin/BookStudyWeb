@@ -36,7 +36,7 @@ if (!$name || !$account || !$password) {
     $md5 = md5($name . $account . $password . time());
     $data = [
         'name' => $name, 'md5' => $md5,
-        'avatar' => '123626c8689420157ba4a7dbd47ce702'
+        'avatar' => 'http://api.bookstudy.com/user/image/123626c8689420157ba4a7dbd47ce702.png'
     ];
     $id = $db->insert('userinfo', $data);
     $data = ['id' => $id, 'account' => $account, 'password' => $password];

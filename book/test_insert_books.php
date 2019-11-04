@@ -40,6 +40,7 @@ foreach ($booksArray as $book) {
     $img_url = $json_obj['image'];
     $img_file_name = $json_obj['id'] . substr($img_url, strripos($img_url, '.'));
     $local_img_path = 'http://api.bookstudy.com/book/image/' . $img_file_name;
+    downloadNetworkFile($img_url, $local_img_path);
 
     // 基本信息的获取
     $author = implode(",", $json_obj['author']);

@@ -8,8 +8,9 @@ if ($type) {
         $pwd = @$_POST['password'];
 
         if (!$acc || !$pwd) {
+            echo json_encode(['code' => 401, 'msg' => '账号或密码不允许为空！']);
             header('HTTP/1.1 401.1 Unauthorized');
-            return "401";
+            die;
         } else {
             $db = MySqlAPI::getInstance();
 
@@ -22,17 +23,19 @@ if ($type) {
 
             if (!$res) {
                 $db->close();
+                echo json_encode(['code' => 401, 'msg' => '账号或密码错误！']);
                 header('HTTP/1.1 401.1 Unauthorized');
-                return '401';
+                die;
             }
 
             if ($res['online'] == '1') {
                 $db->close();
-                header('HTTP 403 Forbidden');
-                return '403';
+                echo json_encode(['code' => 403, 'msg' => '该账号已在另一台设备登录！']);
+                header('HTTP/1.1 403 Forbidden');
+                die;
             }
 
-            // $db->query('update userprivate set online=1 where id=' . $res['id']);
+            $db->query('update userprivate set online=1 where id=' . $res['id']);
 
             $db->close();
 
@@ -45,7 +48,7 @@ if ($type) {
         $id = @$_POST['id'];
         $res = null;
 
-        if ($id) {
+        if ($id !== null) {
             $res = $db->query('update userprivate set online=0 where id=' . $id);
         }
 
